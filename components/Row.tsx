@@ -1,13 +1,10 @@
 import { useState } from "react"
-import { Anime } from "../interface"
+import { Anime, IRow } from "../interface"
 import Poster from "./Poster"
 
-interface IProps {
-    items:Anime[];
-    title:string;
-}
 
-const Row = ({ items,title }:IProps) => {
+
+const Row = ({ items,title }:IRow) => {
     //view all state to view all of the anime
   const [viewAll,setViewAll] = useState<boolean>(false)
 

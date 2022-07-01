@@ -7,17 +7,18 @@ import Sidebar from "./Sidebar";
 
 interface IProps {
   seasonsNow:Anime[];
-  seasonYear:Anime[]
+  seasonYear:Anime[];
+
 }
 const HomeFeed = ({ seasonsNow,seasonYear }:IProps) => {
-  console.log(seasonYear);
+  // console.log(seasonYear);
 
   return (
     <section className="max-w-7xl mx-auto p-4 space-y-4 relative ">
 
-        <div className="max-w-5xl border-r px-3">
-          <Row items={seasonsNow} title="Current Season" />
-          <Row items={seasonYear} title={`${seasonYear[0].season} ${seasonYear[0].year}`} />
+        <div className="max-w-[800px]  px-3">
+          <Row items={seasonsNow} title={`${seasonsNow[0].season}, ${seasonsNow[0].year}`} />
+          <Row items={seasonYear} title={`${seasonYear[0].season}, ${seasonYear[0].year}`} />
         </div>
         <Sidebar />
 

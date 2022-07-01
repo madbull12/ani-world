@@ -58,3 +58,8 @@ interface JPG {
     }
 
 }
+
+export interface IRow {
+    items:Anime[];
+    title:string;
+}

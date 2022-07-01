@@ -5,17 +5,20 @@ import HomeFeed from '../components/HomeFeed'
 import Sidebar from '../components/Sidebar'
 import { Anime } from '../interface'
 import styles from '../styles/Home.module.css'
-import { getSeasonNowAnime, getSeasonYearAnime } from './api/anime'
+import { getAnimeByFilter, getSeasonNowAnime, getSeasonYearAnime } from './api/anime'
 
 interface IProps {
   seasonsNow:Anime[];
-  seasonYear:Anime[]
+  seasonYear:Anime[];
+  topAiring:Anime[];
+  topUpcoming:Anime[];
 }
 
-const Home = ({ seasonsNow,seasonYear }:IProps) => {
+const Home = ({ seasonsNow,seasonYear,topAiring,topUpcoming }:IProps) => {
   const homeFeed = {
     seasonsNow,
-    seasonYear
+    seasonYear,
+
   }
   return (
     <div className={styles.container}>
@@ -41,13 +44,15 @@ const Home = ({ seasonsNow,seasonYear }:IProps) => {
 }
 
 export const getStaticProps = async() => {
-  const [seasonsNow,seasonYear] = ([await getSeasonNowAnime(),await getSeasonYearAnime(2022,'summer')]);
+  const [seasonsNow,seasonYear] = ([await getSeasonNowAnime(),await getSeasonYearAnime(2022,'spring')]);
 
   return {
     props:{
       seasonsNow,
-      seasonYear
-    }
+      seasonYear,
+      
+    },
+    
   }
 
 }
