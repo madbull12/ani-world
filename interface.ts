@@ -26,6 +26,13 @@ export interface Anime {
 
 }
 
+export interface IMain {
+    seasonsNow:Anime[];
+    seasonYear:Anime[];
+    seasonsUpcoming:Anime[];
+    // animeNews:Anime[];
+}
+
 interface Aired {
     from:string;
     to:string;

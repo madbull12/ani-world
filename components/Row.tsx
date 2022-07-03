@@ -9,7 +9,7 @@ const Row = ({ items,title }:IRow) => {
   const [viewAll,setViewAll] = useState<boolean>(false)
 
   return (
-    <section className="">
+    <section className="space-y-4">
         <div className="flex justify-between items-center gap-x-2">
             <h1 className="font-black text-xl text-gray-700 whitespace-nowrap capitalize">{title}</h1>
             <div className="h-[2px] w-full bg-gray-200"></div>
@@ -18,7 +18,7 @@ const Row = ({ items,title }:IRow) => {
             </button>
         </div>
         <div className="grid  gap-4 min-w-0 overflow-x-scroll  auto-cols-max grid-flow-col scrollbar-hide md:scrollbar-default  overflow-y-hidden">
-            {items.slice(0,viewAll ? items.length : 8).map((anime)=>(
+            {items?.slice(0,viewAll ? items.length : 8).map((anime)=>(
                 <div key={anime.mal_id} className="rounded-lg overflow-hidden">
                     <Poster  anime={anime} />
 

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { Anime } from '../interface'
 
@@ -9,7 +10,7 @@ interface IProps {
 const Poster = ({ anime }: IProps) => {
     const [showTitle,setShowTitle] = useState<boolean>(false);
   return (
-  
+    <Link href={`/anime/${anime.mal_id}`}>
         <article className='cursor-pointer relative group overflow-hidden h-full '
             onMouseEnter={()=>setShowTitle(true)}
             onMouseLeave={()=>setShowTitle(false)}
@@ -26,6 +27,10 @@ const Poster = ({ anime }: IProps) => {
 
             </div>
         </article>
+    
+    </Link>
+  
+        
 
 
   )
