@@ -33,7 +33,7 @@ const SidebarRow = ({ items,title,limit,loading }: IProps) => {
                             <div>
                                 <h1 className="font-bold text-blue-600">{anime.title}</h1>
                                 <p className="text-gray-500 text-sm">{anime.type}, {anime.episodes===null ? 0 : anime.episodes} eps, scored {anime.score === null ? "N/A" : anime.score}</p>
-                                <p className="text-gray-500 text-sm">Members: {anime.members.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                                <p className="text-gray-500 text-sm">Members: {anime.members.toLocaleString()}</p>
 
                             </div>
                         </div>

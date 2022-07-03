@@ -7,7 +7,7 @@ import { IoAddCircle, IoAddCircleOutline, IoHeartCircle, IoHeartCircleOutline } 
 import useSWR from 'swr';
 import AnimeDetailsLoader from '../../components/AnimeDetailsLoader';
 import Backdrop from '../../components/Backdrop';
-import { Anime } from '../../interface';
+import { Anime, Genre } from '../../interface';
 
 
 const fetcher = (url:string) => fetch(url).then(res=>res.json());
@@ -16,7 +16,9 @@ const AnimeDetails = () => {
     const { animeId } = router.query;
     const { data,error } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}`,fetcher);
     const { data:anime } = data || {};
+    
     if(error) return <h1>{error}</h1>
+    console.log(anime?.genres)
 
   return (
     <main className='max-w-8xl mx-auto'>
@@ -49,9 +51,53 @@ const AnimeDetails = () => {
                 </div>
                 <Backdrop color="#1085f1" />
             </div>
-            <div className='bg-[#007CEF] w-full'>
-                <h1 className='ml-[280px]'>fsdfsf</h1>
-            </div>
+            <section className='bg-[#007CEF] w-full py-4 pr-4 text-white'>
+                <div className='ml-[285px] space-y-3'>
+                    <header className='flex justify-between '>
+                        <h1 className='text-xl font-bold'>Synopsis</h1>
+                        <div className='flex space-x-4'>
+                            <p className='font-semibold'>
+                                Ranked:
+                                <span className='font-normal'> #{anime.rank?.toLocaleString() || "N/A"}</span>
+                            </p>
+                            <p className='font-bold'>
+                                Popularity:
+                                <span className='font-normal'> #{anime.popularity?.toLocaleString() || "N/A"}</span>
+                            </p>
+                            <p className='font-semibold'>
+                                Members:
+                                <span className='font-normal'> {anime.members?.toLocaleString() || "N/A"}</span>
+                            </p>
+                        </div>
+                    </header>
+                    <p>
+                        {anime.synopsis}
+                    </p>
+                </div>
+                <div className='p-8 flex gap-x-4 mt-8'>
+                    <div className='text-white bg-[#FF9901] rounded-lg p-2 flex flex-col items-center'>
+                        <span className='font-bold text-xs'>SCORE</span>
+                        <span className='text-2xl font-bold'>{anime.score || "N/A"}</span>
+                        <span className='text-xs font-normal'>{anime.scored_by?.toLocaleString() || "N/A"} users</span>
+                    </div>
+                    <div className='rounded-lg border-2 border-gray-700 p-3 flex flex-col'>
+                        <div className='space-x-4'>
+                            <span className='font-semi-bold'>Type: <span className='font-normal'>{anime.type}</span></span>
+                            <span className='font-semi-bold'>Episodes: <span className='font-normal'>{anime.episodes || "N/A"}</span></span>
+                            <span className='font-semi-bold'>
+                                Genres: 
+                              {anime.genres.map((genre:Genre,i:any)=>(
+                                <span key={genre.mal_id}>{`${i  ? "," : ""} ${genre.name}`}</span>
+                              ))}
+                            </span>
+                            <span className='font-semi-bold'>Status: <span className='font-normal'>{anime.status}</span></span>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            
+            </section>
             
             </>
             

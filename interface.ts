@@ -33,6 +33,13 @@ export interface IMain {
     // animeNews:Anime[];
 }
 
+export interface Genre {
+    mal_id:0;
+    type:string;
+    name:string;
+    
+}
+
 interface Aired {
     from:string;
     to:string;
