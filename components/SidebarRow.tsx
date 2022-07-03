@@ -25,19 +25,22 @@ const SidebarRow = ({ items,title,limit,loading }: IProps) => {
         </div>
         <div className="space-y-4 p-4 bg-blue-50">
             {items?.slice(0,limit).map((anime,i)=>(
-                <div key={anime.mal_id} className="flex gap-x-2 ">
-                    <span className="font-bold text-2xl text-gray-500">{i+1}</span>
-                    <Image src={anime.images.jpg.image_url} width={80} height={90} alt={anime.title} />
-                    <div>
+                <Link key={anime.mal_id} href={`/anime/${anime.mal_id}`}>
+                    <div  className="flex gap-x-2 cursor-pointer ">
+                        <span className="font-bold text-2xl text-gray-500">{i+1}</span>
+                        <Image src={anime.images.jpg.image_url} width={80} height={90} alt={anime.title} />
                         <div>
-                            <h1 className="font-bold text-blue-600">{anime.title}</h1>
-                            <p className="text-gray-500 text-sm">{anime.type}, {anime.episodes===null ? 0 : anime.episodes} eps, scored {anime.score === null ? "N/A" : anime.score}</p>
-                            <p className="text-gray-500 text-sm">Members: {anime.members.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <div>
+                                <h1 className="font-bold text-blue-600">{anime.title}</h1>
+                                <p className="text-gray-500 text-sm">{anime.type}, {anime.episodes===null ? 0 : anime.episodes} eps, scored {anime.score === null ? "N/A" : anime.score}</p>
+                                <p className="text-gray-500 text-sm">Members: {anime.members.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
 
+                            </div>
                         </div>
+                        <button className="self-start justify-self-end ml-auto text-blue-600 font-semibold">add</button>
                     </div>
-                    <button className="self-start justify-self-end ml-auto text-blue-600 font-semibold">add</button>
-                </div>
+                </Link>
+                
             ))}
         </div>
     </section>

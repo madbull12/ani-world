@@ -4,7 +4,7 @@ import { IoMenu } from 'react-icons/io5'
 const Header = () => {
   return (
     // header component
-    <header className="bg-transparent p-4 bg-[#007CEF] text-white">
+    <header className="bg-transparent p-4 bg-blue-500 text-white">
         <div className="max-w-7xl mx-auto">
             <nav className="flex justify-between items-center">
                 <span className="font-bold text-2xl whitespace-nowrap">

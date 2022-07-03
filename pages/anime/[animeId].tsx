@@ -1,8 +1,12 @@
+import { Jelly } from '@uiball/loaders';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react'
+import { IoAddCircle, IoAddCircleOutline, IoHeartCircle, IoHeartCircleOutline } from 'react-icons/io5';
 import useSWR from 'swr';
+import AnimeDetailsLoader from '../../components/AnimeDetailsLoader';
+import Backdrop from '../../components/Backdrop';
 import { Anime } from '../../interface';
 
 
@@ -22,16 +26,39 @@ const AnimeDetails = () => {
             <link rel="icon" href="/favicon.ico" />
       </Head>
         {anime ? (
+            <>
             <div className='relative'>
                 <Image alt={anime.title} src={anime.images.webp.large_image_url} width="100%" height={25} layout="responsive" objectFit='cover'  />
-                <div className='absolute -bottom-40 left-6'>
+                <div className='absolute z-50 -bottom-40 left-0  px-8 flex  gap-x-8 w-full'>
                   
-                        <Image alt={anime.title} src={anime.images.webp.large_image_url}  width={220} height={300} className="rounded-lg" objectFit='cover' />
+                        <Image alt={anime.title} src={anime.images.webp.large_image_url} width={220} height={300} className="rounded-lg" objectFit='cover' />
+                        <div className='pt-16 '>
+                            <div>
+                                <h1 className='text-white font-bold text-3xl '>{anime.title}</h1>
+                                <p className="text-white font-thin text-lg">{anime.title_japanese}</p>
 
+                            </div>
+                        </div>
+                        <div className='pt-16 ml-auto text-white text-4xl flex'>
+                      
+                                <IoAddCircleOutline />
+                                <IoHeartCircleOutline />
+
+                        </div>
+                        
                 </div>
+                <Backdrop color="#1085f1" />
             </div>
+            <div className='bg-[#007CEF] w-full'>
+                <h1 className='ml-[280px]'>fsdfsf</h1>
+            </div>
+            
+            </>
+            
         ):(
-            <p>loading...</p>
+          <div className="h-screen place-items-center grid">
+            <Jelly color="#007CEF" size={100} />
+          </div>
         )}
     </main>
   )
