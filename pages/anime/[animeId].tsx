@@ -2,23 +2,72 @@ import { Jelly } from '@uiball/loaders';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useState } from 'react'
 import { IoAddCircle, IoAddCircleOutline, IoHeartCircle, IoHeartCircleOutline } from 'react-icons/io5';
 import useSWR from 'swr';
 import AnimeDetailsLoader from '../../components/AnimeDetailsLoader';
 import Backdrop from '../../components/Backdrop';
 import { Anime, Genre } from '../../interface';
-
+import ReactPlayer from 'react-player/lazy'
+import { v4 as uuidv4 } from 'uuid';
 
 const fetcher = (url:string) => fetch(url).then(res=>res.json());
 const AnimeDetails = () => {
     const router = useRouter();
     const { animeId } = router.query;
     const { data,error } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}`,fetcher);
+    const { data:animeVideos } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/videos`,fetcher)
+    // const { data:animeEpisodes } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/episodes`,fetcher)
+    const { data:animeReviews } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/reviews`, fetcher);
+    // const { data:animeRecommendations } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/recommendations`, fetcher);
+
+
+
     const { data:anime } = data || {};
+    const { data:videos } =  animeVideos || {};
+    const { data:reviews } =  animeReviews || {};
+
+
+    const [_link,setLink] = useState("videos");
+
+    const tabLinks = [
+        "videos",
+        "episodes",
+        "reviews",
+        "recommendations",
+        "stats",
+        "characters & staff",
+
+    ]
+    console.log(videos)
+
+    
+    console.log(reviews)
+    // console.log(animeRecommendations)
     
     if(error) return <h1>{error}</h1>
-    console.log(anime?.genres)
+    console.log(anime?.genres);
+
+    const convertToDate = (x:string) => {
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        const date = new Date(x);
+
+        const year = date.getFullYear();
+        let dt:string | number = date.getDate();
+        let month = monthNames[date.getMonth()];
+
+        if(dt<10) {
+            dt="0"+dt;
+        }
+        
+        if(!x) {
+            return "N/A"
+        }
+
+        return (`${dt} ${month}, ${year}`)
+    }
 
   return (
     <main className='max-w-8xl mx-auto'>
@@ -38,7 +87,7 @@ const AnimeDetails = () => {
                             <div>
                                 <h1 className='text-white font-bold text-3xl '>{anime.title}</h1>
                                 <p className="text-white font-thin text-lg">{anime.title_japanese}</p>
-
+                       
                             </div>
                         </div>
                         <div className='pt-16 ml-auto text-white text-4xl flex'>
@@ -80,24 +129,92 @@ const AnimeDetails = () => {
                         <span className='text-2xl font-bold'>{anime.score || "N/A"}</span>
                         <span className='text-xs font-normal'>{anime.scored_by?.toLocaleString() || "N/A"} users</span>
                     </div>
-                    <div className='rounded-lg border-2 border-gray-700 p-3 flex flex-col'>
+                    <div className='rounded-lg border-2 border-gray-700 p-3 space-y-2 flex flex-col '>
                         <div className='space-x-4'>
-                            <span className='font-semi-bold'>Type: <span className='font-normal'>{anime.type}</span></span>
-                            <span className='font-semi-bold'>Episodes: <span className='font-normal'>{anime.episodes || "N/A"}</span></span>
-                            <span className='font-semi-bold'>
+                            <span className='font-semibold'>Type: <span className='font-normal'>{anime.type}</span></span>
+                            <span className='font-semibold'>Episodes: <span className='font-normal'>{anime.episodes || "N/A"}</span></span>
+                            <span className='font-semibold'>
                                 Genres: 
                               {anime.genres.map((genre:Genre,i:any)=>(
-                                <span key={genre.mal_id}>{`${i  ? "," : ""} ${genre.name}`}</span>
+                                <span key={uuidv4()} className="font-normal">{`${i  ? "," : ""} ${genre.name}`}</span>
                               ))}
                             </span>
-                            <span className='font-semi-bold'>Status: <span className='font-normal'>{anime.status}</span></span>
+                            <span className='font-semibold'>Status: <span className='font-normal'>{anime.status}</span></span>
                             
+                        </div>
+                        <div className='space-x-4'>
+                            <span className='font-semibold'>Aired: <span className='font-normal'>from {convertToDate(anime.aired.from)} to {convertToDate(anime.aired.to)} </span></span>
+                            <span className='font-semibold'><span className='font-normal'>Broadcast: {anime.broadcast.string}</span></span>
+                            <span className='font-semibold'>
+                                Studios:
+                              {anime.studios.map((studio:Genre,i:any)=>(
+                                <span key={uuidv4()} className="font-normal">{`${i  ? "," : ""} ${studio.name}`}</span>
+                            ))}
+                            </span>
+
                         </div>
                     </div>
                     
                 </div>
             
             </section>
+            <section className='bg-white p-8 max-7xl mx-auto'>
+                <nav>
+                    <ul className='flex justify-between'>
+                        {tabLinks.map((link,i)=>(
+                            <li key={uuidv4()} className={`font-bold pb-2 uppercase text-sm cursor-pointer ${_link === link  ? "border-b-4 border-blue-500" : ""}`} onClick={()=>setLink(link)}>{link}</li>
+                        ))}
+                    </ul>
+                </nav>
+                <div className={`mt-2 ${_link === "videos" ? "block" : "hidden"} `}>
+                    <h1 className='font-bold text-2xl'>Trailers</h1>
+                    <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-x-2 grid-cols-1 mt-2'>
+                        {videos?.promo.map((item:any,i:any)=>(
+                            <div key={uuidv4()}>
+                                <p>{item.title}</p>
+                                {/* <iframe src={item.trailer.url}></iframe> */}
+                                {/* <ReactPlayer url={""} controls width={300} height={200} muted  /> */}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={`mt-2 space-y-2 ${_link === "episodes" ? "block" : "hidden"} `}>
+                    {/* {episodes[0].title} */}
+                    <h1 className='text-2xl font-bold'>Episode Lists</h1>
+                    <div className=' gap-4 grid grid-cols-2'>
+                        {videos?.episodes.map((_episode:any)=>(
+                            <div key={uuidv4()} className="flex bg-gray-100 p-2 gap-x-2">
+                                <Image src={_episode.images.jpg.image_url} width={100} height={100} alt={_episode.title} className="rounded-lg" />
+                                <div>
+                                    <h1 className='font-bold text-lg'>{_episode.episode}</h1>
+                                    <p>{_episode.title}</p>
+                                </div>
+                                
+                            </div>
+                        ))}
+                    </div>
+                
+               
+                </div>
+                <div className={`mt-2 space-y-2 ${_link === "reviews" ? "block" : "hidden"} `}>
+                    <h1 className='text-2xl font-bold'>Reviews</h1>
+                    <div>
+                        {reviews?.slice(0,10).map((review:any)=>(
+                            <div key={uuidv4()}>
+                                <div className='flex space-between items-center'>
+                                    <div>
+                                        <Image src={review.user.images.jpg.image_url} width={50} height={100} />
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            
             
             </>
             
