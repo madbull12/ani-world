@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { Anime } from '../interface'
+import { Anime, Recommendation } from '../interface'
 
 interface IProps {
-    anime:Anime
+    anime:Anime 
 }
 
 const Poster = ({ anime }: IProps) => {

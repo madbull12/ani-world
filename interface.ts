@@ -26,6 +26,8 @@ export interface Anime {
 
 }
 
+
+
 export interface IMain {
     seasonsNow:Anime[];
     seasonYear:Anime[];
@@ -38,6 +40,50 @@ export interface Genre {
     type:string;
     name:string;
     
+}
+
+export interface AnimeDetailsProps extends Anime {
+    genres:Genre[];
+    studios:Genre[];
+    broadcast:{
+        day:string;
+        time:string;
+        timezone:string;
+        string:string;
+    }
+
+}
+
+export interface Recommendation {
+    entry:Entry
+    votes:number;
+
+}
+
+export interface Entry extends Anime{
+    images:JPG;
+    mal_id:number;
+    title:string;
+}
+
+export interface Stats {
+    watching:number;
+    completed:number;
+    on_hold:number;
+    dropped:number;
+    plan_to_watch:number;
+    total:number;
+    scores:Score[]
+}
+
+interface Score {
+    votes:number;
+    score:number;
+    percentage:number;
+}
+
+interface Studio {
+
 }
 
 interface Aired {
