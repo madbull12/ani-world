@@ -40,7 +40,7 @@ const AnimeDetails = () => {
         "reviews",
         "recommendations",
         "stats",
-        "characters & staff",
+        "characters",
 
     ]
     // console.log(videos)

@@ -75,6 +75,8 @@ const Stats = () => {
   const { data:stats }: { data:Stats  } = animeStats || {};
   console.log(data)
 
+  
+
 
   return (
     <div>

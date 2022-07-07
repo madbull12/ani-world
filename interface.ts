@@ -76,6 +76,29 @@ export interface Stats {
     scores:Score[]
 }
 
+export interface Character {
+    character:SingleCharacter;
+    role:string;
+    voice_actors:VoiceActor[];
+}   
+
+export interface Staff {
+    person:SingleCharacter;
+    positions:string[];
+}
+
+interface SingleCharacter {
+    mal_id:number;
+    url:string;
+    images:JPG;
+    name:string;
+}
+
+interface VoiceActor {
+    person:SingleCharacter;
+    language:string;
+}
+
 interface Score {
     votes:number;
     score:number;

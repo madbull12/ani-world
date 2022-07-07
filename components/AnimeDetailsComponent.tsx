@@ -22,7 +22,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
         "reviews",
         "recommendations",
         "stats",
-        "characters & staff",
+        "characters",
 
     ]
     const [_link,setLink] = useState("videos");
