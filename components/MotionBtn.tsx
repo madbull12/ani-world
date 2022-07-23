@@ -12,7 +12,7 @@ const LoadMoreBtn = ({
 }:IBtn) => {
   return (
   <motion.button 
-    className='bg-blue-200 shadow-md  px-4 py-2 rounded-lg font-bold text-blue-500 mt-2' 
+    className='bg-blue-200 shadow-md z-50  px-4 py-2 rounded-lg font-bold text-blue-500 mt-2' 
     onClick={handleClick}
     whileHover={{
         scale: 1.1,

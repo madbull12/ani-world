@@ -7,7 +7,7 @@ import { Character, Staff } from '../../../interface';
 import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import LoadMoreBtn from '../../../components/LoadMoreBtn';
+import MotionBtn from '../../../components/MotionBtn';
 
 
 const fetcher = (url:string) => fetch(url).then(res=>res.json());
@@ -69,7 +69,7 @@ const CharactersPage = () => {
                     <div className='flex justify-center'>
                         
                     
-                            <LoadMoreBtn
+                            <MotionBtn
                                 handleClick={()=>
                                     (characters?.length >= loadMoreCharacters)
                                     ? 
@@ -102,7 +102,7 @@ const CharactersPage = () => {
                          <div className='flex justify-center'>
                         
                     
-                            <LoadMoreBtn
+                            <MotionBtn
                                 handleClick={()=>
                                     (staff?.length >= loadMoreStaff)
                                     ? 
