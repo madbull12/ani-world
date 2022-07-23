@@ -57,21 +57,21 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
         {anime && (
             <>
             <div className='relative'>
-                <Image alt={anime.title} src={anime.images.jpg.large_image_url} width="100%" height={25} layout="responsive" objectFit='cover'  />
-                <div className='absolute z-50 -bottom-40 left-0  px-8 flex  gap-x-8 w-full'>
+                <Image alt={anime.title} src={anime.images.jpg.large_image_url} width={100} height={25} layout="responsive" objectFit='cover' className='hidden'  />
+                <div className='absolute z-50 md:-bottom-36 lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2'>
                   
                         <Image alt={anime.title} src={anime.images.jpg.large_image_url} width={220} height={300} className="rounded-lg" objectFit='cover' />
-                        <div className='pt-16 '>
-                            <div>
-                                <h1 className='text-white font-bold text-3xl '>{anime.title}</h1>
-                                <p className="text-white font-thin text-lg">{anime.title_japanese}</p>
+                        <div className=' md:pt-12  '>
+                            <div className=" max-w-[250px] md:max-w-full">
+                                <h1 className='text-white font-bold text-lg md:text-xl lg:text-2xl'>{anime.title}</h1>
+                                <p className="text-white font-thin text-sm md:text-base ">{anime.title_japanese}</p>
                        
                             </div>
                         </div>
-                        <div className='pt-16 ml-auto text-white text-4xl flex'>
+                        <div className=' md:pt-12 md:ml-auto text-white text-4xl flex self-start'>
                       
-                                <IoAddCircleOutline />
-                                <IoHeartCircleOutline />
+                                <IoAddCircleOutline className='text-3xl lg:text-4xl' />
+                                <IoHeartCircleOutline className='text-3xl lg:text-4xl' />
 
                         </div>
                         
@@ -80,32 +80,32 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
             </div>
             <section className='bg-[#007CEF] w-full py-4 pr-4 text-white'>
                 <div className='ml-[285px] space-y-3'>
-                    <header className='flex justify-between '>
-                        <h1 className='text-xl font-bold'>Synopsis</h1>
+                    <header className='flex justify-between items-center gap-x-3'>
+                        <h1 className='lg:text-xl text-base font-bold'>Synopsis</h1>
                         <div className='flex space-x-4'>
-                            <p className='font-semibold'>
+                            <p className=' font-semibold text-sm md:text-base'>
                                 Ranked:
                                 <span className='font-normal'> #{anime.rank?.toLocaleString() || "N/A"}</span>
                             </p>
-                            <p className='font-bold'>
+                            <p className='font-semibold text-sm md:text-base'>
                                 Popularity:
                                 <span className='font-normal'> #{anime.popularity?.toLocaleString() || "N/A"}</span>
                             </p>
-                            <p className='font-semibold'>
+                            <p className='font-semibold text-sm md:text-base'>
                                 Members:
                                 <span className='font-normal'> {anime.members?.toLocaleString() || "N/A"}</span>
                             </p>
                         </div>
                     </header>
-                    <p>
+                    <p className='text-sm lg:text-base'>
                         {anime.synopsis}
                     </p>
                 </div>
                 <div className='p-8 flex gap-x-4 mt-8'>
-                    <div className='text-white bg-[#FF9901] rounded-lg p-2 flex flex-col items-center'>
-                        <span className='font-bold text-xs'>SCORE</span>
+                    <div className='text-white bg-[#FF9901] rounded-full md:rounded-lg p-2 flex flex-col items-center'>
+                        <span className='font-bold text-xs hidden md:block'>SCORE</span>
                         <span className='text-2xl font-bold'>{anime.score || "N/A"}</span>
-                        <span className='text-xs font-normal'>{anime.scored_by?.toLocaleString() || "N/A"} users</span>
+                        <span className='text-xs font-normal hidden md:block'>{anime.scored_by?.toLocaleString() || "N/A"} users</span>
                     </div>
                     <div className='rounded-lg border-2 border-gray-700 p-3 space-y-2 flex flex-col '>
                         <div className='space-x-4'>
