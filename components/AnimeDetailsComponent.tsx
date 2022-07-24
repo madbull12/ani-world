@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { IoAddCircleOutline, IoClose, IoHeartCircleOutline, IoTimeSharp } from 'react-icons/io5'
 import { Anime, AnimeDetailsProps, Genre } from '../interface'
 import Backdrop from './Backdrop'
@@ -8,9 +8,11 @@ import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { Jelly } from '@uiball/loaders'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import MotionBtn from './MotionBtn'
 import BackdropModal from './BackdropModal'
+import { useSetBodyScroll } from '../lib/zustand'
+
 
 interface IDetails {
     anime:AnimeDetailsProps,
@@ -18,15 +20,51 @@ interface IDetails {
 }
 
 
+
+const dropIn = {
+    hidden:{
+        y:"-100vh",
+        opacity:0,
+    },
+    visible:{
+        y:"0",
+        opacity:1,
+        transition: {
+            duration:0.1,
+            type:"spring",
+            damping:25,
+            stiffness:500
+        }
+    },
+    exit:{
+        y:"100vh",
+        opacity:0
+    }
+}
+
+
+
+
 const Synopsis = ({ text,handleClose }:{ text:string,handleClose:()=>void }) => {
+
+     const { setScroll } = useSetBodyScroll(); 
+
+
     return (
         <BackdropModal
-            onClick={handleClose}
+            onClick={()=>{
+                handleClose();
+                setScroll();
+            }}
 
         >
             <motion.div
-                className='text-white p-4 bg-blue-600 relative'
+                className='text-white p-4 bg-blue-600 relative max-w-[500px] rounded-lg'
                 onClick={(e)=>e.stopPropagation()}
+                variants={dropIn}
+                initial="hidden"
+                animate="visible"
+                exit='exit'
             >
                 <h1 className="font-bold text-2xl">Synopsis</h1>
                 <p>{text}</p>
@@ -47,6 +85,8 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
         "characters",
 
     ]
+    const { unsetScroll } = useSetBodyScroll(); 
+
     const [_link,setLink] = useState("videos");
     const router = useRouter();
     const { animeId } = router.query;
@@ -83,13 +123,18 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
     <div>
         {anime && (
             <div>
-                {showSynopsis && (
-                    <>
-                        <Synopsis text={anime.synopsis} handleClose={handleClose}  />
-                    
-                    </>
+              
+                <AnimatePresence
+                    initial={false}
+                    exitBeforeEnter={true}
+                    onExitComplete={()=>null}
+
+                >
+                    {showSynopsis && <Synopsis text={anime.synopsis} handleClose={handleClose} />}
+                </AnimatePresence>
+                  
                 
-                ) }
+             
                 <div className='relative'>
                 
                     <Image alt={anime.title} src={anime.images.jpg.large_image_url} width={100} height={25} layout="responsive" objectFit='cover' className='hidden'  />
@@ -136,7 +181,9 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                             <MotionBtn
                                 handleClick={()=>{
                                     setShowSynopsis(true)
+                                    
                                 }}
+                                unsetScroll={unsetScroll}
                                 string="Read Synopsis"
                             />
                         </div>
