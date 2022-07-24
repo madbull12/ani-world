@@ -92,8 +92,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
     const { animeId } = router.query;
     // console.log(animeId);
     const [showSynopsis,setShowSynopsis] = useState(false);
-
-
+  
     const convertToDate = (x:string) => {
         const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -119,6 +118,10 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
         setShowSynopsis(false)
     }
 
+    const scrollToTop = ()=>{
+        window.scrollTo(0, 0)
+    }
+
   return (
     <div>
         {anime && (
@@ -136,7 +139,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                 
              
                 <div className='relative'>
-                
+    
                     <Image alt={anime.title} src={anime.images.jpg.large_image_url} width={100} height={25} layout="responsive" objectFit='cover' className='hidden'  />
                     <div className='absolute z-50 md:-bottom-36 lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2'>
                     
@@ -162,6 +165,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                     <div className='ml-[285px] space-y-3 z-[999] relative'>
                         <header className='flex justify-between items-center gap-x-3 flex-col md:flex-row'>
                             <h1 className='lg:text-xl text-base font-bold hidden md:block'>Synopsis</h1>
+                         
                             <div className='flex space-x-4'>
                                 <p className=' font-semibold text-sm md:text-base'>
                                     Ranked:
@@ -185,6 +189,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                                 }}
                                 unsetScroll={unsetScroll}
                                 string="Read Synopsis"
+                                scrollToTop={scrollToTop}
                             />
                         </div>
              

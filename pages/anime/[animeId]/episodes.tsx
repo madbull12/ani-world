@@ -16,7 +16,7 @@ const EpisodePage = () => {
     const { data:videos } =  animeVideos || {};
     const { data:anime } = data || {};
 
-    console.log(videos);
+
 
   return (
     <div>

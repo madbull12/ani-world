@@ -3,8 +3,10 @@ import { motion } from 'framer-motion'
 
 interface IBtn {
     handleClick:()=>void;
-    string:string,
-    unsetScroll?:()=>void
+    string:string;
+    scrollToTop?:()=>void;
+    unsetScroll?:()=>void;
+
 }
 
 const LoadMoreBtn = (props:IBtn) => {
@@ -15,6 +17,7 @@ const LoadMoreBtn = (props:IBtn) => {
             onClick={()=>{
                 props.handleClick();
                 props.unsetScroll?.();
+                props.scrollToTop?.();
             }}
             whileHover={{
                 scale: 1.1,
