@@ -16,6 +16,9 @@ import AnimeDetailsComponent from '../../../components/AnimeDetailsComponent';
 
 
 const fetcher = (url:string) => fetch(url).then(res=>res.json());
+
+
+
 const AnimeDetails = () => {
     const router = useRouter();
     const { animeId } = router.query;

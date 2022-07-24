@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { FC, useState } from 'react'
-import { IoAddCircleOutline, IoHeartCircleOutline } from 'react-icons/io5'
+import { IoAddCircleOutline, IoClose, IoHeartCircleOutline, IoTimeSharp } from 'react-icons/io5'
 import { Anime, AnimeDetailsProps, Genre } from '../interface'
 import Backdrop from './Backdrop'
 import { v4 as uuidv4 } from 'uuid';
@@ -10,10 +10,30 @@ import { Jelly } from '@uiball/loaders'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import MotionBtn from './MotionBtn'
+import BackdropModal from './BackdropModal'
 
 interface IDetails {
     anime:AnimeDetailsProps,
     children?:React.ReactNode
+}
+
+
+const Synopsis = ({ text,handleClose }:{ text:string,handleClose:()=>void }) => {
+    return (
+        <BackdropModal
+            onClick={handleClose}
+
+        >
+            <motion.div
+                className='text-white p-4 bg-blue-600 relative'
+                onClick={(e)=>e.stopPropagation()}
+            >
+                <h1 className="font-bold text-2xl">Synopsis</h1>
+                <p>{text}</p>
+                <IoClose className='text-2xl absolute top-2 right-2 cursor-pointer' onClick={handleClose} />
+            </motion.div>
+        </BackdropModal>
+    )
 }
 
 
@@ -31,6 +51,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
     const router = useRouter();
     const { animeId } = router.query;
     // console.log(animeId);
+    const [showSynopsis,setShowSynopsis] = useState(false);
 
 
     const convertToDate = (x:string) => {
@@ -54,10 +75,21 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
         return (`${dt} ${month}, ${year}`)
     }
 
+    const handleClose = () => {
+        setShowSynopsis(false)
+    }
+
   return (
     <div>
         {anime && (
             <div>
+                {showSynopsis && (
+                    <>
+                        <Synopsis text={anime.synopsis} handleClose={handleClose}  />
+                    
+                    </>
+                
+                ) }
                 <div className='relative'>
                 
                     <Image alt={anime.title} src={anime.images.jpg.large_image_url} width={100} height={25} layout="responsive" objectFit='cover' className='hidden'  />
@@ -103,7 +135,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                         <div className='md:hidden'>
                             <MotionBtn
                                 handleClick={()=>{
-
+                                    setShowSynopsis(true)
                                 }}
                                 string="Read Synopsis"
                             />
@@ -181,3 +213,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
 }
 
 export default AnimeDetailsComponent
+
+function setShowSynopsis(arg0: boolean): void {
+    throw new Error('Function not implemented.')
+}

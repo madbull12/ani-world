@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 
-const Backdrop = ({ color }:{ color:string }) => {
+
+const Backdrop = ({ color }:{ color:string}) => {
   return (
-    <div className={`absolute top-0 right-0 left-0 bottom-0 w-full h-full z-40 bg-[#007bef93]  `}>
-      
+    <div className={`backdrop bg-[#007bef93] z-[40]  `}>
+     
     </div>
   )
 }
