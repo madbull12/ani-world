@@ -1,6 +1,9 @@
 import BackdropModal from "./BackdropModal";
 import { motion } from 'framer-motion'
-import { useOpenSearch, useSetBodyScroll } from "../lib/zustand";
+import { useSearch, useSetBodyScroll } from "../lib/zustand";
+import {  IoSearchOutline } from "react-icons/io5";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const dropIn = {
     hidden:{
@@ -26,9 +29,17 @@ const dropIn = {
 const Search = () => {
 
     const { setScroll } = useSetBodyScroll(); 
-    const { closeSearch } = useOpenSearch();
+    const { closeSearch } = useSearch();
+    const router = useRouter();
+    const [term,setTerm] = useState<string>("")
 
-   
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        router.push({
+            pathname:"/search",
+            query:{ q:term}
+        })
+    }
 
    return (
        <BackdropModal
@@ -46,7 +57,14 @@ const Search = () => {
             animate="visible"
             exit='exit'
         >
-            <input type="text" className="" placeholder="Search anime..." />
+            <div className="flex items-center space-x-2">
+                <IoSearchOutline />
+                <form onSubmit={handleSubmit}>
+                    <input onChange={(e)=>setTerm(e.target.value)} type="text" className="bg-transparent outline-none border-b p-2  placeholder:text-gray-300" placeholder="Search anime..." />
+
+                </form>
+            </div>
+      
 
             </motion.div>
        </BackdropModal>

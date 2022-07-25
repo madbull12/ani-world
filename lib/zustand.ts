@@ -18,8 +18,9 @@ export const useSetBodyScroll = create<IScroll>((set) => ({
     setScroll: () => set((state)=>({ scrollSet:state.scrollSet = true }))
 }))
 
-export const useOpenSearch = create<ISearch>((set)=>({
+export const useSearch = create<ISearch>((set)=>({
     isOpen:false,
     openSearch:()=>set((state)=>({ isOpen:state.isOpen = true })),
     closeSearch:()=>set((state)=>({ isOpen:state.isOpen = false })),
+    
 }))

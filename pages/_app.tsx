@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import Header from '../components/Header'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import { useEffect } from 'react'
-import { useOpenSearch, useSetBodyScroll } from '../lib/zustand'
+import { useSearch, useSetBodyScroll } from '../lib/zustand'
 import { AnimatePresence } from 'framer-motion'
 import Search from '../components/Search'
 
@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     document.body.style.overflow = scrollSet ? "visible" : "hidden";
   },[scrollSet]);
 
-  const { isOpen } = useOpenSearch();
+  const { isOpen } = useSearch();
 
   return (
     <div>

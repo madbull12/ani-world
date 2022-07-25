@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { IoMenu, IoSearchCircle } from 'react-icons/io5'
-import { useOpenSearch } from "../lib/zustand"
+import { useSearch } from "../lib/zustand"
 
 const Header = () => {
-    const { openSearch } = useOpenSearch();
+    const { openSearch } = useSearch();
 
   return (
     // header component 
