@@ -63,7 +63,7 @@ const CategoryDropdown = ({ setCategory,category }:IDropdown) => {
     return (
         <div onClick={()=>setDropDown(!isDropped)}>
             <div className="flex items-center gap-x-1 cursor-pointer">
-                <span>{category}</span>
+                <span className="capitalize">{category}</span>
                 <IoFilter />
             </div>
             {isDropped && (
