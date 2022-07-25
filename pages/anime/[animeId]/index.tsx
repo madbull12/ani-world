@@ -79,6 +79,8 @@ const AnimeDetails = () => {
     //     return (`${dt} ${month}, ${year}`)
     // }
 
+    console.log(anime)
+
   return (
     <main className='max-w-8xl mx-auto'>
         <Head>

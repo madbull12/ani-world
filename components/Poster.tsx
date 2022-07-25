@@ -20,7 +20,7 @@ const Poster = ({ anime }: IProps) => {
 
           
             <div 
-                className={`bg-[#007CEF] absolute bottom-0 rounded-b-lg   w-full ease-in-out duration-150 transition-all ${showTitle ? "h-[40px] p-2" : "h-0"}`}
+                className={`bg-[#007CEF] overflow-hidden absolute bottom-0 rounded-b-lg   w-full ease-in-out duration-150 transition-all ${showTitle ? "h-[40px] p-2" : "h-0"}`}
         
             >
                 <h1 className=' text-white  truncate font-bold'>{anime.title}</h1>
