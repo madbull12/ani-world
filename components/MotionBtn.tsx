@@ -9,7 +9,7 @@ interface IBtn {
 
 }
 
-const LoadMoreBtn = (props:IBtn) => {
+const MotionBtn = (props:IBtn) => {
     
   return (
         <motion.button 
@@ -34,4 +34,4 @@ const LoadMoreBtn = (props:IBtn) => {
   )
 }
 
-export default LoadMoreBtn
+export default MotionBtn
