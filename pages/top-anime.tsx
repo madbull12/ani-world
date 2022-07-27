@@ -7,35 +7,7 @@ import MotionBtn from '../components/MotionBtn';
 import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
-
-const useLocalStorage = (key:string,initial:any) => {
-  const [value,setValue] = useState(()=>{
-    if(typeof window !== "undefined") {
-        try {
-          const saved = window.localStorage.getItem(key);
-          if(saved !== null) {
-            return JSON.parse(saved);
-
-          }
-
-        } catch (err) {
-       
-          console.log(err);
-        }
-
-
-   
-    }
-
-    return initial;
-  });
-
-  useEffect(()=>{
-    window.localStorage.setItem(key,JSON.stringify(value));
-  },[value]);
-
-  return [value,setValue]
-}
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const fetcher = (url:string) => fetch(url).then((res)=>res.json())
 const TopAnimePage = () => {
