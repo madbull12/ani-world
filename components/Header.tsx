@@ -26,6 +26,31 @@ const Header = () => {
     const { unsetScroll } = useSetBodyScroll();
     const [isHovered,setIsHovered] = useState<boolean>();
 
+    const d =new Date();
+    let month = d.getMonth();
+    const currentYear = d.getFullYear();
+   const currentSeason = getSeason(month+=1);
+
+
+
+    function getSeason(month:number) {
+
+        if (month >= 3 && month <= 5) {
+            return 'spring';
+        }
+    
+        if (month >= 6 && month <= 8) {
+            return 'summer';
+        }
+    
+        if (month >= 9 && month <= 11) {
+            return 'fall';
+        }
+    
+        // Months 12, 01, 02
+        return 'winter';
+    }
+
   return (
     // header component 
     <header className=" p-4 text-white bg-blue-500 " >
@@ -59,7 +84,7 @@ const Header = () => {
         
                                     </div>
                                     <div className="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
-                                        <Link href="/"  >Seasonal Anime</Link>
+                                        <Link href={`/anime/season/${currentYear}/${currentSeason}`}  >Seasonal Anime</Link>
         
                                     </div>
                                 </motion.div>

@@ -1,8 +1,11 @@
 import React from 'react'
+import SeasonalNav from '../../../../components/SeasonalNav'
 
 const SeasonalPage = () => {
   return (
-    <div>SeasonalPage</div>
+    <div>
+      <SeasonalNav />
+    </div>
   )
 }
 
