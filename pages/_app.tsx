@@ -6,15 +6,26 @@ import { useEffect } from 'react'
 import { useSearch, useSetBodyScroll } from '../lib/zustand'
 import { AnimatePresence } from 'framer-motion'
 import Search from '../components/Search'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { scrollSet } = useSetBodyScroll();
+  const router = useRouter();
+
   useEffect(()=>{
     document.body.style.overflow = scrollSet ? "visible" : "hidden";
   },[scrollSet]);
 
   const { isOpen } = useSearch();
 
+  if(typeof window !== 'undefined') {
+    if(router.pathname !== "/top-anime") {
+      window.localStorage.setItem("page",JSON.stringify(1));
+  
+    }
+  }
+
+  
   return (
     <div>
          <AnimatePresence
