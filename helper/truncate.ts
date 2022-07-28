@@ -1,5 +1,5 @@
 const truncate = (x:string,n:number) => {
-    return x.slice(0,n) + "..."
+    return x?.slice(0,n) + "..."
 
 }
 

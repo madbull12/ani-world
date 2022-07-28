@@ -45,10 +45,7 @@ const SeasonalNav = () => {
             </ul>
         </nav>
         ):(
-            <div className='h-full w-full grid place-items-center'>
-                <Jelly color="#007CEF"  />
-
-        </div>
+            <></>
         )}
 
     </header>
