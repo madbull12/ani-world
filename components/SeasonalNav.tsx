@@ -40,7 +40,7 @@ const SeasonalNav = () => {
                     </Link>
                 ))}
                 
-                <IoEllipsisHorizontal onClick={()=>setIndex(items.length===0 ? index : index - 1)} className='cursor-pointer hover:bg-blue-500 hover:text-white duration-100 ease-in p-1 text-3xl  ' />
+                <IoEllipsisHorizontal onClick={()=>setIndex(index===0 ? index : index - 1)} className='cursor-pointer hover:bg-blue-500 hover:text-white duration-100 ease-in p-1 text-3xl  ' />
 
             </ul>
         </nav>
