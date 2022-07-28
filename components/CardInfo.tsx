@@ -1,7 +1,7 @@
 import moment from 'moment'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import {  IoPlay } from 'react-icons/io5'
+import {  IoPeople, IoPlay, IoStar } from 'react-icons/io5'
 import { IoMdArrowDropup,IoMdArrowDropdown } from 'react-icons/io'
 import {  AnimeDetailsProps } from '../interface'
 import { v4 as uuidv4 } from 'uuid'
@@ -43,23 +43,36 @@ const CardInfo = ({ anime }:IProps) => {
         </div>
         <div className='flex relative gap-x-2 h-[200px] w-full overflow-y-scroll overflow-x-hidden'>
           
-            <div className='w-1/2 h-full relative  '>
+          <div className='w-1/2 h-full relative  '>
               <Image src={anime.images.jpg.image_url}  
                   layout="fill"
                   objectFit='cover'
                   alt={anime.title}  
                 />
-            </div>
+          </div>
           
       
       
-        <div className='w-1/2 '>
-          <p className='text-xs md:text-sm text-ellipsis '>{expand ? anime.synopsis :  truncate(anime.synopsis,250)}</p>
-          <div className="grid place-items-center text-2xl ">
-            {!expand ? <IoMdArrowDropdown className='cursor-pointer animate-bounce' onClick={()=>setExpand(true)} /> : <IoMdArrowDropup className='cursor-pointer animate-bounce' onClick={()=>setExpand(false)} />}
-          </div>
+          <div className='w-1/2 '>
+            <p className='text-xs md:text-sm text-ellipsis '>{expand ? anime.synopsis :  truncate(anime.synopsis,250)}</p>
+            <div className="grid place-items-center text-2xl ">
+              {!expand ? <IoMdArrowDropdown className='cursor-pointer animate-bounce' onClick={()=>setExpand(true)} /> : <IoMdArrowDropup className='cursor-pointer animate-bounce' onClick={()=>setExpand(false)} />}
+            </div>
 
+          </div>
         </div>
+        <div className='flex justify-between items-center [&>*]:flex [&>*]:items-center [&>*]:gap-x-2 text-sm text-gray-500 mt-2'>
+          <div>
+            <IoStar />
+            {anime.score}
+          </div>
+          <div>
+            <IoPeople />
+            {anime.members}
+          </div>
+          <button className='bg-blue-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-blue-400'>
+            Add to List
+          </button>
         </div>
     </article>
   )

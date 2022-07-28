@@ -135,14 +135,17 @@ const Search = () => {
             animate="visible"
             exit='exit'
         >
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 ">
                 <CategoryDropdown setCategory={setCategory} category={category}  />
 
                 <IoSearchOutline />
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="relative">
                     <input onChange={(e)=>setTerm(e.target.value)} type="text" className="bg-transparent outline-none border-b p-2  placeholder:text-gray-300" placeholder="Search anime, manga and more..." />
-
+       
+   
                 </form>
+            
+
             </div>
       
 
