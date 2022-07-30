@@ -146,3 +146,21 @@ export interface IRow {
     items:Anime[];
     title:string;
 }
+
+export interface Review {
+    date:string;
+    episodes_watched:number;
+    mal_id:number;
+    review:string;
+    scores:{
+        overall:number;
+    };
+    type:string;
+    user:{
+        images:JPG,
+        username:string,
+    },
+        votes:number
+
+
+}
