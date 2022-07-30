@@ -3,6 +3,8 @@ import { IoMenu, IoSearchCircle } from 'react-icons/io5'
 import { useSearch, useSetBodyScroll } from "../lib/zustand"
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from "react"
+import { useUser } from "@auth0/nextjs-auth0"
+import Image from "next/image"
 
 const showIn = {
     hidden:{
@@ -30,6 +32,10 @@ const Header = () => {
     let month = d.getMonth();
     const currentYear = d.getFullYear();
    const currentSeason = getSeason(month+=1);
+   
+  const { user,error,isLoading } = useUser();
+
+  console.log(user)
 
 
 
@@ -98,12 +104,24 @@ const Header = () => {
                     <Link href="/">
                         Manga
                     </Link>
+                    {user ? (
+                        <Link href="/api/auth/logout">Sign out</Link>
+                    ):(
+                        <Link href="/api/auth/login">Sign in</Link>
+
+                    )}
                     <IoSearchCircle className="text-3xl cursor-pointer"  onClick={()=>{
                         openSearch()
                         unsetScroll()
                         window.scrollTo(0, 0)
                         
                     }} />
+                    {user && (
+                        <Link href="/user">
+                            <Image alt={"profile"} src={user?.picture || ""} width={30} height={30} className="rounded-full ml-2 cursor-pointer" />
+                        
+                        </Link>
+                    )}
                 </ul>
                 <IoMenu className="md:hidden text-xl cursor-pointer" />
                 

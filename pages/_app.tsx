@@ -7,6 +7,7 @@ import { useSearch, useSetBodyScroll } from '../lib/zustand'
 import { AnimatePresence } from 'framer-motion'
 import Search from '../components/Search'
 import { useRouter } from 'next/router'
+import { UserProvider } from '@auth0/nextjs-auth0'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { scrollSet } = useSetBodyScroll();
@@ -27,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   
   return (
-    <div>
+    <UserProvider>
          <AnimatePresence
             initial={false}
             exitBeforeEnter={true}
@@ -41,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
       
       </SkeletonTheme>
-    </div>
+    </UserProvider>
 
 
   )
