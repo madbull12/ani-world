@@ -3,6 +3,7 @@ import { IoClose } from 'react-icons/io5'
 import { useSetBodyScroll, useToggle } from '../lib/zustand';
 import BackdropModal from './BackdropModal';
 import { motion } from 'framer-motion'
+import ColorTheme from './ColorTheme';
 
 const ToggleNav = () => {
     const { untoggleNav } = useToggle();
@@ -38,6 +39,7 @@ const ToggleNav = () => {
                 e.stopPropagation();
                 handleClose()
             }} />
+            <ColorTheme />
         </motion.section>
     </BackdropModal>
 

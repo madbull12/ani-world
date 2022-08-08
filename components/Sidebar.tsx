@@ -10,6 +10,7 @@ export interface ISidebar {
     topUpcoming:Anime[]
 }
 const Sidebar = () => {
+
   const [values,setValues] = useState({
     loading:false,
     error:null,

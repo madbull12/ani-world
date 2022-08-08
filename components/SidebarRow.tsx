@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Anime, IRow } from "../interface";
+import { useTheme } from '../lib/zustand';
 
 
 interface IProps extends IRow {
@@ -10,6 +11,7 @@ interface IProps extends IRow {
 }
 
 const SidebarRow = ({ items,title,limit,loading }: IProps) => {
+    const { theme } = useTheme();
   return (
     <>
     {loading ? (
@@ -18,7 +20,7 @@ const SidebarRow = ({ items,title,limit,loading }: IProps) => {
     <section>
         <div className="flex justify-between items-center bg-blue-100 p-2 ">
             <h1 className="text-lg font-bold">{title}</h1>
-            <span className="text-blue-600 font-bold">
+            <span className=" font-bold" style={{ color:theme }}>
                 <Link href="/">More</Link>
 
             </span>
@@ -31,13 +33,13 @@ const SidebarRow = ({ items,title,limit,loading }: IProps) => {
                         <Image src={anime.images.jpg.image_url} width={80} height={90} alt={anime.title} />
                         <div>
                             <div>
-                                <h1 className="font-bold text-blue-600">{anime.title}</h1>
+                                <h1 className="font-bold " style={{ color:theme }}>{anime.title}</h1>
                                 <p className="text-gray-500 text-sm">{anime.type}, {anime.episodes===null ? 0 : anime.episodes} eps, scored {anime.score === null ? "N/A" : anime.score}</p>
                                 <p className="text-gray-500 text-sm">Members: {anime.members.toLocaleString()}</p>
 
                             </div>
                         </div>
-                        <button className="self-start justify-self-end ml-auto text-blue-600 font-semibold">add</button>
+                        <button className="self-start justify-self-end ml-auto  font-semibold" style={{ color:theme }}>add</button>
                     </div>
                 </Link>
                 

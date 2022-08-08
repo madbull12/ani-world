@@ -18,6 +18,11 @@ interface IToggle {
     untoggleNav:()=>void
 }
 
+interface ITheme {
+    theme:any;
+    setTheme:(theme:any)=>void
+}
+
 export const useSetBodyScroll = create<IScroll>((set) => ({
     scrollSet:true,
     unsetScroll: () => set((state)=>({ scrollSet:state.scrollSet = false })),
@@ -37,3 +42,11 @@ export const useToggle = create<IToggle>((set)=>({
     untoggleNav:()=>set((state)=>({ isToggle:state.isToggle=false })),
 
 }));
+
+
+export const useTheme = create<ITheme>((set)=>({
+    theme:"#3b82f6",
+    setTheme:(theme:string)=>set({ theme })
+}))
+
+

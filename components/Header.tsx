@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { IoMenu, IoSearchCircle } from 'react-icons/io5'
-import { useSearch, useSetBodyScroll, useToggle } from "../lib/zustand"
+import { useSearch, useSetBodyScroll, useTheme, useToggle } from "../lib/zustand"
 import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useUser } from "@auth0/nextjs-auth0"
 import Image from "next/image"
+import useLocalStorage from "../hooks/useLocalStorage"
 
 const showIn = {
     hidden:{
@@ -28,6 +29,7 @@ const Header = () => {
     const { unsetScroll } = useSetBodyScroll();
     const { toggleNav } = useToggle();
     const [isHovered,setIsHovered] = useState<boolean>();
+    const { setTheme,theme } = useTheme();
 
     const d =new Date();
     let month = d.getMonth();
@@ -36,8 +38,13 @@ const Header = () => {
    
   const { user,error,isLoading } = useUser();
 
-  console.log(user)
 
+
+//   useEffect(()=>{
+//      setTheme(window.localStorage.getItem("theme")?.slice(1,-1))
+//   },[theme])  
+
+//   console.log(theme)
 
 
     function getSeason(month:number) {
@@ -60,7 +67,7 @@ const Header = () => {
 
   return (
     // header component 
-    <header className=" p-4 text-white bg-blue-500 " >
+    <header className={` p-4 text-white  `} style={{ background:`${theme}` }} >
         <div className="max-w-7xl mx-auto">
             <nav className="flex justify-between items-center">
                 <span className="font-bold text-2xl whitespace-nowrap">
