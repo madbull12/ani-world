@@ -52,7 +52,7 @@ const Sidebar = () => {
   },[])
 
   return (
-    <aside className='absolute right-0 top-0 p-4   w-[420px] space-y-12'>
+    <aside className='absolute right-0 top-0 p-4   w-[420px] space-y-12 hidden md:block'>
 
           <>
         

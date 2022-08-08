@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { IoMenu, IoSearchCircle } from 'react-icons/io5'
-import { useSearch, useSetBodyScroll } from "../lib/zustand"
+import { useSearch, useSetBodyScroll, useToggle } from "../lib/zustand"
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from "react"
 import { useUser } from "@auth0/nextjs-auth0"
@@ -26,6 +26,7 @@ const showIn = {
 const Header = () => {
     const { openSearch } = useSearch();
     const { unsetScroll } = useSetBodyScroll();
+    const { toggleNav } = useToggle();
     const [isHovered,setIsHovered] = useState<boolean>();
 
     const d =new Date();
@@ -123,7 +124,10 @@ const Header = () => {
                         </Link>
                     )}
                 </ul>
-                <IoMenu className="md:hidden text-xl cursor-pointer" />
+                <IoMenu className="md:hidden text-xl cursor-pointer" onClick={()=>{
+                    toggleNav();
+                    unsetScroll();
+                }} />
                 
 
             </nav>

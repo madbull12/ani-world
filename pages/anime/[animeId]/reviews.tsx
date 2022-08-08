@@ -38,7 +38,14 @@ const ReviewComponent = ({ review }:{ review:Review }) => {
         <div>
             <p className='text-sm py-4'>
                 {readMore ? review.review : truncate(review.review,1000)}
-                <button onClick={()=>setReadMore(!readMore)} className=' font-semibold  text-blue-500 cursor-pointer ml-1'>{readMore ? "Show less" : "Read more"}</button>
+
+                {review.review.length > 1000 && (
+                    <>
+                        <button onClick={()=>setReadMore(!readMore)} className=' font-semibold  text-blue-500 cursor-pointer ml-1'>{readMore ? "Show less" : "Read more"}</button>
+                    </>
+               
+                )}
+             
             </p>
         
             

@@ -17,7 +17,7 @@ const Row = ({ items,title }:IRow) => {
                 {viewAll ? "View Less" : "View All"}
             </button>
         </div>
-        <div className="grid  gap-4 min-w-0 overflow-x-scroll  auto-cols-max grid-flow-col scrollbar-hide md:scrollbar-default  overflow-y-hidden">
+        <div className="grid  gap-4 min-w-0 custom-scrollbar overflow-x-scroll  auto-cols-max grid-flow-col  overflow-y-hidden ">
             {items?.slice(0,viewAll ? items.length : 8).map((anime)=>(
                 <div key={anime.mal_id} className="rounded-lg overflow-hidden">
                     <Poster  anime={anime} />
