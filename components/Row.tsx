@@ -15,7 +15,7 @@ const Row = ({ items,title }:IRow) => {
         <div className="flex justify-between items-center gap-x-2">
             <h1 className="font-black text-xl text-gray-700 whitespace-nowrap capitalize">{title}</h1>
             <div className="h-[2px] w-full bg-gray-200"></div>
-            <button className="whitespace-nowrap font-black text-sm  text-[#007CEF] uppercase" onClick={()=>setViewAll(!viewAll)} style={{ color:theme }}>
+            <button className={`whitespace-nowrap font-black text-sm  text-${theme}-500 uppercase`} onClick={()=>setViewAll(!viewAll)}>
                 {viewAll ? "View Less" : "View All"}
             </button>
         </div>

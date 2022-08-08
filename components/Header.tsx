@@ -29,7 +29,7 @@ const Header = () => {
     const { unsetScroll } = useSetBodyScroll();
     const { toggleNav } = useToggle();
     const [isHovered,setIsHovered] = useState<boolean>();
-    const { setTheme,theme } = useTheme();
+    const { theme } = useTheme();
 
     const d =new Date();
     let month = d.getMonth();
@@ -67,7 +67,7 @@ const Header = () => {
 
   return (
     // header component 
-    <header className={` p-4 text-white  `} style={{ background:`${theme}` }} >
+    <header className={` p-4 text-white bg-${theme}-500 `}  >
         <div className="max-w-7xl mx-auto">
             <nav className="flex justify-between items-center">
                 <span className="font-bold text-2xl whitespace-nowrap">

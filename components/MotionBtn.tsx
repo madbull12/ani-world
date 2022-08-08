@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useTheme } from '../lib/zustand';
 
 interface IBtn {
     handleClick:()=>void;
@@ -10,10 +11,11 @@ interface IBtn {
 }
 
 const MotionBtn = (props:IBtn) => {
+    const { theme } = useTheme();
     
   return (
         <motion.button 
-            className='bg-blue-200 shadow-md z-50  px-4 py-2 rounded-lg font-bold text-blue-500 mt-2' 
+            className={`bg-${theme}-200 shadow-md z-50  px-4 py-2 rounded-lg font-bold text-${theme}-500 mt-2`} 
             onClick={()=>{
                 props.handleClick();
                 props.unsetScroll?.();

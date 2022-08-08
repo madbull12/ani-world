@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import truncate from '../../../helper/truncate';
 import AnimeDetailsComponent from '../../../components/AnimeDetailsComponent';
+import { useTheme } from '../../../lib/zustand';
 
 
 const fetcher = (url:string) => fetch(url).then(res=>res.json());
@@ -29,7 +30,7 @@ const AnimeDetails = () => {
     const [readMore,setReadMore] = useState<boolean>(false);
     const [idReadMore,setIdReadMore] = useState();
 
-
+    const { theme } = useTheme()
 
 
 
@@ -259,7 +260,7 @@ const AnimeDetails = () => {
             
         ):(
           <div className="h-screen place-items-center grid">
-            <Jelly color="#007CEF" size={100} />
+            <Jelly color={theme} size={100} />
           </div>
         )}
     </main>

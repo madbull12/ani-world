@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import MotionBtn from './MotionBtn'
 import BackdropModal from './BackdropModal'
-import { useSetBodyScroll } from '../lib/zustand'
+import { useSetBodyScroll, useTheme } from '../lib/zustand'
 
 
 interface IDetails {
@@ -48,7 +48,7 @@ const dropIn = {
 const Synopsis = ({ text,handleClose }:{ text:string,handleClose:()=>void }) => {
 
      const { setScroll } = useSetBodyScroll(); 
-
+    const { theme } = useTheme();
 
     return (
         <BackdropModal
@@ -59,12 +59,13 @@ const Synopsis = ({ text,handleClose }:{ text:string,handleClose:()=>void }) => 
 
         >
             <motion.div
-                className='text-white p-4 bg-blue-600 relative max-w-[500px] rounded-lg'
+                className={`bg-${theme}-500 text-white p-4  relative max-w-[500px] rounded-lg`}
                 onClick={(e)=>e.stopPropagation()}
                 variants={dropIn}
                 initial="hidden"
                 animate="visible"
                 exit='exit'
+                
             >
                 <h1 className="font-bold text-2xl">Synopsis</h1>
                 <p>{text}</p>
@@ -86,6 +87,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
 
     ]
     const { unsetScroll } = useSetBodyScroll(); 
+    const { theme } = useTheme();
 
     const [_link,setLink] = useState("videos");
     const router = useRouter();
@@ -161,7 +163,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                     </div>
                     <Backdrop color="#1085f1" />
                 </div>
-                <section className='bg-[#007CEF] w-full py-4 pr-4 text-white'>
+                <section className={`bg-${theme}-500 w-full py-4 pr-4 text-white`}>
                     <div className='ml-[285px] space-y-3 z-[999] relative'>
                         <header className='flex justify-between items-center gap-x-3 flex-col md:flex-row'>
                             <h1 className='lg:text-xl text-base font-bold hidden md:block'>Synopsis</h1>
@@ -244,7 +246,7 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                         <ul className='flex justify-between'>
                             {tabLinks.map((link,i)=>(
                                 <Link href={`/anime/${animeId}/${link}`} key={uuidv4()} scroll={false}>
-                                    <li  className={`font-bold pb-2 uppercase text-sm cursor-pointer ${(router.pathname.includes(link))  ? "border-b-4 border-blue-500" : ""}`} onClick={()=>setLink(link)}>{link}</li>
+                                    <li  className={`font-bold pb-2 uppercase text-sm cursor-pointer ${(router.pathname.includes(link))  ? `border-b-4 border-${theme}-500` : ""}`} onClick={()=>setLink(link)}>{link}</li>
                                 </Link>
                             
                             ))}

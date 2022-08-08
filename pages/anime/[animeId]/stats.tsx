@@ -36,6 +36,7 @@ import {  Chart,
   Title,
   Tooltip } from 'chart.js';
 import { Stats } from '../../../interface';
+import { useTheme } from '../../../lib/zustand';
   Chart.register(
     ArcElement,
     LineElement,
@@ -75,6 +76,7 @@ const Stats = () => {
   const { data:stats }: { data:Stats  } = animeStats || {};
   console.log(data)
 
+  const { theme } = useTheme();
   
 
 
@@ -83,26 +85,26 @@ const Stats = () => {
       <AnimeDetailsComponent anime={anime} />
       {stats ? (
         <div className='px-4 pb-4 space-y-4'>
-            <div className='flex gap-x-2 justify-center'>
-              <div className='bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce'>
-                <AiFillEye className="text-5xl text-blue-500"  />
-                <p className='text-sm text-blue-500 font-semibold'>Watching: {stats.watching.toLocaleString()}</p>
+            <div className={`flex gap-x-2 justify-center [&>*]:text-${theme}-500 [&>*]:bg-${theme}-100`}>
+              <div className='bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce '>
+                <AiFillEye className={`text-5xl `}  />
+                <p className='text-sm  font-semibold'>Watching: {stats.watching.toLocaleString()}</p>
               </div>
               <div className='bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce'>
-                <MdOutlineIncompleteCircle className="text-5xl text-blue-500"  />
-                <p className='text-sm text-blue-500 font-semibold'>Completed: {stats.completed.toLocaleString()}</p>
+                <MdOutlineIncompleteCircle className="text-5xl "  />
+                <p className='text-sm  font-semibold'>Completed: {stats.completed.toLocaleString()}</p>
               </div>
               <div className='bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce'>
-                <IoPauseCircleSharp className="text-5xl text-blue-500"  />
-                <p className='text-sm text-blue-500 font-semibold'>On hold: {stats.on_hold.toLocaleString()}</p>
+                <IoPauseCircleSharp className="text-5xl "  />
+                <p className='text-sm  font-semibold'>On hold: {stats.on_hold.toLocaleString()}</p>
               </div>
               <div className='bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce'>
-                <MdCancel className="text-5xl text-blue-500"  />
-                <p className='text-sm text-blue-500 font-semibold'>Dropped: {stats.dropped.toLocaleString()}</p>
+                <MdCancel className="text-5xl "  />
+                <p className='text-sm  font-semibold'>Dropped: {stats.dropped.toLocaleString()}</p>
               </div>
               <div className='bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce'>
-                <AiFillSchedule className="text-5xl text-blue-500"  />
-                <p className='text-sm text-blue-500 font-semibold'>Plan to watch: {stats.plan_to_watch.toLocaleString()}</p>
+                <AiFillSchedule className="text-5xl "  />
+                <p className='text-sm  font-semibold'>Plan to watch: {stats.plan_to_watch.toLocaleString()}</p>
               </div>
             </div>
             <Bar
