@@ -23,30 +23,12 @@ const showIn = {
     }
 }
 
+interface ILink {
+    title:string;
+    isManga:boolean;
+}
 
-const Header = () => {
-    const { openSearch } = useSearch();
-    const { unsetScroll } = useSetBodyScroll();
-    const { toggleNav } = useToggle();
-    const [isHovered,setIsHovered] = useState<boolean>();
-    const { theme } = useTheme();
-
-    const d =new Date();
-    let month = d.getMonth();
-    const currentYear = d.getFullYear();
-   const currentSeason = getSeason(month+=1);
-   
-  const { user,error,isLoading } = useUser();
-
-
-
-//   useEffect(()=>{
-//      setTheme(window.localStorage.getItem("theme")?.slice(1,-1))
-//   },[theme])  
-
-//   console.log(theme)
-
-
+const LinkItem = ({ title,isManga }:ILink) => {
     function getSeason(month:number) {
 
         if (month >= 3 && month <= 5) {
@@ -64,6 +46,77 @@ const Header = () => {
         // Months 12, 01, 02
         return 'winter';
     }
+    const [isHovered,setIsHovered] = useState<boolean>();
+    const d =new Date();
+    let month = d.getMonth();
+    const currentYear = d.getFullYear();
+    const currentSeason = getSeason(month+=1);
+
+    return (
+        <div className="relative" onMouseOver={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)}>
+            <li className="cursor-pointer capitalize">
+                {title}
+            </li>
+            <AnimatePresence
+                initial={false}
+                exitBeforeEnter={true}
+                onExitComplete={()=>null}
+
+            >
+                {isHovered && (
+                    <motion.div 
+                        variants={showIn}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="absolute rounded-md  text-sm flex flex-col shadow-md whitespace-nowrap -bottom-20 z-[999] text-blue-500 font-semibold bg-blue-50"
+                    >
+                        <div className="hover:bg-blue-500 px-4 flexflex-col py-2 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
+                            <Link href="/top-anime" className="hover:text-blue-400" >
+                                <span>Top {isManga ? "Manga":"Anime"}</span>
+                            </Link>
+                    
+
+                        </div>
+               
+                        {
+                            !isManga && (
+                                <div className="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
+                                    <Link href={`/anime/season/${currentYear}/${currentSeason}`}>Seasonal Anime</Link>
+    
+                                </div>
+                            )
+                        }
+                    
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            
+
+    
+        </div>
+               
+    )
+}
+
+
+const Header = () => {
+    const { openSearch } = useSearch();
+    const { unsetScroll } = useSetBodyScroll();
+    const { toggleNav } = useToggle();
+    const { theme } = useTheme();
+
+    
+  const { user,error,isLoading } = useUser();
+
+
+
+//   useEffect(()=>{
+//      setTheme(window.localStorage.getItem("theme")?.slice(1,-1))
+//   },[theme])  
+
+//   console.log(theme)
+
 
   return (
     // header component 
@@ -74,44 +127,10 @@ const Header = () => {
                     <Link href="/" >アニワルド</Link>
 
                 </span>
-                <ul className="space-x-2  items-center hidden md:flex">
-                    <div className="relative" onMouseOver={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)}>
-                        <Link href="/">
-                            Anime
-                        </Link>
-                        <AnimatePresence
-                            initial={false}
-                            exitBeforeEnter={true}
-                            onExitComplete={()=>null}
-
-                        >
-                            {isHovered && (
-                                <motion.div 
-                                    variants={showIn}
-                                    initial="hidden"
-                                    animate="visible"
-                                    exit="exit"
-                                    className="absolute rounded-md  text-sm flex flex-col shadow-md whitespace-nowrap -bottom-20 z-[999] text-blue-500 font-semibold bg-blue-50"
-                                >
-                                    <div className="hover:bg-blue-500 px-4 py-2 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
-                                        <Link href="/top-anime" className="hover:text-blue-400" >Top Anime</Link>
-        
-                                    </div>
-                                    <div className="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
-                                        <Link href={`/anime/season/${currentYear}/${currentSeason}`}  >Seasonal Anime</Link>
-        
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                        
-              
-                   
-                    </div>
+                <ul className="space-x-2  items-center hidden md:flex ml-auto">
+                    <LinkItem isManga={false} title="anime" />
                
-                    <Link href="/">
-                        Manga
-                    </Link>
+                    <LinkItem isManga={true} title="manga" />
                     {user ? (
                         <Link href="/api/auth/logout">Sign out</Link>
                     ):(
@@ -131,7 +150,7 @@ const Header = () => {
                         </Link>
                     )}
                 </ul>
-                <IoMenu className="md:hidden text-xl cursor-pointer" onClick={()=>{
+                <IoMenu className=" text-xl cursor-pointer ml-2" onClick={()=>{
                     toggleNav();
                     unsetScroll();
                 }} />
