@@ -8,8 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import useLocalStorage from '../hooks/useLocalStorage';
+import fetcher from '../helper/fetcher';
 
-const fetcher = (url:string) => fetch(url).then((res)=>res.json())
 const TopAnimePage = () => {
     const [page,setPage] = useLocalStorage("page",1);
     const { data:topAnime } = useSWR(`https://api.jikan.moe/v4/top/anime?page=${page}`,fetcher);

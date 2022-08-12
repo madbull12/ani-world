@@ -1,11 +1,20 @@
-import { useUser } from '@auth0/nextjs-auth0'
+import { getSession, useUser } from '@auth0/nextjs-auth0'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Jelly } from '@uiball/loaders';
 import Image from 'next/image';
 import React from 'react'
+import useSWR from 'swr';
+import fetcher from '../helper/fetcher';
+import Poster from '../components/Poster'
+import { v4 as uuidv4 } from 'uuid'
 
 const UserPage = () => {
     const { user,isLoading } = useUser();
-    console.log(user)
+    console.log(user);
+
+    const { data:favourites } = useSWR(`/api/favorite/${user?.email}`,fetcher);
+    console.log(favourites)
+    
   return (
     <main className='flex min-h-[90vh] justify-center items-center'>
         {isLoading ? (
@@ -20,8 +29,14 @@ const UserPage = () => {
                     <p className='text-lg font-semibold'>{user?.name}</p>
                     <p className='text-sm text-gray-500'>{user?.email}</p>
                 </div>
-                <div>
-                    
+                <div className='justify-self-start mt-4'>
+                    <h1 className='text-xl font-bold'>Favourite Anime</h1>
+                    {favourites?.map((item:any)=>(
+                        
+                        <div className='' key={uuidv4()}>
+                            <h1>{item.title}</h1>
+                        </div>
+                    ))}
                 </div>
             </div>
         )}
@@ -29,4 +44,9 @@ const UserPage = () => {
   )
 }
 
+export const getServerSideProps = withPageAuthRequired();
+
+
 export default UserPage
+
+

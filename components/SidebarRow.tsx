@@ -3,7 +3,7 @@ import Link from "next/link";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Anime, IRow } from "../interface";
 import { useTheme } from '../lib/zustand';
-
+import { useUser } from "@auth0/nextjs-auth0";
 
 interface IProps extends IRow {
     limit:number;
@@ -12,6 +12,28 @@ interface IProps extends IRow {
 
 const SidebarRow = ({ items,title,limit,loading }: IProps) => {
     const { theme } = useTheme();
+    const { user } = useUser();
+
+    const addFavorite = async(title:string,imageUrl:string,malId:number) =>{
+        const data = {
+            title,
+            imageUrl,
+            userEmail:user?.email,
+            malId
+        }
+        try {
+            await fetch("/api/favorite",{
+                body:JSON.stringify(data),
+                headers:{
+                    "Content-type":"application/json"
+                  },
+                method:"POST"
+            })
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
   return (
     <>
     {loading ? (
@@ -39,7 +61,10 @@ const SidebarRow = ({ items,title,limit,loading }: IProps) => {
 
                             </div>
                         </div>
-                        <button className={`self-start justify-self-end ml-auto  font-semibold text-${theme}-500`} >add</button>
+                        <button  className={`self-start justify-self-end ml-auto  font-semibold text-${theme}-500`} onClick={(e)=>{
+                            e.stopPropagation()
+                            addFavorite(anime.title,anime.images.jpg.large_image_url,anime.mal_id)
+                        }} >add</button>
                     </div>
                 </Link>
                 

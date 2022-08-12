@@ -9,3 +9,15 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model FavouriteAnime {
+  id Int @id @default(autoincrement())
+  title String
+  imageUrl String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userEmail String 
+  malId Int
+
+  @@unique([malId, userEmail])
+}
