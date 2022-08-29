@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
 import { Anime, IRow } from "../interface";
 import { useTheme } from '../lib/zustand';
 import { useUser } from "@auth0/nextjs-auth0";
+import { addFavorite,addToFavourite } from "../helper/functions";
+import toast from "react-hot-toast";
 
 interface IProps extends IRow {
     limit:number;
@@ -14,25 +16,19 @@ const SidebarRow = ({ items,title,limit,loading }: IProps) => {
     const { theme } = useTheme();
     const { user } = useUser();
 
-    const addFavorite = async(title:string,imageUrl:string,malId:number) =>{
-        const data = {
-            title,
-            imageUrl,
-            userEmail:user?.email,
-            malId
-        }
-        try {
-            await fetch("/api/favorite",{
-                body:JSON.stringify(data),
-                headers:{
-                    "Content-type":"application/json"
-                  },
-                method:"POST"
-            })
-        } catch(err) {
-            console.log(err);
-        }
-    }
+    // const addToFavourite = async(title:string,imageUrl:string,mal_id:number,email:any) => {
+    //     try {
+    //         await toast.promise(addFavorite(title,imageUrl,mal_id,email),{
+    //             loading:"Saving to favorite...",
+    //             success:"Saving anime successfully",
+    //             error:(err)=>`Something went wrong: ${err.toString()}`
+    //         });
+    //     } catch(err) {
+    //         console.log(err)
+    //     }
+     
+    // }
+
 
   return (
     <>
@@ -63,7 +59,7 @@ const SidebarRow = ({ items,title,limit,loading }: IProps) => {
                         </div>
                         <button  className={`self-start justify-self-end ml-auto  font-semibold text-${theme}-500`} onClick={(e)=>{
                             e.stopPropagation()
-                            addFavorite(anime.title,anime.images.jpg.large_image_url,anime.mal_id)
+                            addToFavourite(anime.title,anime.images.jpg.large_image_url,anime.mal_id,user?.email)
                         }} >add</button>
                     </div>
                 </Link>

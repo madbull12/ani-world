@@ -9,6 +9,7 @@ import Search from '../components/Search'
 import { useRouter } from 'next/router'
 import { UserProvider } from '@auth0/nextjs-auth0'
 import ToggleNav from '../components/ToggleNav'
+import { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { scrollSet } = useSetBodyScroll();
@@ -51,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </AnimatePresence>
           
       <SkeletonTheme baseColor='#EFF6FF' highlightColor="#fff">
+          <Toaster />
           <Header />
           <Component {...pageProps} />
       

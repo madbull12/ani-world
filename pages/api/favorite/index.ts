@@ -13,7 +13,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
                     malId
                 }
             });
-            res.status(200).json({message:"Note created"})
+            res.status(201).json({message:"Note created"})
         }catch(err) {
             res.status(400).json({error:err})
         }
