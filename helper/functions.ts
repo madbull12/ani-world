@@ -23,13 +23,31 @@ export const addFavorite = async(title:string,imageUrl:string,malId:number,email
     }
 }
 
-export const addToFavourite = async(title:string,imageUrl:string,mal_id:number,email:any) => {
+export const addToFavourite = async(title:string,imageUrl:string,malId:number,email:any) => {
 
-    await toast.promise(addFavorite(title,imageUrl,mal_id,email),{
-        loading:"Saving to favorite...",
-        success:"Saving anime successfully",
-        error:(err)=>`Something went wrong: ${err.toString()}`
-    });
+    const data = {
+        title,
+        imageUrl,
+        userEmail:email,
+        malId
+    }
+
+    try {
+        await toast.promise(fetch("/api/favorite",{
+            body:JSON.stringify(data),
+            headers:{
+                "Content-type":"application/json"
+                },
+            method:"POST"
+        }),{
+            loading:"Saving to favorite...",
+            success:"Saving anime successfully",
+            error:(err)=>`Something went wrong: ${err.toString()}`
+        });
+    } catch(err) {
+        console.log(err)
+    }
+
   
  
 }

@@ -12,6 +12,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import MotionBtn from './MotionBtn'
 import BackdropModal from './BackdropModal'
 import { useSetBodyScroll, useTheme } from '../lib/zustand'
+import { addToFavourite } from '../helper/functions'
+import { useUser } from '@auth0/nextjs-auth0'
 
 
 interface IDetails {
@@ -89,10 +91,10 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
     const { unsetScroll } = useSetBodyScroll(); 
     const { theme } = useTheme();
 
+    const { user } = useUser()
     const [_link,setLink] = useState("videos");
     const router = useRouter();
     const { animeId } = router.query;
-    // console.log(animeId);
     const [showSynopsis,setShowSynopsis] = useState(false);
   
     const convertToDate = (x:string) => {
@@ -155,8 +157,27 @@ const AnimeDetailsComponent = ({ anime,children }:IDetails) => {
                             </div>
                             <div className=' md:pt-12 md:ml-auto text-white text-4xl flex self-start'>
                         
-                                    <IoAddCircleOutline className='text-3xl lg:text-4xl' />
-                                    <IoHeartCircleOutline className='text-3xl lg:text-4xl' />
+                                    <motion.button
+                                        whileHover={{ scale:1.1 }}
+                                        whileTap={{ scale:0.9 }}
+                                    >
+                                        <IoAddCircleOutline className='text-3xl lg:text-4xl cursor-pointer' />
+
+                                    </motion.button>
+                                    <motion.button 
+                                        whileHover={{ scale:1.1 }}
+                                        whileTap={{ scale:0.9 }}
+                                        onClick={()=>user 
+                                            ?
+                                            addToFavourite(anime.title,anime.images.jpg.image_url,anime.mal_id,user?.email)
+                                            :
+                                            router.push("/api/auth/login")
+                                        }
+                                    >
+                                        <IoHeartCircleOutline className='text-3xl lg:text-4xl cursor-pointer'  />
+
+
+                                    </motion.button>
 
                             </div>
                             

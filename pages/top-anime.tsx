@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import ReactPaginate from 'react-paginate';
 import useSWR from 'swr'
 import { Anime } from '../interface';
 import { v4 as uuidv4 } from 'uuid'
