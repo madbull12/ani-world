@@ -1,101 +1,99 @@
-import { Jelly } from '@uiball/loaders';
-import Head from 'next/head';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import { Jelly } from "@uiball/loaders";
+import Head from "next/head";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 // import { IoAddCircle, IoAddCircleOutline, IoHeartCircle, IoHeartCircleOutline } from 'react-icons/io5';
-import useSWR from 'swr';
+import useSWR from "swr";
 // import AnimeDetailsLoader from '../../components/AnimeDetailsLoader';
 // import Backdrop from '../../components/Backdrop';
 // import { Anime, Genre } from '../../interface';
 // import ReactPlayer from 'react-player/lazy'
-import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment';
-import truncate from '../../../helper/truncate';
-import AnimeDetailsComponent from '../../../components/AnimeDetailsComponent';
-import { useTheme } from '../../../lib/zustand';
+import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
+import truncate from "../../../helper/truncate";
+import AnimeDetailsComponent from "../../../components/AnimeDetailsComponent";
+import { useTheme } from "../../../lib/zustand";
 
-
-const fetcher = (url:string) => fetch(url).then(res=>res.json());
-
-
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const AnimeDetails = () => {
-    const router = useRouter();
-    const { animeId } = router.query;
-    const { data,error } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}`,fetcher);
-    const { data:animeVideos } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/videos`,fetcher)
-    const { data:animeReviews } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/reviews`, fetcher);
-    // const { data:animeRecommendations } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/recommendations`, fetcher);
-    const [readMore,setReadMore] = useState<boolean>(false);
-    const [idReadMore,setIdReadMore] = useState();
+  const router = useRouter();
+  const { animeId } = router.query;
+  const { data, error } = useSWR(
+    `https://api.jikan.moe/v4/anime/${animeId}`,
+    fetcher
+  );
+  const { data: animeVideos } = useSWR(
+    `https://api.jikan.moe/v4/anime/${animeId}/videos`,
+    fetcher
+  );
+  const { data: animeReviews } = useSWR(
+    `https://api.jikan.moe/v4/anime/${animeId}/reviews`,
+    fetcher
+  );
+  // const { data:animeRecommendations } = useSWR(`https://api.jikan.moe/v4/anime/${animeId}/recommendations`, fetcher);
+  const [readMore, setReadMore] = useState<boolean>(false);
+  const [idReadMore, setIdReadMore] = useState();
 
-    const { theme } = useTheme()
+  const { theme } = useTheme();
 
+  const { data: anime } = data || {};
+  const { data: videos } = animeVideos || {};
+  const { data: reviews } = animeReviews || {};
 
+  const [_link, setLink] = useState("videos");
 
-    const { data:anime } = data || {};
-    const { data:videos } =  animeVideos || {};
-    const { data:reviews } =  animeReviews || {};
+  const tabLinks = [
+    "videos",
+    "episodes",
+    "reviews",
+    "recommendations",
+    "stats",
+    "characters",
+  ];
+  // console.log(videos)
 
+  // console.log(reviews)
+  // console.log(animeRecommendations)
 
-    const [_link,setLink] = useState("videos");
+  if (error) return <h1>{error}</h1>;
 
-    const tabLinks = [
-        "videos",
-        "episodes",
-        "reviews",
-        "recommendations",
-        "stats",
-        "characters",
+  // const convertToDate = (x:string) => {
+  //     const monthNames = ["January", "February", "March", "April", "May", "June",
+  //     "July", "August", "September", "October", "November", "December"
+  //     ];
+  //     const date = new Date(x);
 
-    ]
-    // console.log(videos)
+  //     const year = date.getFullYear();
+  //     let dt:string | number = date.getDate();
+  //     let month = monthNames[date.getMonth()];
 
-    
-    // console.log(reviews)
-    // console.log(animeRecommendations)
-    
-    if(error) return <h1>{error}</h1>
+  //     if(dt<10) {
+  //         dt="0"+dt;
+  //     }
 
+  //     if(!x) {
+  //         return "N/A"
+  //     }
 
-    // const convertToDate = (x:string) => {
-    //     const monthNames = ["January", "February", "March", "April", "May", "June",
-    //     "July", "August", "September", "October", "November", "December"
-    //     ];
-    //     const date = new Date(x);
+  //     return (`${dt} ${month}, ${year}`)
+  // }
 
-    //     const year = date.getFullYear();
-    //     let dt:string | number = date.getDate();
-    //     let month = monthNames[date.getMonth()];
-
-    //     if(dt<10) {
-    //         dt="0"+dt;
-    //     }
-        
-    //     if(!x) {
-    //         return "N/A"
-    //     }
-
-    //     return (`${dt} ${month}, ${year}`)
-    // }
-
-    console.log(anime)
+  console.log(anime);
 
   return (
-    <main className='max-w-8xl mx-auto'>
-        <Head>
-            <title>{anime?.title}</title>
-            <meta name="description" content="Generated by create next app" />
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-     
-        {anime ? (
-            
-            <>
-     
-            <AnimeDetailsComponent anime={anime} />
-            {/* <div className='relative'>
+    <main className="max-w-8xl mx-auto">
+      <Head>
+        <title>{anime?.title}</title>
+        <meta name="description" content="Generated by create next app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      {anime ? (
+        <>
+          <AnimeDetailsComponent anime={anime} />
+          {/* <div className='relative'>
                 <Image alt={anime.title} src={anime.images.webp.large_image_url} width="100%" height={25} layout="responsive" objectFit='cover'  />
                 <div className='absolute z-50 -bottom-40 left-0  px-8 flex  gap-x-8 w-full'>
                   
@@ -175,7 +173,7 @@ const AnimeDetails = () => {
                 </div>
             
             </section> */}
-            {/* <section className='bg-white p-8 max-7xl mx-auto'>
+          {/* <section className='bg-white p-8 max-7xl mx-auto'>
                 <nav>
                     <ul className='flex justify-between'>
                         {tabLinks.map((link,i)=>(
@@ -255,16 +253,14 @@ const AnimeDetails = () => {
                 </div>
             </section>
              */}
-            
-            </>
-            
-        ):(
-          <div className="h-screen place-items-center grid">
-            <Jelly color={theme} size={100} />
-          </div>
-        )}
+        </>
+      ) : (
+        <div className="h-screen place-items-center grid">
+          <Jelly color={theme} size={100} />
+        </div>
+      )}
     </main>
-  )
-}
+  );
+};
 
-export default AnimeDetails
+export default AnimeDetails;

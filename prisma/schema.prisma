@@ -11,13 +11,13 @@ datasource db {
 }
 
 model FavouriteAnime {
-  id Int @id @default(autoincrement())
-  title String
-  imageUrl String
+  id        Int      @id @default(autoincrement())
+  title     String
+  imageUrl  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userEmail String 
-  malId Int
+  userEmail String
+  malId     Int
 
   @@unique([malId, userEmail])
 }
