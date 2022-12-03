@@ -9,6 +9,7 @@ import truncate from "../../../helper/truncate";
 import { Jelly } from "@uiball/loaders";
 import fetcher from "../../../helper/fetcher";
 import { Review } from "../../../interface";
+import { BiConfused } from 'react-icons/bi'
 
 const ReviewComponent = ({ review }: { review: Review }) => {
   const router = useRouter();
@@ -27,18 +28,49 @@ const ReviewComponent = ({ review }: { review: Review }) => {
             alt={review.user.username}
             className="rounded-lg"
           />
-          <div>
+          <div className="space-y-1">
             <p className="text-blue-500 font-thin">{review.user.username}</p>
             <p className="text-gray-400">
-              <span className="font-bold">{review.votes}</span> people find this
+              <span className="font-bold">{review.reactions.overall}</span> people find this
               review helpful
             </p>
+            <div className="flex items-center gap-x-2">
+                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+                  <span>🤔</span>
+                  <p>{review.reactions.confusing}</p>
+                </div>
+                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+                  <span>😎</span>
+                  <p>{review.reactions.creative}</p>
+                </div>
+                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+                  <span>😂</span>
+                  <p>{review.reactions.funny}</p>
+                </div>
+                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+                  <span>💡</span>
+                  <p>{review.reactions.informative}</p>
+                </div>
+                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+                  <span>❤</span>
+                  <p>{review.reactions.love_it}</p>
+                </div>
+                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+                  <span>👍</span>
+                  <p>{review.reactions.nice}</p>
+                </div>
+                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+                  <span>✔️</span>
+                  <p>{review.reactions.well_written}</p>
+                </div>
+              
+            </div>
           </div>
         </div>
         <div className="ml-auto space-y-2">
           <p className="text-sm">{moment(review.date).format("LL")}</p>
           {/* <p className='text-sm text-gray-400'>{review.episodes_watched} of {videos?.episodes.length} episodes watched</p> */}
-          <p>Overall rating: {review?.scores?.overall}</p>
+          <p>Overall rating: {review?.score}</p>
         </div>
       </div>
       <div>

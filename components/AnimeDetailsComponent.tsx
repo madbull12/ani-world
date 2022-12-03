@@ -19,7 +19,7 @@ import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme } from "../lib/zustand";
 import { addToFavourite } from "../helper/functions";
 import { useUser } from "@auth0/nextjs-auth0";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 interface IDetails {
   anime: AnimeDetailsProps;
@@ -201,9 +201,8 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                           anime.title,
                           anime.images.jpg.image_url,
                           anime.mal_id,
-                          session?.user?.email
                         )
-                      : router.push("/api/auth/login")
+                      : signIn("google")
                   }
                 >
                   <IoHeartCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />

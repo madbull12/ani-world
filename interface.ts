@@ -152,9 +152,17 @@ export interface Review {
     episodes_watched:number;
     mal_id:number;
     review:string;
-    scores:{
+    score:number
+    reactions:{
+        confusing:number;
+        creative:number;
+        funny:number;
+        informative:number;
+        love_it:number;
+        nice:number;
         overall:number;
-    };
+        well_written:number;
+    }
     type:string;
     user:{
         images:JPG,

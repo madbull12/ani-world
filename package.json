@@ -27,6 +27,7 @@
     "react-paginate": "^8.1.3",
     "react-player": "^2.10.1",
     "swr": "^1.3.0",
+    "tailwind-scrollbar": "^2.0.1",
     "tailwind-scrollbar-hide": "^1.1.7",
     "uuid": "^8.3.2",
     "zustand": "^4.0.0-rc.4"
