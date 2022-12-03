@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Anime } from "../interface";
 import { getAnimeByFilter } from "../pages/api/anime";
 import SidebarRow from "./SidebarRow";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+
 
 export interface ISidebar {
   topAiring: Anime[];

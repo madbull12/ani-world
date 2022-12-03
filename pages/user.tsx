@@ -1,5 +1,4 @@
-import { getSession, useUser } from "@auth0/nextjs-auth0";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+
 import { Jelly } from "@uiball/loaders";
 import Image from "next/image";
 import React, { useState } from "react";

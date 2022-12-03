@@ -4,7 +4,6 @@ import { useSetBodyScroll, useToggle } from "../lib/zustand";
 import BackdropModal from "./BackdropModal";
 import { AnimatePresence, motion } from "framer-motion";
 import ColorTheme from "./ColorTheme";
-import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";

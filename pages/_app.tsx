@@ -7,7 +7,6 @@ import { useSearch, useSetBodyScroll, useToggle } from "../lib/zustand";
 import { AnimatePresence } from "framer-motion";
 import Search from "../components/Search";
 import { useRouter } from "next/router";
-import { UserProvider } from "@auth0/nextjs-auth0";
 import ToggleNav from "../components/ToggleNav";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";

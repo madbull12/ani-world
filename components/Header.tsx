@@ -8,10 +8,8 @@ import {
 } from "../lib/zustand";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0";
 import Image from "next/image";
 import { signOut,signIn, useSession } from 'next-auth/react'
-import useLocalStorage from "../hooks/useLocalStorage";
 
 const showIn = {
   hidden: {

@@ -10,15 +10,12 @@ import { Anime, AnimeDetailsProps, Genre } from "../interface";
 import Backdrop from "./Backdrop";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
-import useSWR from "swr";
-import { Jelly } from "@uiball/loaders";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import MotionBtn from "./MotionBtn";
 import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme } from "../lib/zustand";
 import { addToFavourite } from "../helper/functions";
-import { useUser } from "@auth0/nextjs-auth0";
 import { signIn, useSession } from "next-auth/react";
 
 interface IDetails {

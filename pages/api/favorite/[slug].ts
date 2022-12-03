@@ -1,4 +1,3 @@
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import prisma from "../../../lib/prisma";
