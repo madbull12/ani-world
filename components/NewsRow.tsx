@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { v4 } from "uuid";
 import { Anime, IRow } from "../interface";
 import { getAnimeNews } from "../pages/api/anime";
 
@@ -17,7 +18,7 @@ const NewsRow = () => {
   return (
     <div>
       {items?.map((news) => (
-        <p key={news.mal_id}>{news.title}</p>
+        <p key={v4()}>{news.title}</p>
       ))}
     </div>
   );

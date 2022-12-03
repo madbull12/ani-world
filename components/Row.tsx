@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 } from "uuid";
 import { Anime, IRow } from "../interface";
 import { useTheme } from "../lib/zustand";
 import Poster from "./Poster";
@@ -24,7 +25,7 @@ const Row = ({ items, title }: IRow) => {
       </div>
       <div className={`grid  gap-4 min-w-0 pb-4 scrollbar-thumb-rounded-full  scrollbar scrollbar-track-transparent scrollbar-thumb-blue-500 overflow-x-scroll  auto-cols-max grid-flow-col  overflow-y-hidden `}>
         {items?.slice(0, viewAll ? items.length : 8).map((anime) => (
-          <div key={anime.mal_id} className="rounded-lg overflow-hidden">
+          <div key={v4()} className="rounded-lg overflow-hidden">
             <Poster anime={anime} />
           </div>
         ))}

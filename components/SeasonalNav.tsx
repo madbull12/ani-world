@@ -34,6 +34,7 @@ const SeasonalNav = () => {
             {items[1]?.seasons?.map((season) => (
               <Link
                 key={uuidv4()}
+                
                 href={`/anime/season/${items[index].year}/${season}`}
               >
                 <span

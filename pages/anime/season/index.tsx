@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 } from "uuid";
 import { Anime } from "../../../interface";
 import { getSeasonNowAnime } from "../../api/anime";
 
@@ -6,7 +7,7 @@ const SeasonPage = ({ data }: any) => {
   return (
     <div>
       {data.map((anime: Anime) => (
-        <h1 key={anime.mal_id}>{anime.title}</h1>
+        <h1 key={v4()}>{anime.title}</h1>
       ))}
     </div>
   );

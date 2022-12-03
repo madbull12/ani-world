@@ -52,7 +52,7 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
           </div>
           <div className={`space-y-4 p-4 bg-${theme}-50`}>
             {items?.slice(0, limit).map((anime, i) => (
-            <SidebarAnime theme={theme} anime={anime} i={i} />
+            <SidebarAnime theme={theme} anime={anime} key={v4()} i={i} />
             ))}
           </div>
         </section>
