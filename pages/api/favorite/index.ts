@@ -28,4 +28,20 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
             throw new Error("Mutation failed!")
         }
     }
+    if(req.method==="GET") {
+        try {
+            const data = await prisma.favouriteAnime.findMany({
+                where:{
+                    userId:session?.user.id as string
+                }
+            });
+
+            res.status(200).json(data);
+         
+        } catch(err) {
+            res.status(400).json({err:err})
+        }
+ 
+        
+    } 
 }

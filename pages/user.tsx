@@ -12,6 +12,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 interface IFavourite {
   id: number;
@@ -26,7 +27,7 @@ const Favourite = ({ item }: { item: IFavourite }) => {
 
   const router = useRouter();
   const refreshData = () => {
-    router.replace(router.asPath);
+    router.replace(router.asPath, undefined,{ scroll:false });
   };
 
   const deleteSave = async (id: number) => {
@@ -44,10 +45,9 @@ const Favourite = ({ item }: { item: IFavourite }) => {
             success: "Anime successfully removed",
             error: "There's an error removing anime",
           }
-        )
-        .then(() => {
-          refreshData();
-        });
+        ).then(()=>refreshData())
+
+      
     } catch (err) {
       console.log(err);
     }
@@ -60,14 +60,17 @@ const Favourite = ({ item }: { item: IFavourite }) => {
         onMouseEnter={() => setShowTrash(true)}
         onMouseLeave={() => setShowTrash(false)}
       >
-        <Image
-          src={item.imageUrl}
-          height={300}
-          width={250}
-          className="rounded-lg "
-          objectFit={"cover"}
-          alt={item.title}
-        />
+        <div className="relative w-72 h-72">
+          <Image
+            src={item.imageUrl}
+            layout="fill"
+            className="rounded-lg "
+            objectFit={"cover"}
+            alt={item.title}
+          />
+          <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#00000073] overflow-hidden rounded-lg" ></div>
+        </div>
+        
         <p>{item.title}</p>
         {showTrash && (
           <motion.button
@@ -86,22 +89,21 @@ const Favourite = ({ item }: { item: IFavourite }) => {
 };
 
 const UserPage = () => {
-  const { user, isLoading } = useUser();
-  console.log(user);
+  const { data:session }:any = useSession()
 
-  const { data: favourites } = useSWR(`/api/favorite/${user?.email}`, fetcher);
+  const { data: favourites } = useSWR(`/api/favorite`, fetcher);
   console.log(favourites);
 
   return (
     <main className="flex min-h-[90vh] justify-center items-center p-4">
-      {isLoading ? (
+      {!favourites ? (
         <div className="h-full w-full grid place-items-center">
           <Jelly color="#007CEF" />
         </div>
       ) : (
         <div className="flex flex-col items-center">
           <Image
-            src={user?.picture || ""}
+            src={session?.user?.image || ""}
             alt="profile-picture"
             width={100}
             height={100}
@@ -109,8 +111,8 @@ const UserPage = () => {
             objectFit="cover"
           />
           <div className="mt-2 space-y-2 text-center">
-            <p className="text-lg font-semibold">{user?.name}</p>
-            <p className="text-sm text-gray-500">{user?.email}</p>
+            <p className="text-lg font-semibold">{session?.user?.name}</p>
+            <p className="text-sm text-gray-500">{session?.user?.email}</p>
           </div>
           <div className="justify-self-start mt-4">
             <>
@@ -134,6 +136,5 @@ const UserPage = () => {
   );
 };
 
-export const getServerSideProps = withPageAuthRequired();
 
 export default UserPage;

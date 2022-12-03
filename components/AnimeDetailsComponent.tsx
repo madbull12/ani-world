@@ -142,6 +142,15 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
     window.scrollTo(0, 0);
   };
 
+  const handleAddFavourite = async() => {
+    await addToFavourite(
+      anime.title,
+      anime.images.jpg.image_url,
+      anime.mal_id,
+    );
+    router.push("/user",undefined,{shallow:true})
+  }
+
   return (
     <div>
       {anime && (
@@ -197,11 +206,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   whileTap={{ scale: 0.9 }}
                   onClick={() =>
                     status==="authenticated"
-                      ? addToFavourite(
-                          anime.title,
-                          anime.images.jpg.image_url,
-                          anime.mal_id,
-                        )
+                      ? handleAddFavourite()
                       : signIn("google")
                   }
                 >

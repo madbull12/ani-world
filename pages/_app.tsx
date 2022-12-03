@@ -11,8 +11,9 @@ import { UserProvider } from "@auth0/nextjs-auth0";
 import ToggleNav from "../components/ToggleNav";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
+import AuthWrapper from "../components/AuthWrapper";
 
-function MyApp({ Component, pageProps:{ session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { scrollSet } = useSetBodyScroll();
   const { isOpen } = useSearch();
   const { isToggle } = useToggle();
@@ -31,26 +32,28 @@ function MyApp({ Component, pageProps:{ session, ...pageProps } }: AppProps) {
 
   return (
     <SessionProvider session={session}>
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
-      >
-        {isOpen && <Search />}
-      </AnimatePresence>
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
-      >
-        {isToggle && <ToggleNav />}
-      </AnimatePresence>
+      <AuthWrapper>
+        <AnimatePresence
+          initial={false}
+          exitBeforeEnter={true}
+          onExitComplete={() => null}
+        >
+          {isOpen && <Search />}
+        </AnimatePresence>
+        <AnimatePresence
+          initial={false}
+          exitBeforeEnter={true}
+          onExitComplete={() => null}
+        >
+          {isToggle && <ToggleNav />}
+        </AnimatePresence>
 
-      <SkeletonTheme baseColor="#EFF6FF" highlightColor="#fff">
-        <Toaster />
-        <Header />
-        <Component {...pageProps} />
-      </SkeletonTheme>
+        <SkeletonTheme baseColor="#EFF6FF" highlightColor="#fff">
+          <Toaster />
+          <Header />
+          <Component {...pageProps} />
+        </SkeletonTheme>
+      </AuthWrapper>
     </SessionProvider>
   );
 }

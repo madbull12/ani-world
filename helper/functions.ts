@@ -52,5 +52,5 @@ export const addToFavourite = async (
     );
   } catch (err) {
     console.log(err);
-  }
+  } 
 };

@@ -8,6 +8,8 @@ import { addToFavourite } from "../helper/functions";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
+import { v4 } from "uuid";
+import SidebarAnime from "./SidebarAnime";
 
 interface IProps extends IRow {
   limit: number;
@@ -18,7 +20,8 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
   const { theme } = useTheme();
   const { data:session,status } = useSession()
   const router = useRouter();
-  console.log(session)
+  console.log(session);
+
 
   // const addToFavourite = async(title:string,imageUrl:string,mal_id:number,email:any) => {
   //     try {
@@ -49,49 +52,7 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
           </div>
           <div className={`space-y-4 p-4 bg-${theme}-50`}>
             {items?.slice(0, limit).map((anime, i) => (
-              <Link key={anime.mal_id} href={`/anime/${anime.mal_id}`}>
-                <div className="flex gap-x-2 cursor-pointer ">
-                  <span className="font-bold text-2xl text-gray-500">
-                    {i + 1}
-                  </span>
-                  <Image
-                    src={anime.images.jpg.image_url}
-                    width={80}
-                    height={90}
-                    alt={anime.title}
-                  />
-                  <div>
-                    <div>
-                      <h1 className={`font-bold text-${theme}-500`}>
-                        {anime.title}
-                      </h1>
-                      <p className="text-gray-500 text-sm">
-                        {anime.type},{" "}
-                        {anime.episodes === null ? 0 : anime.episodes} eps,
-                        scored {anime.score === null ? "N/A" : anime.score}
-                      </p>
-                      <p className="text-gray-500 text-sm">
-                        Members: {anime.members.toLocaleString()}
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    className={`self-start justify-self-end ml-auto  font-semibold text-${theme}-500`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      status==="authenticated"
-                        ? addToFavourite(
-                            anime.title,
-                            anime.images.jpg.large_image_url,
-                            anime.mal_id,
-                          )
-                        : signIn("google");
-                    }}
-                  >
-                    add
-                  </button>
-                </div>
-              </Link>
+            <SidebarAnime theme={theme} anime={anime} i={i} />
             ))}
           </div>
         </section>
