@@ -3,7 +3,6 @@ import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Anime, IRow } from "../interface";
 import { useTheme } from "../lib/zustand";
-import { useUser } from "@auth0/nextjs-auth0";
 import { addToFavourite } from "../helper/functions";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
