@@ -7,7 +7,7 @@ import ColorTheme from "./ColorTheme";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const LinkItem = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -101,12 +101,12 @@ const ToggleNav = () => {
         <div className="md:hidden">
           {status==='authenticated' ? (
             <div className="flex items-center justify-between">
-              <Link href="/api/auth/logout">
+              <button onClick={()=>signOut()}>
                 <span className="flex font-semibold items-center gap-x-2 text-xl cursor-pointer">
                   <IoLogOutOutline />
                   Sign out
                 </span>
-              </Link>
+              </button>
               <Image
                 alt="profile"
                 src={session?.user?.image || ""}
@@ -117,12 +117,12 @@ const ToggleNav = () => {
               />
             </div>
           ) : (
-            <Link href="/api/auth/login">
+            <button onClick={()=>signIn("google")}>
               <span className="flex font-semibold items-center gap-x-2 text-xl cursor-pointer">
                 <IoLogInOutline />
                 Sign in
               </span>
-            </Link>
+            </button>
           )}
         </div>
       </motion.section>

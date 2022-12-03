@@ -111,7 +111,7 @@ const Header = () => {
 
   return (
     // header component
-    <header className={` p-4 text-white bg-${theme}-500 `}>
+    <header className={` p-4 text-white bg-[${theme}] `}>
       <div className="max-w-7xl mx-auto">
         <nav className="flex justify-between items-center">
           <span className="font-bold text-2xl whitespace-nowrap">

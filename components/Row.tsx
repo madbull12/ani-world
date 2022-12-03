@@ -9,7 +9,7 @@ const Row = ({ items, title }: IRow) => {
   const { theme } = useTheme();
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-4 ">
       <div className="flex justify-between items-center gap-x-2">
         <h1 className="font-black text-xl text-gray-700 whitespace-nowrap capitalize">
           {title}
@@ -22,7 +22,7 @@ const Row = ({ items, title }: IRow) => {
           {viewAll ? "View Less" : "View All"}
         </button>
       </div>
-      <div className="grid  gap-4 min-w-0 custom-scrollbar overflow-x-scroll  auto-cols-max grid-flow-col  overflow-y-hidden ">
+      <div className={`grid  gap-4 min-w-0 pb-4 scrollbar-thumb-rounded-full  scrollbar scrollbar-track-transparent scrollbar-thumb-blue-500 overflow-x-scroll  auto-cols-max grid-flow-col  overflow-y-hidden `}>
         {items?.slice(0, viewAll ? items.length : 8).map((anime) => (
           <div key={anime.mal_id} className="rounded-lg overflow-hidden">
             <Poster anime={anime} />
