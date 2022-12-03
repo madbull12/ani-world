@@ -7,6 +7,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { addToFavourite } from "../helper/functions";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 interface IProps extends IRow {
   limit: number;
@@ -15,7 +16,7 @@ interface IProps extends IRow {
 
 const SidebarRow = ({ items, title, limit, loading }: IProps) => {
   const { theme } = useTheme();
-  const { user } = useUser();
+  const { data:session,status } = useSession()
   const router = useRouter();
 
   // const addToFavourite = async(title:string,imageUrl:string,mal_id:number,email:any) => {
@@ -77,12 +78,12 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
                     className={`self-start justify-self-end ml-auto  font-semibold text-${theme}-500`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      user
+                      status==="authenticated"
                         ? addToFavourite(
                             anime.title,
                             anime.images.jpg.large_image_url,
                             anime.mal_id,
-                            user?.email
+                            session?.user?.email
                           )
                         : router.push("/api/auth/login");
                     }}

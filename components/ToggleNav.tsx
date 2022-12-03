@@ -7,6 +7,7 @@ import ColorTheme from "./ColorTheme";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const LinkItem = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -71,7 +72,8 @@ const ToggleNav = () => {
     },
   };
 
-  const { user } = useUser();
+  // const { user } = useUser();
+  const { data:session,status } = useSession();
 
   return (
     <BackdropModal onClick={handleClose}>
@@ -97,7 +99,7 @@ const ToggleNav = () => {
         </ul>
         <ColorTheme />
         <div className="md:hidden">
-          {user ? (
+          {status==='authenticated' ? (
             <div className="flex items-center justify-between">
               <Link href="/api/auth/logout">
                 <span className="flex font-semibold items-center gap-x-2 text-xl cursor-pointer">
@@ -107,7 +109,7 @@ const ToggleNav = () => {
               </Link>
               <Image
                 alt="profile"
-                src={user?.picture || ""}
+                src={session?.user?.image || ""}
                 width={30}
                 height={30}
                 objectFit="cover"

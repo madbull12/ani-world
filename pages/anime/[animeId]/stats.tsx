@@ -82,6 +82,7 @@ const Stats = () => {
   console.log(data);
 
   const { theme } = useTheme();
+  console.log(theme)
 
   return (
     <div>
@@ -89,33 +90,33 @@ const Stats = () => {
       {stats ? (
         <div className="px-4 pb-4 space-y-4">
           <div
-            className={`flex gap-x-2 justify-center [&>*]:text-${theme}-500 [&>*]:bg-${theme}-100`}
+            className={`flex gap-x-2 justify-center `}
           >
-            <div className="bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce ">
+            <div className={`text-${theme}-500 bg-${theme}-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce `}>
               <AiFillEye className={`text-5xl `} />
               <p className="text-sm  font-semibold">
                 Watching: {stats.watching.toLocaleString()}
               </p>
             </div>
-            <div className="bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce">
+            <div className={`text-${theme}-500  bg-${theme}-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <MdOutlineIncompleteCircle className="text-5xl " />
               <p className="text-sm  font-semibold">
                 Completed: {stats.completed.toLocaleString()}
               </p>
             </div>
-            <div className="bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce">
+            <div className={`text-${theme}-500  bg-${theme}-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <IoPauseCircleSharp className="text-5xl " />
               <p className="text-sm  font-semibold">
                 On hold: {stats.on_hold.toLocaleString()}
               </p>
             </div>
-            <div className="bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce">
+            <div className={`text-${theme}-500  bg-${theme}-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <MdCancel className="text-5xl " />
               <p className="text-sm  font-semibold">
                 Dropped: {stats.dropped.toLocaleString()}
               </p>
             </div>
-            <div className="bg-blue-100 p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce">
+            <div className={`text-${theme}-500  bg-${theme}-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <AiFillSchedule className="text-5xl " />
               <p className="text-sm  font-semibold">
                 Plan to watch: {stats.plan_to_watch.toLocaleString()}

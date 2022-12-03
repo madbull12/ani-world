@@ -12,6 +12,7 @@ import { Review } from "../../../interface";
 
 const ReviewComponent = ({ review }: { review: Review }) => {
   const router = useRouter();
+  console.log(review)
 
   const [readMore, setReadMore] = useState<boolean>(false);
 
@@ -37,7 +38,7 @@ const ReviewComponent = ({ review }: { review: Review }) => {
         <div className="ml-auto space-y-2">
           <p className="text-sm">{moment(review.date).format("LL")}</p>
           {/* <p className='text-sm text-gray-400'>{review.episodes_watched} of {videos?.episodes.length} episodes watched</p> */}
-          <p>Overall rating: {review.scores.overall}</p>
+          <p>Overall rating: {review?.scores?.overall}</p>
         </div>
       </div>
       <div>

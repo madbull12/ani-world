@@ -10,8 +10,9 @@ import { useRouter } from "next/router";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import ToggleNav from "../components/ToggleNav";
 import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps:{ session, ...pageProps } }: AppProps) {
   const { scrollSet } = useSetBodyScroll();
   const { isOpen } = useSearch();
   const { isToggle } = useToggle();
@@ -29,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <UserProvider>
+    <SessionProvider session={session}>
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}
@@ -50,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header />
         <Component {...pageProps} />
       </SkeletonTheme>
-    </UserProvider>
+    </SessionProvider>
   );
 }
 

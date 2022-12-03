@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
 import Image from "next/image";
+import { signOut,signIn, useSession } from 'next-auth/react'
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const showIn = {
@@ -101,8 +102,7 @@ const Header = () => {
   const { toggleNav } = useToggle();
   const { theme } = useTheme();
 
-  const { user, error, isLoading } = useUser();
-
+  const { data:session,status } = useSession()
   //   useEffect(()=>{
   //      setTheme(window.localStorage.getItem("theme")?.slice(1,-1))
   //   },[theme])
@@ -121,10 +121,10 @@ const Header = () => {
             <LinkItem isManga={false} title="anime" />
 
             <LinkItem isManga={true} title="manga" />
-            {user ? (
-              <Link href="/api/auth/logout">Sign out</Link>
+            {status==='authenticated' ? (
+              <button onClick={()=>signOut()}>Sign out</button>
             ) : (
-              <Link href="/api/auth/login">Sign in</Link>
+              <button onClick={()=>signIn("google")}>Sign in</button>
             )}
             <IoSearchCircle
               className="text-3xl cursor-pointer"
@@ -134,11 +134,11 @@ const Header = () => {
                 window.scrollTo(0, 0);
               }}
             />
-            {user && (
+            {status==="authenticated" && (
               <Link href="/user">
                 <Image
                   alt={"profile"}
-                  src={user?.picture || ""}
+                  src={session?.user?.image || ""}
                   width={30}
                   height={30}
                   className="rounded-full ml-2 cursor-pointer"

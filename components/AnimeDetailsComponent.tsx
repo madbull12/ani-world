@@ -19,6 +19,7 @@ import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme } from "../lib/zustand";
 import { addToFavourite } from "../helper/functions";
 import { useUser } from "@auth0/nextjs-auth0";
+import { useSession } from "next-auth/react";
 
 interface IDetails {
   anime: AnimeDetailsProps;
@@ -94,7 +95,8 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   const { unsetScroll } = useSetBodyScroll();
   const { theme } = useTheme();
 
-  const { user } = useUser();
+  // const { user } = useUser();
+  const { data:session,status } = useSession()
   const [_link, setLink] = useState("videos");
   const router = useRouter();
   const { animeId } = router.query;
@@ -194,12 +196,12 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() =>
-                    user
+                    status==="authenticated"
                       ? addToFavourite(
                           anime.title,
                           anime.images.jpg.image_url,
                           anime.mal_id,
-                          user?.email
+                          session?.user?.email
                         )
                       : router.push("/api/auth/login")
                   }
@@ -328,7 +330,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
           </section>
           <section className="bg-white p-8 max-7xl mx-auto">
             <nav>
-              <ul className="flex justify-between">
+              <ul className="flex justify-between flex-wrap gap-2">
                 {tabLinks.map((link, i) => (
                   <Link
                     href={`/anime/${animeId}/${link}`}
