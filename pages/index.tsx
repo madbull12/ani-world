@@ -20,6 +20,7 @@ const Home = ({ seasonsNow, seasonYear, seasonsUpcoming }: IMain) => {
     seasonsUpcoming,
   };
 
+  
   return (
     <div>
       <Head>
