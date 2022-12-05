@@ -82,7 +82,7 @@ const Synopsis = ({
 };
 
 const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
-  const matches = useMediaQuery("(min-width: 500px)");
+  const matches = useMediaQuery("(min-width: 768px)");
   const tabLinks = [
     "videos",
     "episodes",
@@ -170,7 +170,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               />
             </div>
 
-            <div className="absolute z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
+            <div className="absolute  z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
               <div className="relative w-1/2 h-44 sm:w-[220px] sm:h-[300px]">
                 <Image
                   alt={anime.title}
@@ -213,7 +213,8 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                 </motion.button>
               </div>
             </div>
-            <Backdrop color="#1085f1" />
+            <Backdrop color="#1085f1" /> 
+            
           </div>
           <section className={`bg-blue-500 w-full py-4 pr-4 text-white`}>
             <div className="ml-[200px] xs:ml-[290px] sm:ml-[275px] space-y-3 z-[999] relative">
