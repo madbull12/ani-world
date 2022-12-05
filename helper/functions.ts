@@ -27,7 +27,7 @@ import toast from "react-hot-toast";
 export const addToFavourite = async (
   title: string,
   imageUrl: string,
-  malId: number,
+  malId: number
 ) => {
   const data = {
     title,
@@ -52,11 +52,11 @@ export const addToFavourite = async (
     );
   } catch (err) {
     console.log(err);
-  } 
+  }
 };
 
-export const themeConverter = (theme:string,isBg:boolean,shade:string) => {
-  switch(theme){
+export const themeConverter = (theme: string, isBg: boolean, shade: string) => {
+  switch (theme) {
     case "blue":
       return isBg ? `bg-blue-${shade}` : `text-blue-${shade}`;
     case "emerald":
@@ -71,7 +71,22 @@ export const themeConverter = (theme:string,isBg:boolean,shade:string) => {
       return isBg ? `bg-lime-${shade}` : `text-lime-${shade}`;
     default:
       break;
-
-    
   }
-}
+};
+
+export const getSeason = (month:number) => {
+  if (month >= 3 && month <= 5) {
+    return "spring";
+  }
+
+  if (month >= 6 && month <= 8) {
+    return "summer";
+  }
+
+  if (month >= 9 && month <= 11) {
+    return "fall";
+  }
+
+  // Months 12, 01, 02
+  return "winter";
+};

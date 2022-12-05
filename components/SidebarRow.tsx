@@ -40,7 +40,7 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
       {loading ? (
         <Skeleton count={limit} height={"50px"} style={{ margin: "8px 0" }} />
       ) : (
-        <section>
+        <section >
           <div
             className={`flex justify-between items-center bg-blue-100 p-2 `}
           >

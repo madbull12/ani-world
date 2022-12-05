@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useMediaQuery from "../hooks/useMediaQuery";
 import { Anime, IMain } from "../interface";
 import NewsRow from "./NewsRow";
 import Poster from "./Poster";
@@ -7,7 +8,7 @@ import Sidebar from "./Sidebar";
 
 const HomeFeed = ({ seasonsNow, seasonYear, seasonsUpcoming }: IMain) => {
   // console.log(seasonYear);
-
+  const matches = useMediaQuery('(min-width: 1024px)')
   return (
     <section className="max-w-7xl mx-auto p-4 space-y-4 relative ">
       <div className="max-w-[800px] space-y-8 px-3 z-50">
@@ -22,7 +23,7 @@ const HomeFeed = ({ seasonsNow, seasonYear, seasonsUpcoming }: IMain) => {
         <Row items={seasonsUpcoming} title="Upcoming Season" />
         {/* <NewsRow /> */}
       </div>
-      <Sidebar />
+      {matches ? <Sidebar /> : null}
     </section>
   );
 };

@@ -7,9 +7,15 @@ import ColorTheme from "./ColorTheme";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { getSeason } from "../helper/functions";
 
 const LinkItem = () => {
   const [isClicked, setIsClicked] = useState(false);
+  
+  const d = new Date();
+  let month = d.getMonth();
+  const currentYear = d.getFullYear();
+  const currentSeason = getSeason((month += 1));
   return (
     <div className="relative ">
       <motion.li
@@ -26,7 +32,7 @@ const LinkItem = () => {
       {isClicked && (
         <AnimatePresence exitBeforeEnter={true} onExitComplete={() => null}>
           <motion.div
-            className="flex flex-col items-center"
+            className="flex flex-col items-center text-base gap-y-2 mt-2"
             animate={{ height: "auto" }}
             initial={{ height: 0 }}
             exit={{ height: 0 }}
@@ -36,10 +42,8 @@ const LinkItem = () => {
               stiffness: 150,
             }}
           >
-            <p>fdfs</p>
-            <p>fdfs</p>
-            <p>fdfs</p>
-            <p>fdfs</p>
+            <Link href="/top-anime">Top Anime</Link>
+            <Link href={`/anime/season/${currentYear}/${currentSeason}`}>Seasonal Anime</Link>
           </motion.div>
         </AnimatePresence>
       )}

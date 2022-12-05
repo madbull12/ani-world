@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { signOut,signIn, useSession } from 'next-auth/react'
-import { themeConverter } from "../helper/functions";
+import { getSeason, themeConverter } from "../helper/functions";
 
 const showIn = {
   hidden: {
@@ -33,22 +33,7 @@ interface ILink {
 }
 
 const LinkItem = ({ title, isManga }: ILink) => {
-  function getSeason(month: number) {
-    if (month >= 3 && month <= 5) {
-      return "spring";
-    }
-
-    if (month >= 6 && month <= 8) {
-      return "summer";
-    }
-
-    if (month >= 9 && month <= 11) {
-      return "fall";
-    }
-
-    // Months 12, 01, 02
-    return "winter";
-  }
+  
   const [isHovered, setIsHovered] = useState<boolean>();
   const d = new Date();
   let month = d.getMonth();

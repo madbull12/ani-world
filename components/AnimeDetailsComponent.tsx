@@ -17,6 +17,7 @@ import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme } from "../lib/zustand";
 import { addToFavourite } from "../helper/functions";
 import { signIn, useSession } from "next-auth/react";
+import useMediaQuery from "../hooks/useMediaQuery";
 
 interface IDetails {
   anime: AnimeDetailsProps;
@@ -81,6 +82,7 @@ const Synopsis = ({
 };
 
 const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
+  const matches = useMediaQuery("(min-width: 500px)");
   const tabLinks = [
     "videos",
     "episodes",
@@ -93,7 +95,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   const { theme } = useTheme();
 
   // const { user } = useUser();
-  const { data:session,status } = useSession()
+  const { data: session, status } = useSession();
   const [_link, setLink] = useState("videos");
   const router = useRouter();
   const { animeId } = router.query;
@@ -139,14 +141,10 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
     window.scrollTo(0, 0);
   };
 
-  const handleAddFavourite = async() => {
-    await addToFavourite(
-      anime.title,
-      anime.images.jpg.image_url,
-      anime.mal_id,
-    );
-    router.push("/user",undefined,{shallow:true})
-  }
+  const handleAddFavourite = async () => {
+    await addToFavourite(anime.title, anime.images.jpg.image_url, anime.mal_id);
+    router.push("/user", undefined, { shallow: true });
+  };
 
   return (
     <div>
@@ -167,22 +165,24 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               <Image
                 alt={anime.title}
                 src={anime.images.jpg.large_image_url}
-                
                 layout="fill"
                 objectFit="cover"
-
               />
             </div>
-           
+
             <div className="absolute z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
-              <Image
-                alt={anime.title}
-                src={anime.images.jpg.large_image_url}
-                width={220}
-                height={300}
-                className="rounded-lg  z-[999]"
-                objectFit="cover"
-              />
+              <div className="relative w-1/2 h-44 sm:w-[220px] sm:h-[300px]">
+                <Image
+                  alt={anime.title}
+                  src={anime.images.jpg.large_image_url}
+                  layout="fill"
+                  // width={matches ? 220 : 150}
+                  // height={matches ? 300 : 200}
+                  className="rounded-lg  z-[999]"
+                  objectFit="cover"
+                />
+              </div>
+
               <div className=" md:pt-12  ">
                 <div className=" max-w-[250px] md:max-w-full">
                   <h1 className="text-white font-bold text-lg md:text-xl lg:text-2xl">
@@ -204,7 +204,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() =>
-                    status==="authenticated"
+                    status === "authenticated"
                       ? handleAddFavourite()
                       : signIn("google")
                   }
@@ -215,14 +215,14 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
             </div>
             <Backdrop color="#1085f1" />
           </div>
-          <section className={`bg-${theme}-500 w-full py-4 pr-4 text-white`}>
-            <div className="ml-[285px] space-y-3 z-[999] relative">
-              <header className="flex justify-between items-center gap-x-3 flex-col md:flex-row">
+          <section className={`bg-blue-500 w-full py-4 pr-4 text-white`}>
+            <div className="ml-[200px] xs:ml-[290px] sm:ml-[275px] space-y-3 z-[999] relative">
+              <header className="flex justify-between items-center gap-x-3  flex-col md:flex-row">
                 <h1 className="lg:text-xl text-base font-bold hidden md:block">
                   Synopsis
                 </h1>
 
-                <div className="flex space-x-4">
+                <div className="flex gap-4 flex-wrap">
                   <p className=" font-semibold text-sm md:text-base">
                     Ranked:
                     <span className="font-normal">
@@ -261,7 +261,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                 {anime.synopsis}
               </p>
             </div>
-            <div className="p-8 flex gap-x-4 mt-80 md:mt-8">
+            <div className="p-8 flex gap-x-4 mt-44 sm:mt-72  lg:mt-20">
               <div className="text-white bg-[#FF9901] rounded-full md:rounded-lg w-[50px] h-[50px] md:h-auto md:w-auto grid place-items-center p-2 self-start md:flex md:flex-col md:items-center">
                 <span className="font-bold text-xs hidden md:block">SCORE</span>
                 <span className="text-base md:text-2xl font-bold">
