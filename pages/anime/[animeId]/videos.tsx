@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import ReactPlayer from "react-player/youtube";
 import useSWR from "swr";
+import { v4 } from "uuid";
 import AnimeDetailsComponent from "../../../components/AnimeDetailsComponent";
 import fetcher from "../../../helper/fetcher";
 import { IMusicVideo, IPromo } from "../../../interface";
@@ -38,7 +39,7 @@ const VideoPage = () => {
           <h1 className="text-2xl font-bold">Music Videos</h1>
           <div className="grid grid-cols-4 gap-4">
             {videos?.music_videos.map((video:IMusicVideo) => (
-              <ReactPlayer url={video?.video.url} width={300} height={200} />
+              <ReactPlayer url={video?.video.url} key={v4()} width={300} height={200} />
             ))}
           </div>
         </div>
