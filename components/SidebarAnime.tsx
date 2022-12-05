@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 import { addToFavourite } from "../helper/functions";
 import { Anime } from "../interface";
 
-const SidebarAnime = ({ anime,theme,i }: { anime: Anime,theme:string,i:number }) => {
+const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
   const router = useRouter();
   const { data:sessionm,status } = useSession()
   const handleAddFavourite = async () => {
@@ -26,7 +26,7 @@ const SidebarAnime = ({ anime,theme,i }: { anime: Anime,theme:string,i:number })
         />
         <div>
           <div>
-            <h1 className={`font-bold text-${theme}-500`}>{anime.title}</h1>
+            <h1 className={`font-bold text-blue-500`}>{anime.title}</h1>
             <p className="text-gray-500 text-sm">
               {anime.type}, {anime.episodes === null ? 0 : anime.episodes} eps,
               scored {anime.score === null ? "N/A" : anime.score}
@@ -37,7 +37,7 @@ const SidebarAnime = ({ anime,theme,i }: { anime: Anime,theme:string,i:number })
           </div>
         </div>
         <button
-          className={`self-start justify-self-end ml-auto  font-semibold text-${theme}-500`}
+          className={`self-start justify-self-end ml-auto  font-semibold text-blue-500`}
           onClick={(e) => {
             e.stopPropagation();
             status === "authenticated"

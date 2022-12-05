@@ -42,16 +42,16 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
       ) : (
         <section>
           <div
-            className={`flex justify-between items-center ${themeConverter(theme,true,"100")} p-2 `}
+            className={`flex justify-between items-center bg-blue-100 p-2 `}
           >
             <h1 className="text-lg font-bold">{title}</h1>
-            <span className={`text-${theme}-500 font-bold `}>
+            <span className={`text-blue-500 font-bold `}>
               <Link href="/">More</Link>
             </span>
           </div>
-          <div className={`space-y-4 p-4 bg-${theme}-50`}>
+          <div className={`space-y-4 p-4 bg-blue-50`}>
             {items?.slice(0, limit).map((anime, i) => (
-            <SidebarAnime theme={theme} anime={anime} key={v4()} i={i} />
+              <SidebarAnime  anime={anime} key={v4()} i={i} />
             ))}
           </div>
         </section>

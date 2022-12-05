@@ -14,7 +14,7 @@ const MotionBtn = (props: IBtn) => {
 
   return (
     <motion.button
-      className={`bg-${theme}-200 shadow-md z-50  px-4 py-2 rounded-lg font-bold text-${theme}-500 mt-2`}
+      className={`bg-blue-200 shadow-md z-50  px-4 py-2 rounded-lg font-bold text-${theme}-500 mt-2`}
       onClick={() => {
         props.handleClick();
         props.unsetScroll?.();

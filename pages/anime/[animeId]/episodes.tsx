@@ -4,8 +4,8 @@ import React from "react";
 import useSWR from "swr";
 import { v4 as uuidv4 } from "uuid";
 import AnimeDetailsComponent from "../../../components/AnimeDetailsComponent";
+import fetcher from "../../../helper/fetcher";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const EpisodePage = () => {
   const router = useRouter();
   const { animeId } = router.query;

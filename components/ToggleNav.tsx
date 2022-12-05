@@ -96,7 +96,7 @@ const ToggleNav = () => {
 
           <li className="cursor-pointer">Manga</li>
         </ul>
-        <ColorTheme />
+        {/* <ColorTheme /> */}
         <div className="md:hidden">
           {status==='authenticated' ? (
             <div className="flex items-center justify-between">

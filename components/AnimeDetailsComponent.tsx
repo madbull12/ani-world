@@ -163,11 +163,11 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
           </AnimatePresence>
 
           <div className="relative">
-            <div className="w-full h-96">
+            <div className="w-full h-96 hidden md:block">
               <Image
                 alt={anime.title}
                 src={anime.images.jpg.large_image_url}
-               
+                
                 layout="fill"
                 objectFit="cover"
 
