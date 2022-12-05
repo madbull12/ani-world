@@ -30,7 +30,7 @@ const VideoPage = () => {
           <h1 className="text-2xl font-bold">Trailers</h1>
           <div className="grid grid-cols-4 gap-4">
             {videos?.promo.map((promo: IPromo) => (
-              <ReactPlayer url={promo.trailer.url} width={300} height={200} />
+              <ReactPlayer url={promo.trailer.url} key={v4()} width={300} height={200} />
             ))}
           </div>
         </div>
