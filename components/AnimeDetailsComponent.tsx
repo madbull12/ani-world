@@ -163,22 +163,24 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
           </AnimatePresence>
 
           <div className="relative">
-            <Image
-              alt={anime.title}
-              src={anime.images.jpg.large_image_url}
-              width={100}
-              height={25}
-              layout="responsive"
-              objectFit="cover"
-              className="hidden"
-            />
-            <div className="absolute z-50 md:-bottom-36 lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
+            <div className="w-full h-96">
+              <Image
+                alt={anime.title}
+                src={anime.images.jpg.large_image_url}
+               
+                layout="fill"
+                objectFit="cover"
+
+              />
+            </div>
+           
+            <div className="absolute z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
               <Image
                 alt={anime.title}
                 src={anime.images.jpg.large_image_url}
                 width={220}
                 height={300}
-                className="rounded-lg relative z-[999]"
+                className="rounded-lg  z-[999]"
                 objectFit="cover"
               />
               <div className=" md:pt-12  ">

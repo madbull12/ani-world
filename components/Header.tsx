@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { signOut,signIn, useSession } from 'next-auth/react'
+import { themeConverter } from "../helper/functions";
 
 const showIn = {
   hidden: {
@@ -56,7 +57,7 @@ const LinkItem = ({ title, isManga }: ILink) => {
 
   return (
     <div
-      className="relative"
+      className="relative "
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -109,7 +110,7 @@ const Header = () => {
 
   return (
     // header component
-    <header className={` p-4 text-white bg-[${theme}] `}>
+    <header className={` p-4 text-white ${themeConverter(theme,true,"500")} `}>
       <div className="max-w-7xl mx-auto">
         <nav className="flex justify-between items-center">
           <span className="font-bold text-2xl whitespace-nowrap">

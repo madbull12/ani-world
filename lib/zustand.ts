@@ -42,6 +42,6 @@ export const useToggle = create<IToggle>((set) => ({
 }));
 
 export const useTheme = create<ITheme>((set) => ({
-  theme: "#3b82f6",
+  theme: "blue",
   setTheme: (theme: string) => set({ theme }),
 }));

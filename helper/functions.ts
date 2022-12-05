@@ -54,3 +54,24 @@ export const addToFavourite = async (
     console.log(err);
   } 
 };
+
+export const themeConverter = (theme:string,isBg:boolean,shade:string) => {
+  switch(theme){
+    case "blue":
+      return isBg ? `bg-blue-${shade}` : `text-blue-${shade}`;
+    case "emerald":
+      return isBg ? `bg-emerald-${shade}` : `text-emerald-${shade}`;
+    case "violet":
+      return isBg ? `bg-violet-${shade}` : `text-violet-${shade}`;
+    case "pink":
+      return isBg ? `bg-pink-${shade}` : `text-pink-${shade}`;
+    case "yellow":
+      return isBg ? `bg-yellow-${shade}` : `text-yellow-${shade}`;
+    case "lime":
+      return isBg ? `bg-lime-${shade}` : `text-lime-${shade}`;
+    default:
+      break;
+
+    
+  }
+}

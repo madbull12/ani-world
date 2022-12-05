@@ -3,7 +3,7 @@ import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Anime, IRow } from "../interface";
 import { useTheme } from "../lib/zustand";
-import { addToFavourite } from "../helper/functions";
+import { addToFavourite, themeConverter } from "../helper/functions";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
@@ -42,7 +42,7 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
       ) : (
         <section>
           <div
-            className={`flex justify-between items-center bg-${theme}-100 p-2 `}
+            className={`flex justify-between items-center ${themeConverter(theme,true,"100")} p-2 `}
           >
             <h1 className="text-lg font-bold">{title}</h1>
             <span className={`text-${theme}-500 font-bold `}>
