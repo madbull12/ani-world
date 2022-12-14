@@ -32,11 +32,11 @@ const EpisodePage = () => {
             ) : (
               <>
                 <h1 className="text-2xl font-bold">Episode Lists</h1>
-                <div className=" gap-4 grid grid-cols-2">
+                <div className=" gap-4 grid grid-cols-1 md:grid-cols-2">
                   {videos?.episodes?.map((_episode: any) => (
                     <div
                       key={uuidv4()}
-                      className="flex bg-gray-100 p-2 gap-x-2"
+                      className="flex  items-start bg-gray-100 p-2 gap-x-2"
                     >
                       <Image
                         src={

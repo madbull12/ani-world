@@ -63,7 +63,7 @@ const Synopsis = ({
       }}
     >
       <motion.div
-        className={`bg-${theme}-500 text-white p-4  relative max-w-[500px] rounded-lg`}
+        className={`bg-${theme}-500 text-white p-4  relative max-w-[500px] mx-auto rounded-lg`}
         onClick={(e) => e.stopPropagation()}
         variants={dropIn}
         initial="hidden"
@@ -71,7 +71,7 @@ const Synopsis = ({
         exit="exit"
       >
         <h1 className="font-bold text-2xl">Synopsis</h1>
-        <p>{text}</p>
+        <p className="text-xs xs:text-sm md:text-base">{text}</p>
         <IoClose
           className="text-2xl absolute top-2 right-2 cursor-pointer"
           onClick={handleClose}
@@ -185,10 +185,10 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
 
               <div className=" md:pt-12  ">
                 <div className=" max-w-[250px] md:max-w-full">
-                  <h1 className="text-white font-bold text-lg md:text-xl lg:text-2xl">
+                  <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl">
                     {anime.title}
                   </h1>
-                  <p className="text-white font-thin text-sm md:text-base ">
+                  <p className="text-white font-thin text-sm sm:text-sm md:text-base ">
                     {anime.title_japanese}
                   </p>
                 </div>
@@ -217,28 +217,28 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
             
           </div>
           <section className={`bg-blue-500 w-full py-4 pr-4 text-white`}>
-            <div className="ml-[200px] xs:ml-[290px] sm:ml-[275px] space-y-3 z-[999] relative">
+            <div className="ml-[150px] xxs:ml-[200px] xs:ml-[310px] sm:ml-[350px] space-y-3 z-[999] relative">
               <header className="flex justify-between items-center gap-x-3  flex-col md:flex-row">
                 <h1 className="lg:text-xl text-base font-bold hidden md:block">
                   Synopsis
                 </h1>
 
-                <div className="flex gap-4 flex-wrap">
-                  <p className=" font-semibold text-sm md:text-base">
+                <div className="flex gap-4 flex-wrap text-xs sm:text-sm md:text-base">
+                  <p className=" font-semibold ">
                     Ranked:
                     <span className="font-normal">
                       {" "}
                       #{anime.rank?.toLocaleString() || "N/A"}
                     </span>
                   </p>
-                  <p className="font-semibold text-sm md:text-base">
+                  <p className="font-semibold  ">
                     Popularity:
                     <span className="font-normal">
                       {" "}
                       #{anime.popularity?.toLocaleString() || "N/A"}
                     </span>
                   </p>
-                  <p className="font-semibold text-sm md:text-base">
+                  <p className="font-semibold ">
                     Members:
                     <span className="font-normal">
                       {" "}
@@ -272,7 +272,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   {anime.scored_by?.toLocaleString() || "N/A"} users
                 </span>
               </div>
-              <div className="rounded-lg border-2 border-gray-700 p-3 space-y-2 flex flex-col ">
+              <div className="rounded-lg border-2 border-gray-700 p-3 space-y-2 flex flex-col text-xs xs:text-sm md:text-base ">
                 <div className="space-x-4">
                   <span className="font-semibold">
                     Type: <span className="font-normal">{anime.type}</span>
@@ -342,7 +342,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                     scroll={false}
                   >
                     <li
-                      className={`font-bold pb-2 uppercase text-sm cursor-pointer ${
+                      className={`font-bold pb-2 uppercase text-xs xs:text-sm cursor-pointer ${
                         router.pathname.includes(link)
                           ? `border-b-4 border-${theme}-500`
                           : ""

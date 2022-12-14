@@ -28,7 +28,7 @@ const VideoPage = () => {
       <div className="p-4 space-y-4">
         <div>
           <h1 className="text-2xl font-bold">Trailers</h1>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid-cols-1 grid justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {videos?.promo.map((promo: IPromo) => (
               <ReactPlayer url={promo.trailer.url} key={v4()} width={300} height={200} />
             ))}
@@ -37,9 +37,11 @@ const VideoPage = () => {
 
         <div>
           <h1 className="text-2xl font-bold">Music Videos</h1>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid-cols-1 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {videos?.music_videos.map((video:IMusicVideo) => (
-              <ReactPlayer url={video?.video.url} key={v4()} width={300} height={200} />
+                <ReactPlayer url={video?.video.url} key={v4()} width={300} height={200} />
+
+
             ))}
           </div>
         </div>

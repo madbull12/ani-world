@@ -19,8 +19,8 @@ const ReviewComponent = ({ review }: { review: Review }) => {
 
   return (
     <div className="w-full bg-blue-50 p-2 divide-y divide-gray-300">
-      <div className="flex space-between  ">
-        <div className="flex gap-x-2">
+      <div className="flex space-between text-sm md:text-base  ">
+        <div className="flex gap-x-2 items-start">
           <Image
             src={review.user.images.jpg.image_url}
             width={50}
@@ -34,8 +34,8 @@ const ReviewComponent = ({ review }: { review: Review }) => {
               <span className="font-bold">{review.reactions.overall}</span> people find this
               review helpful
             </p>
-            <div className="flex items-center gap-x-2">
-                <div className="flex items-center gap-x-1 text-gray-500 text-sm">
+            <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-x-1  text-gray-500 text-sm">
                   <span>🤔</span>
                   <p>{review.reactions.confusing}</p>
                 </div>
@@ -67,14 +67,14 @@ const ReviewComponent = ({ review }: { review: Review }) => {
             </div>
           </div>
         </div>
-        <div className="ml-auto space-y-2">
-          <p className="text-sm">{moment(review.date).format("LL")}</p>
+        <div className="ml-auto space-y-2 text-xs md:text-sm">
+          <p className="text-xs md:text-sm">{moment(review.date).format("LL")}</p>
           {/* <p className='text-sm text-gray-400'>{review.episodes_watched} of {videos?.episodes.length} episodes watched</p> */}
           <p>Overall rating: {review?.score}</p>
         </div>
       </div>
       <div>
-        <p className="text-sm py-4">
+        <p className="text-xs md:text-sm py-4">
           {readMore ? review.review : truncate(review.review, 1000)}
 
           {review.review.length > 1000 && (
