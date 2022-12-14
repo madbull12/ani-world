@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoClose, IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
-import { useSetBodyScroll, useToggle } from "../lib/zustand";
+import { useSearch, useSetBodyScroll, useToggle } from "../lib/zustand";
 import BackdropModal from "./BackdropModal";
 import { AnimatePresence, motion } from "framer-motion";
 import ColorTheme from "./ColorTheme";
@@ -52,8 +52,9 @@ const LinkItem = () => {
 };
 
 const ToggleNav = () => {
+  const { openSearch } = useSearch();
   const { untoggleNav } = useToggle();
-  const { setScroll } = useSetBodyScroll();
+  const { setScroll,unsetScroll } = useSetBodyScroll();
   const handleClose = () => {
     untoggleNav();
     setScroll();
@@ -99,6 +100,11 @@ const ToggleNav = () => {
           <LinkItem />
 
           <li className="cursor-pointer">Manga</li>
+          <li className="cursor-pointer" onClick={()=>{
+            unsetScroll();
+            openSearch();
+            untoggleNav()
+          }}>Search</li>
         </ul>
         {/* <ColorTheme /> */}
         <div className="md:hidden">
