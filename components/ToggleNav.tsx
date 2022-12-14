@@ -109,7 +109,7 @@ const ToggleNav = () => {
         {/* <ColorTheme /> */}
         <div className="md:hidden">
           {status==='authenticated' ? (
-            <div className="flex items-center justify-between">
+            <div className="flex justify-between flex-col">
               <button onClick={()=>signOut()}>
                 <span className="flex font-semibold items-center gap-x-2 text-xl cursor-pointer">
                   <IoLogOutOutline />
@@ -122,12 +122,12 @@ const ToggleNav = () => {
                 width={30}
                 height={30}
                 objectFit="cover"
-                className="rounded-full"
+                className="rounded-full self-end mt-4"
               />
             </div>
           ) : (
             <button onClick={()=>signIn("google")}>
-              <span className="flex font-semibold items-center gap-x-2 text-xl cursor-pointer">
+              <span className="flex font-semibold items-center items-center gap-x-2 text-xl cursor-pointer">
                 <IoLogInOutline />
                 Sign in
               </span>
