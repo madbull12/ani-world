@@ -53,7 +53,7 @@ const Favourite = ({ item }: { item: IFavourite }) => {
   };
 
   return (
-    <Link href={`/anime/${item.malId}`} key={uuidv4()}>
+    <div  key={uuidv4()}>
       <div
         className="flex flex-col font-bold cursor-pointer relative space-y-2"
         onMouseEnter={() => setShowTrash(true)}
@@ -70,7 +70,7 @@ const Favourite = ({ item }: { item: IFavourite }) => {
           <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#00000073] overflow-hidden rounded-lg" ></div>
         </div>
         
-        <p>{item.title}</p>
+        <Link href={`/anime/${item.malId}`} className="text-blue-500">{item.title}</Link>
         {showTrash && (
           <motion.button
             className="text-gray-300 self-center absolute left-2"
@@ -83,7 +83,7 @@ const Favourite = ({ item }: { item: IFavourite }) => {
           </motion.button>
         )}
       </div>
-    </Link>
+    </div>
   );
 };
 

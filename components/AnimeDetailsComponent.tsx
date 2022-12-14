@@ -217,7 +217,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
             
           </div>
           <section className={`bg-blue-500 w-full py-4 pr-4 text-white`}>
-            <div className="ml-[150px] xxs:ml-[200px] xs:ml-[310px] sm:ml-[350px] space-y-3 z-[999] relative">
+            <div className="ml-[150px] xxs:ml-[200px] xs:ml-[310px] sm:ml-[350px] lg:ml-[300px] space-y-3 z-[999] relative">
               <header className="flex justify-between items-center gap-x-4 w-full  flex-col md:flex-row">
                 <h1 className="lg:text-xl text-base font-bold hidden md:block">
                   Synopsis
