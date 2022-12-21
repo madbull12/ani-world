@@ -5,13 +5,13 @@ import BackdropModal from "./BackdropModal";
 import { AnimatePresence, motion } from "framer-motion";
 import ColorTheme from "./ColorTheme";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { getSeason } from "../helper/functions";
 
 const LinkItem = () => {
   const [isClicked, setIsClicked] = useState(false);
-  
+
   const d = new Date();
   let month = d.getMonth();
   const currentYear = d.getFullYear();
@@ -43,7 +43,9 @@ const LinkItem = () => {
             }}
           >
             <Link href="/top-anime">Top Anime</Link>
-            <Link href={`/anime/season/${currentYear}/${currentSeason}`}>Seasonal Anime</Link>
+            <Link href={`/anime/season/${currentYear}/${currentSeason}`}>
+              Seasonal Anime
+            </Link>
           </motion.div>
         </AnimatePresence>
       )}
@@ -54,7 +56,7 @@ const LinkItem = () => {
 const ToggleNav = () => {
   const { openSearch } = useSearch();
   const { untoggleNav } = useToggle();
-  const { setScroll,unsetScroll } = useSetBodyScroll();
+  const { setScroll, unsetScroll } = useSetBodyScroll();
   const handleClose = () => {
     untoggleNav();
     setScroll();
@@ -77,7 +79,7 @@ const ToggleNav = () => {
   };
 
   // const { user } = useUser();
-  const { data:session,status } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <BackdropModal onClick={handleClose}>
@@ -100,34 +102,44 @@ const ToggleNav = () => {
           <LinkItem />
 
           <li className="cursor-pointer">Manga</li>
-          <li className="cursor-pointer" onClick={()=>{
-            unsetScroll();
-            openSearch();
-            untoggleNav()
-          }}>Search</li>
+          <li
+            className="cursor-pointer"
+            onClick={() => {
+              unsetScroll();
+              openSearch();
+              untoggleNav();
+            }}
+          >
+            Search
+          </li>
         </ul>
         {/* <ColorTheme /> */}
         <div className="md:hidden">
-          {status==='authenticated' ? (
+          {status === "authenticated" ? (
             <div className="flex justify-between flex-col">
-              <button onClick={()=>signOut()}>
+              <button onClick={() => signOut()}>
                 <span className="flex font-semibold items-center gap-x-2 text-xl cursor-pointer">
                   <IoLogOutOutline />
                   Sign out
                 </span>
               </button>
-              <Image
-                alt="profile"
-                src={session?.user?.image || ""}
-                width={30}
-                height={30}
-                objectFit="cover"
-                className="rounded-full self-end mt-4"
-              />
+              <Link href={"/user/favourites"}>
+                <div className="gap-x-2 flex items-center mt-4 ">
+                  <Image
+                    alt="profile"
+                    src={session?.user?.image || ""}
+                    width={30}
+                    height={30}
+                    objectFit="cover"
+                    className="rounded-full self-end mt-4"
+                  />
+                  <p className="text-xs">{session?.user?.name}</p>
+                </div>
+              </Link>
             </div>
           ) : (
-            <button onClick={()=>signIn("google")}>
-              <span className="flex font-semibold items-center items-center gap-x-2 text-xl cursor-pointer">
+            <button onClick={() => signIn("google")}>
+              <span className="flex font-semibold  items-center gap-x-2 text-xl cursor-pointer">
                 <IoLogInOutline />
                 Sign in
               </span>

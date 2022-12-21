@@ -12,8 +12,9 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import UserProfile from "../components/UserProfile";
 
-interface IFavourite {
+interface ISaved {
   id: number;
   title: string;
   imageUrl: string;
@@ -21,7 +22,7 @@ interface IFavourite {
   malId: number;
 }
 
-const Favourite = ({ item }: { item: IFavourite }) => {
+const Saved = ({ item }: { item: ISaved }) => {
   const [showTrash, setShowTrash] = useState<boolean>(false);
 
   const router = useRouter();
@@ -59,7 +60,7 @@ const Favourite = ({ item }: { item: IFavourite }) => {
         onMouseEnter={() => setShowTrash(true)}
         onMouseLeave={() => setShowTrash(false)}
       >
-        <div className="relative w-72 h-72">
+        <div className="relative w-64 h-72">
           <Image
             src={item.imageUrl}
             layout="fill"
@@ -88,7 +89,6 @@ const Favourite = ({ item }: { item: IFavourite }) => {
 };
 
 const UserPage = () => {
-  const { data:session }:any = useSession()
 
   const { data: favourites } = useSWR(`/api/favorite`, fetcher);
   console.log(favourites);
@@ -101,26 +101,16 @@ const UserPage = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center">
-          <Image
-            src={session?.user?.image || ""}
-            alt="profile-picture"
-            width={100}
-            height={100}
-            className="rounded-full "
-            objectFit="cover"
-          />
-          <div className="mt-2 space-y-2 text-center">
-            <p className="text-lg font-semibold">{session?.user?.name}</p>
-            <p className="text-sm text-gray-500">{session?.user?.email}</p>
-          </div>
+          <UserProfile />
+         
           <div className="justify-self-start mt-4">
             <>
               {favourites?.length !== 0 ? (
                 <>
                   <h1 className="text-xl font-bold">Favourite Anime</h1>
                   <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1">
-                    {favourites?.map((item: IFavourite) => (
-                      <Favourite item={item} key={uuidv4()} />
+                    {favourites?.map((item: ISaved) => (
+                      <Saved item={item} key={uuidv4()} />
                     ))}
                   </div>
                 </>

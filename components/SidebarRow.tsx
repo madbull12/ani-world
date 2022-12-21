@@ -49,7 +49,7 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
               <Link href="/">More</Link>
             </span>
           </div>
-          <div className={`space-y-4 p-4 bg-blue-50`}>
+          <div className={` p-4 bg-blue-50`}>
             {items?.slice(0, limit).map((anime, i) => (
               <SidebarAnime  anime={anime} key={v4()} i={i} />
             ))}

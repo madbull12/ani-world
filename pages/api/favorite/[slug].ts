@@ -11,7 +11,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
      if(req.method==="DELETE"){
         const anime = await prisma.favouriteAnime.delete({
             where:{
-                id:animeId as string
+                id:animeId
             }
         });
         res.json(anime)

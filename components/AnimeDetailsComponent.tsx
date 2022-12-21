@@ -143,7 +143,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
 
   const handleAddFavourite = async () => {
     await addToFavourite(anime.title, anime.images.jpg.image_url, anime.mal_id);
-    router.push("/user", undefined, { shallow: true });
+    router.push("/user/favourites", undefined, { shallow: true });
   };
 
   return (
