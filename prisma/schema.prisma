@@ -19,9 +19,9 @@ model Saved {
   malId            Int
   userId           String
   user             User            @relation(fields: [userId], references: [id])
-  favouriteAnime   FavouriteAnime? @relation(fields: [favouriteAnimeId], references: [id])
+  favouriteAnime   FavouriteAnime? @relation(fields: [favouriteAnimeId], references: [id], onDelete: Cascade)
   favouriteAnimeId String?         @unique
-  WatchLater       WatchLater?     @relation(fields: [watchLaterId], references: [id])
+  WatchLater       WatchLater?     @relation(fields: [watchLaterId], references: [id], onDelete: Cascade)
   watchLaterId     String?         @unique
 }
 
