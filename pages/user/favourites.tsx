@@ -31,7 +31,8 @@ const FavouritePage = () => {
                   </div>
                 </>
               ) : (
-                <p>No pins yet</p>
+                <p>No anime saved yet</p>
+
               )}
             </>
           </div>

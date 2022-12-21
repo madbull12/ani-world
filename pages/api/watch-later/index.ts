@@ -44,7 +44,7 @@ import {
     }
     if (req.method === "GET") {
       try {
-        const data = await prisma.favouriteAnime.findMany({
+        const data = await prisma.watchLater.findMany({
           where: {
             saved: {
               userId: session?.user?.id as string,

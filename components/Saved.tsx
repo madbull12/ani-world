@@ -21,7 +21,7 @@ const Saved = ({ item }: { item: ISaved }) => {
     try {
       await toast
         .promise(
-          fetch(`/api/favorite/${id}`, {
+          fetch(`/api/${router.pathname === "/user/favourites" ? "favorite" : "watch-later"}/${id}`, {
             headers: {
               "Content-type": "application/json",
             },
@@ -65,7 +65,7 @@ const Saved = ({ item }: { item: ISaved }) => {
             className="text-gray-300 self-center absolute left-2"
             onClick={(e) => {
               e.stopPropagation();
-              deleteSave(item.id);
+              deleteSave(item.favouriteAnimeId ?? item.watchLaterId);
             }}
           >
             <BsFillTrashFill className="text-2xl" />

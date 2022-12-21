@@ -15,7 +15,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import MotionBtn from "./MotionBtn";
 import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme } from "../lib/zustand";
-import { addToFavourite } from "../helper/functions";
+import { addToFavourite, addToWatchLater } from "../helper/functions";
 import { signIn, useSession } from "next-auth/react";
 import useMediaQuery from "../hooks/useMediaQuery";
 
@@ -145,6 +145,14 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
     await addToFavourite(anime.title, anime.images.jpg.image_url, anime.mal_id);
     router.push("/user/favourites", undefined, { shallow: true });
   };
+  const handleAddWatchLater = async () => {
+    await addToWatchLater(
+      anime.title,
+      anime.images.jpg.image_url,
+      anime.mal_id
+    );
+    router.push("/user/watchLater", undefined, { shallow: true });
+  };
 
   return (
     <div>
@@ -195,6 +203,11 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               </div>
               <div className=" md:pt-12 md:ml-auto text-white text-4xl flex self-start">
                 <motion.button
+                  onClick={() =>
+                    status === "authenticated"
+                      ? handleAddWatchLater()
+                      : signIn("google")
+                  }
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -213,8 +226,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                 </motion.button>
               </div>
             </div>
-            <Backdrop color="#1085f1" /> 
-            
+            <Backdrop color="#1085f1" />
           </div>
           <section className={`bg-blue-500 w-full py-4 pr-4 text-white`}>
             <div className="ml-[150px] xxs:ml-[200px] xs:ml-[310px] sm:ml-[350px] lg:ml-[300px] space-y-3 z-[999] relative">

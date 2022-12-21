@@ -207,4 +207,6 @@ export interface ISaved {
     imageUrl: string;
     userEmail: string;
     malId: number;
+    favouriteAnimeId:string;
+    watchLaterId:string
 }

@@ -54,6 +54,36 @@ export const addToFavourite = async (
     console.log(err);
   }
 };
+export const addToWatchLater = async (
+  title: string,
+  imageUrl: string,
+  malId: number
+) => {
+  const data = {
+    title,
+    imageUrl,
+    malId,
+  };
+
+  try {
+    await toast.promise(
+      fetch("/api/watch-later", {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-type": "application/json",
+        },
+        method: "POST",
+      }),
+      {
+        loading: "Saving to watch later...",
+        success: "Anime saved successfully",
+        error: (err) => `Something went wrong: ${err.toString()}`,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const themeConverter = (theme: string, isBg: boolean, shade: string) => {
   switch (theme) {
