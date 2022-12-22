@@ -4,7 +4,7 @@ import Loader from "../../components/Loader";
 import Saved from "../../components/Saved";
 import UserProfile from "../../components/UserProfile";
 import fetcher from "../../helper/fetcher";
-import { ISaved, ISavedResp } from "../../interface";
+import {  ISavedResp } from "../../interface";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -26,7 +26,7 @@ const FavouritePage = () => {
                   <h1 className="text-xl font-bold">Favourite Anime</h1>
                   <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1">
                     {favourites?.map((item: ISavedResp) => (
-                      <Saved item={item?.saved} key={uuidv4()} />
+                      <Saved item={item} key={uuidv4()} />
                     ))}
                   </div>
                 </>

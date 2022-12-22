@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import ProtectedRoute from './ProtectedPage'
 
-const authRoutes = ['/user']
+const authRoutes = ['/user','/user/watchLater','/user/favourites']
 
 const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
   const session = useSession()

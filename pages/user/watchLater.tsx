@@ -19,7 +19,7 @@ const WatchLaterPage = () => {
               <h1 className="text-xl font-bold">Watch Later</h1>
               <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1">
                 {watchLater?.map((item: ISavedResp) => (
-                  <Saved item={item?.saved} key={uuidv4()} />
+                  <Saved item={item} key={uuidv4()} />
                 ))}
               </div>
             </>

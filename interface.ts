@@ -198,15 +198,9 @@ export interface IMusicVideo {
 
 export interface ISavedResp {
     id:string;
-    saved:ISaved
-}
-
-export interface ISaved {
-    id: string;
     title: string;
     imageUrl: string;
-    userEmail: string;
     malId: number;
-    favouriteAnimeId:string;
-    watchLaterId:string
+
 }
+

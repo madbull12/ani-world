@@ -10,16 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Saved {
-  id        String   @id @default(uuid())
-  title     String
-  imageUrl  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  malId     Int
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-}
+
 
 model FavouriteAnime {
   id        String   @id @default(uuid())
@@ -80,7 +71,6 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
-  saved          Saved[]
   watchLater     WatchLater[]
   favouriteAnime FavouriteAnime[]
 }

@@ -20,8 +20,6 @@ export default async function handler(
     try {
       await prisma.favouriteAnime.create({
         data: {
-          saved: {
-            create: {
               title: title as string,
               imageUrl: imageUrl as string,
               malId: malId as number,
@@ -32,8 +30,6 @@ export default async function handler(
               },
               
               
-            },
-          },
         },
    
       });
@@ -46,13 +42,9 @@ export default async function handler(
     try {
       const data = await prisma.favouriteAnime.findMany({
         where: {
-          saved: {
             userId: session?.user?.id as string,
           },
-        },
-        include: {
-          saved: true,
-        },
+    
       });
 
       res.status(200).json(data);

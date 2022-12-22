@@ -20,8 +20,6 @@ import {
       try {
         await prisma.watchLater.create({
           data: {
-            saved: {
-              create: {
                 title: title as string,
                 imageUrl: imageUrl as string,
                 malId: malId as number,
@@ -32,8 +30,6 @@ import {
                 },
                 
                 
-              },
-            },
           },
      
         });
@@ -46,13 +42,9 @@ import {
       try {
         const data = await prisma.watchLater.findMany({
           where: {
-            saved: {
               userId: session?.user?.id as string,
-            },
           },
-          include: {
-            saved: true,
-          },
+       
         });
   
         res.status(200).json(data);
