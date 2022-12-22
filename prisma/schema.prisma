@@ -11,28 +11,38 @@ datasource db {
 }
 
 model Saved {
-  id               String          @id @default(uuid())
-  title            String
-  imageUrl         String
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
-  malId            Int
-  userId           String
-  user             User            @relation(fields: [userId], references: [id])
-  favouriteAnime   FavouriteAnime? @relation(fields: [favouriteAnimeId], references: [id], onDelete: Cascade)
-  favouriteAnimeId String?         @unique
-  WatchLater       WatchLater?     @relation(fields: [watchLaterId], references: [id], onDelete: Cascade)
-  watchLaterId     String?         @unique
+  id        String   @id @default(uuid())
+  title     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  malId     Int
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model FavouriteAnime {
-  id    String @id @default(uuid())
-  saved Saved?
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  malId     Int
+  title     String
+  imageUrl  String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([malId, userId])
 }
 
 model WatchLater {
-  id    String @id @default(uuid())
-  saved Saved?
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  malId     Int
+  title     String
+  imageUrl  String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([malId, userId])
 }
 
 model Account {
@@ -63,14 +73,16 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  Saved         Saved[]
+  id             String           @id @default(cuid())
+  name           String?
+  email          String?          @unique
+  emailVerified  DateTime?
+  image          String?
+  accounts       Account[]
+  sessions       Session[]
+  saved          Saved[]
+  watchLater     WatchLater[]
+  favouriteAnime FavouriteAnime[]
 }
 
 model VerificationToken {
