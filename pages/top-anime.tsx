@@ -24,7 +24,7 @@ const TopAnimePage = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-2xl font-bold pt-2">Top Anime</h1>
+      <h1 className="text-2xl font-bold p-2">Top Anime</h1>
       <div className="text-blue-500 font-bold justify-end my-4  flex gap-x-2">
         {page > 1 && (
           <button
@@ -43,9 +43,9 @@ const TopAnimePage = () => {
         </button>
       </div>
       {/* <button onClick={()=>setPage((prev)=>prev+1)}>Next page</button> */}
-      <table className="w-full mt-2 border">
+      <table className="w-full mt-2 border m-">
         <tbody>
-          <tr className="bg-blue-500 text-white ">
+          <tr className="bg-blue-500 text-white md:text-base sm:text-sm text-xs">
             <th>Rank</th>
             <th className="w-[70%]">Title</th>
             <th>Score</th>
@@ -56,17 +56,17 @@ const TopAnimePage = () => {
               key={uuidv4()}
               className="[&>*]:text-center [&>*]:p-2 [&:nth-child(even)]:bg-blue-50 divide-x"
             >
-              <td className="text-gray-400 text-4xl font-bold">{item.rank}</td>
-              <td className="flex gap-x-2">
+              <td className="text-gray-400 text-2xl md:text-4xl font-bold">{item.rank}</td>
+              <td className="flex gap-x-2 items-center flex-col xs:flex-row">
                 <Image
                   alt={item.title}
                   src={item.images.jpg.image_url}
                   width={60}
                   height={80}
                 />
-                <div className="[&>p]:text-gray-400 [&>p]:text-xs text-start ">
+                <div className="[&>p]:text-gray-400 [&>p]:text-xs  text-center xs:text-start  ">
                   <Link href={`/anime/${item.mal_id}`}>
-                    <span className="font-bold text-blue-500 cursor-pointer hover:text-blue-400">
+                    <span className="font-bold text-xs  text-blue-500 cursor-pointer hover:text-blue-400">
                       {item.title}
                     </span>
                   </Link>
@@ -81,7 +81,7 @@ const TopAnimePage = () => {
                   <p>{item.members.toLocaleString()} members</p>
                 </div>
               </td>
-              <td>{item.score}</td>
+              <td className="text-sm">{item.score}</td>
               <td>
                 <MotionBtn
                   string="Add to list"
