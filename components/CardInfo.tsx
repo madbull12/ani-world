@@ -3,16 +3,44 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { IoPeople, IoPlay, IoStar } from "react-icons/io5";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
-import { AnimeDetailsProps } from "../interface";
+import { AnimeDetailsProps, ISavedResp } from "../interface";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import truncate from "../helper/truncate";
+import { addToWatchLater, deleteWatchLater } from "../helper/functions";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import fetcher from "../helper/fetcher";
+import { signIn, useSession } from "next-auth/react";
 
 interface IProps {
   anime: AnimeDetailsProps;
 }
 const CardInfo = ({ anime }: IProps) => {
   const [expand, setExpand] = useState<boolean>(false);
+  const router = useRouter();
+  const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
+  const { status } = useSession();
+  const [watchLaterClicked, setWatchLaterClicked] = useState(false);
+
+  const addedToWatchLater = watchLater?.find(
+    (watchLater: ISavedResp) => watchLater.malId === anime.mal_id
+  );
+  const handleAddWatchLater = async () => {
+    setWatchLaterClicked(true)
+
+    await addToWatchLater(
+      anime.title,
+      anime.images.jpg.image_url,
+      anime.mal_id
+    );
+    router.push("/user/watchLater", undefined, { scroll: false });
+  };
+
+  const handleDeleteWatchLater = async () => {
+    setWatchLaterClicked(false)
+    await deleteWatchLater(addedToWatchLater?.id);
+  };
 
   return (
     <article className="border p-2">
@@ -20,8 +48,8 @@ const CardInfo = ({ anime }: IProps) => {
         <Link href={`/anime/${anime.mal_id}`}>{anime.title}</Link>
       </p>
 
-      <div className="bg-blue-50 p-2 flex items-center gap-x-8">
-        <div className="w-6 text-white h-6 rounded-full bg-blue-500 grid place-items-center">
+      <div className="bg-blue-50 p-2 flex items-center gap-x-3 sm:gap-x-4 md:gap-x-8 ">
+        <div className="w-6 text-white xs:text-sm text-xs h-6 rounded-full bg-blue-500 grid place-items-center">
           <a rel="noopener noreferrer" href={anime.trailer.url} target="_blank">
             <IoPlay className="cursor-pointer" />
           </a>
@@ -69,7 +97,7 @@ const CardInfo = ({ anime }: IProps) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between items-center [&>*]:flex [&>*]:items-center [&>*]:gap-x-2 text-sm text-gray-500 mt-2">
+      <div className="flex justify-between items-center [&>*]:flex [&>*]:items-center [&>*]:gap-x-2 text-xs xs:text-sm text-gray-500 mt-2">
         <div>
           <IoStar />
           {anime.score}
@@ -78,8 +106,21 @@ const CardInfo = ({ anime }: IProps) => {
           <IoPeople />
           {anime.members}
         </div>
-        <button className="bg-blue-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-blue-400">
-          Add to List
+        <button
+          onClick={() => {
+            status === "authenticated"
+              ? addedToWatchLater
+                ?  handleDeleteWatchLater()
+                : handleAddWatchLater() 
+              : signIn("google");
+          }}
+          className="bg-blue-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-blue-400"
+        >
+              {addedToWatchLater || watchLaterClicked ? (
+                    "Remove from list"
+                  ) : (
+                    "Add to list"
+                  )}
         </button>
       </div>
     </article>

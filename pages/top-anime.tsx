@@ -43,7 +43,7 @@ const TopAnimePage = () => {
         </button>
       </div>
       {/* <button onClick={()=>setPage((prev)=>prev+1)}>Next page</button> */}
-      <table className="w-full mt-2 border m-">
+      <table className="w-full mt-2 border ">
         <tbody>
           <tr className="bg-blue-500 text-white md:text-base sm:text-sm text-xs">
             <th>Rank</th>

@@ -26,7 +26,7 @@ const SeasonalNav = () => {
       <h1 className="font-bold text-2xl ">Seasonal Anime</h1>
       {items ? (
         <nav className="p-2">
-          <ul className="space-x-4 gap-2 flex flex-wrap  items-center text-blue-500">
+          <ul className="space-x-4 gap-2 flex flex-wrap text-sm md:text-base items-center text-blue-500">
             <IoEllipsisHorizontal
               onClick={() => setIndex((prev) => prev + 1)}
               className="cursor-pointer hover:bg-blue-500 hover:text-white duration-100 ease-in p-1 text-3xl "
