@@ -2,18 +2,35 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import useSWR from "swr";
 import { v4 } from "uuid";
-import { addToFavourite } from "../helper/functions";
-import { Anime } from "../interface";
+import fetcher from "../helper/fetcher";
+import { addToFavourite, deleteFavourite } from "../helper/functions";
+import { Anime, ISavedResp } from "../interface";
 
 const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
   const router = useRouter();
-  const { data:sessionm,status } = useSession()
+  const { data:session,status } = useSession();
+  const [favourited,setFavourited] = useState(false);
+  const { data: favourites } = useSWR(`/api/favorite`, fetcher);
+
+  const addedToFavourites = favourites?.find(
+    (favourite: ISavedResp) => favourite.malId === anime.mal_id
+  );
   const handleAddFavourite = async () => {
+    setFavourited((prev) => !prev)
+
     await addToFavourite(anime.title, anime.images.jpg.image_url, anime.mal_id);
-    router.push("/user", undefined, { shallow: true });
+    router.push("/user/favourites", undefined, { shallow: true });
   };
+
+  const handleDeleteFavourite = async () => {
+    setFavourited((prev) => !prev)
+
+    await deleteFavourite(addedToFavourites?.id)
+  }
+
   return (
     <Link key={v4()} href={`/anime/${anime.mal_id}`}>
       <div className="flex gap-x-2 cursor-pointer mb-4 ">
@@ -41,11 +58,11 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
           onClick={(e) => {
             e.stopPropagation();
             status === "authenticated"
-              ? handleAddFavourite()
+              ? addedToFavourites ? handleDeleteFavourite() : handleAddFavourite()
               : signIn("google");
           }}
         >
-          add
+          {(addedToFavourites || favourited) ? "added" : "add"}
         </button>
       </div>
     </Link>

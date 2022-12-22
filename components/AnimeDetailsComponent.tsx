@@ -5,8 +5,10 @@ import {
   IoClose,
   IoHeartCircleOutline,
   IoTimeSharp,
+  IoCheckmarkCircleOutline,
+  IoHeartCircle,
 } from "react-icons/io5";
-import { Anime, AnimeDetailsProps, Genre } from "../interface";
+import { Anime, AnimeDetailsProps, Genre, ISavedResp } from "../interface";
 import Backdrop from "./Backdrop";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
@@ -15,9 +17,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import MotionBtn from "./MotionBtn";
 import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme } from "../lib/zustand";
-import { addToFavourite, addToWatchLater } from "../helper/functions";
+import {
+  addToFavourite,
+  addToWatchLater,
+  deleteFavourite,
+  deleteWatchLater,
+} from "../helper/functions";
 import { signIn, useSession } from "next-auth/react";
 import useMediaQuery from "../hooks/useMediaQuery";
+import useSWR from "swr";
+import fetcher from "../helper/fetcher";
 
 interface IDetails {
   anime: AnimeDetailsProps;
@@ -83,6 +92,7 @@ const Synopsis = ({
 
 const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   const matches = useMediaQuery("(min-width: 768px)");
+
   const tabLinks = [
     "videos",
     "episodes",
@@ -141,6 +151,19 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
     window.scrollTo(0, 0);
   };
 
+  const [favorited, setFavorited] = useState(false);
+  const [watchLaterClicked, setWatchLaterClicked] = useState(false);
+
+  const { data: favourites } = useSWR(`/api/favorite`, fetcher);
+  const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
+
+  const addedToFavourites = favourites?.find(
+    (favourite: ISavedResp) => favourite.malId === anime.mal_id
+  );
+  const addedToWatchLater = watchLater?.find(
+    (watchLater: ISavedResp) => watchLater.malId === anime.mal_id
+  );
+
   const handleAddFavourite = async () => {
     await addToFavourite(anime.title, anime.images.jpg.image_url, anime.mal_id);
     router.push("/user/favourites", undefined, { shallow: true });
@@ -152,6 +175,13 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
       anime.mal_id
     );
     router.push("/user/watchLater", undefined, { shallow: true });
+  };
+
+  const handleDeleteWatchLater = async () => {
+    await deleteWatchLater(addedToWatchLater?.id);
+  };
+  const handleDeleteFavourite = async () => {
+    await deleteFavourite(addedToFavourites?.id);
   };
 
   return (
@@ -203,26 +233,40 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               </div>
               <div className=" md:pt-12 md:ml-auto text-white text-4xl flex self-start">
                 <motion.button
-                  onClick={() =>
+                  onClick={() => {
+                    setWatchLaterClicked((prev) => !prev);
                     status === "authenticated"
-                      ? handleAddWatchLater()
-                      : signIn("google")
-                  }
+                      ? addedToWatchLater
+                        ? handleDeleteWatchLater()
+                        : handleAddWatchLater()
+                      : signIn("google");
+                  }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <IoAddCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                  {addedToWatchLater || watchLaterClicked ? (
+                    <IoCheckmarkCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                  ) : (
+                    <IoAddCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                  )}
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() =>
+                  onClick={() => {
+                    setFavorited((prev) => !prev);
                     status === "authenticated"
-                      ? handleAddFavourite()
-                      : signIn("google")
-                  }
+                      ? addedToFavourites
+                        ? handleDeleteFavourite()
+                        : handleAddFavourite()
+                      : signIn("google");
+                  }}
                 >
-                  <IoHeartCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                  {addedToFavourites || favorited ? (
+                    <IoHeartCircle className="text-3xl lg:text-4xl cursor-pointer" />
+                  ) : (
+                    <IoHeartCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                  )}
                 </motion.button>
               </div>
             </div>
@@ -275,9 +319,11 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               </p>
             </div>
             <div className="p-8 flex gap-x-4 mt-44 sm:mt-72  lg:mt-20">
-              <div className="text-white bg-[#FF9901] rounded-full md:rounded-lg w-[50px] h-[50px] md:h-auto md:w-auto grid place-items-center p-2 self-start md:flex md:flex-col md:items-center">
-                <span className="font-bold text-xs hidden md:block">SCORE</span>
-                <span className="text-base md:text-2xl font-bold">
+              <div className="text-white bg-[#FF9901] rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
+                <span className="font-bold text-[8px]  text-xs hidden md:block">
+                  SCORE
+                </span>
+                <span className="text-base text-[10px] xs:text-xs  md:text-2xl font-bold">
                   {anime.score || "N/A"}
                 </span>
                 <span className="text-xs font-normal hidden md:block">

@@ -54,6 +54,48 @@ export const addToFavourite = async (
     console.log(err);
   }
 };
+export const deleteWatchLater = async (id: string) => {
+  try {
+    await toast
+      .promise(
+        fetch(`/api/watch-later/${id}`, {
+          headers: {
+            "Content-type": "application/json",
+          },
+          method: "DELETE",
+        }),
+        {
+          loading: "Removing from watch later",
+          success: "Anime successfully removed",
+          error: "There's an error removing anime",
+        }
+      )
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const deleteFavourite = async (id: string) => {
+  try {
+    await toast
+      .promise(
+        fetch(`/api/favorite/${id}`, {
+          headers: {
+            "Content-type": "application/json",
+          },
+          method: "DELETE",
+        }),
+        {
+          loading: "Removing from favourites",
+          success: "Anime successfully removed",
+          error: "There's an error removing anime",
+        }
+      )
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 export const addToWatchLater = async (
   title: string,
   imageUrl: string,

@@ -6,9 +6,10 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ISaved } from "../interface";
+import {  ISavedResp } from "../interface";
+import { deleteFavourite, deleteWatchLater } from "../helper/functions";
 
-const Saved = ({ item }: { item: ISaved }) => {
+const Saved = ({ item }: { item: ISavedResp }) => {
   const [showTrash, setShowTrash] = useState<boolean>(false);
   console.log(item.malId)
 
@@ -17,27 +18,15 @@ const Saved = ({ item }: { item: ISaved }) => {
     router.replace(router.asPath, undefined, { scroll: false });
   };
 
-  const deleteSave = async (id: string) => {
-    try {
-      await toast
-        .promise(
-          fetch(`/api/${router.pathname === "/user/favourites" ? "favorite" : "watch-later"}/${id}`, {
-            headers: {
-              "Content-type": "application/json",
-            },
-            method: "DELETE",
-          }),
-          {
-            loading: "Removing from favourites",
-            success: "Anime successfully removed",
-            error: "There's an error removing anime",
-          }
-        )
-        .then(() => refreshData());
-    } catch (err) {
-      console.log(err);
+  const deleteSave = ()=> {
+    if(router.pathname==="/user/favourites") {
+      deleteFavourite(item.id)
+    } else {
+      deleteWatchLater(item.id)
     }
-  };
+    refreshData()
+  }
+
 
   return (
     <div>
@@ -65,7 +54,7 @@ const Saved = ({ item }: { item: ISaved }) => {
             className="text-gray-300 self-center absolute left-2"
             onClick={(e) => {
               e.stopPropagation();
-              deleteSave(item.favouriteAnimeId ?? item.watchLaterId);
+              deleteSave();
             }}
           >
             <BsFillTrashFill className="text-2xl" />

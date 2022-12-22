@@ -119,7 +119,7 @@ const Header = () => {
               }}
             />
             {status==="authenticated" && (
-              <Link href="/user">
+              <Link href="/user/favourites">
                 <Image
                   alt={"profile"}
                   src={session?.user?.image || ""}
