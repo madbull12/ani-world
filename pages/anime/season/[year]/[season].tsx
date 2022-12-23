@@ -7,6 +7,7 @@ import SeasonalNav from "../../../../components/SeasonalNav";
 import fetcher from "../../../../helper/fetcher";
 import { AnimeDetailsProps } from "../../../../interface";
 import { v4 as uuidv4 } from "uuid";
+import Loader from "../../../../components/Loader";
 
 const SeasonalPage = () => {
   const router = useRouter();
@@ -67,9 +68,7 @@ const SeasonalPage = () => {
           </div>
         </>
       ) : (
-        <div className="h-full w-full grid place-items-center">
-          <Jelly color="#007CEF" />
-        </div>
+        <Loader />
       )}
     </div>
   );
