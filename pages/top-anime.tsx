@@ -54,7 +54,7 @@ const TopAnimePage = () => {
             <th>Status</th>
           </tr>
           {anime?.map((item) => (
-            <TopAnimeRow item={item} />
+            <TopAnimeRow key={uuidv4()} item={item} />
           ))}
         </tbody>
       </table>
