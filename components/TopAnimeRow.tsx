@@ -1,12 +1,17 @@
 import moment from "moment";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import { v4 as uuidv4 } from "uuid";
 import fetcher from "../helper/fetcher";
-import { addToFavourite, addToWatchLater, deleteWatchLater } from "../helper/functions";
+import {
+  addToFavourite,
+  addToWatchLater,
+  deleteWatchLater,
+} from "../helper/functions";
 import { Anime, ISavedResp } from "../interface";
 import MotionBtn from "./MotionBtn";
 
@@ -16,19 +21,20 @@ const TopAnimeRow = ({ item }: { item: Anime }) => {
   const addedToWatchLater = watchLater?.find(
     (watchLater: ISavedResp) => watchLater.malId === item.mal_id
   );
+  const { status } = useSession();
+  const [watchLaterClicked, setWatchLaterClicked] = useState<boolean>(false);
 
-  const handleAddFavourite = async () => {
-    await addToFavourite(item.title, item.images.jpg.image_url, item.mal_id);
-    router.push("/user/favourites", undefined, { shallow: true });
-  };
   const handleAddWatchLater = async () => {
+    setWatchLaterClicked(true);
     await addToWatchLater(item.title, item.images.jpg.image_url, item.mal_id);
     router.push("/user/watchLater", undefined, { shallow: true });
   };
 
   const handleDeleteWatchLater = async () => {
+    setWatchLaterClicked(false);
     await deleteWatchLater(addedToWatchLater?.id);
   };
+
   return (
     <tr
       key={uuidv4()}
@@ -64,8 +70,18 @@ const TopAnimeRow = ({ item }: { item: Anime }) => {
       <td className="text-sm">{item.score}</td>
       <td>
         <MotionBtn
-          string="Add to list"
-          handleClick={() => console.log("clicked")}
+          string={
+            watchLaterClicked || addedToWatchLater
+              ? "Remove from  list"
+              : "Add to list"
+          }
+          handleClick={() =>
+            status === "authenticated"
+              ? addedToWatchLater
+                ? handleDeleteWatchLater()
+                : handleAddWatchLater()
+              : signIn("google")
+          }
         />
       </td>
     </tr>
