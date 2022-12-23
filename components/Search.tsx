@@ -120,25 +120,26 @@ const Search = () => {
       }}
     >
       <motion.div
-        className="text-white p-4 bg-blue-600 relative max-w-[500px] rounded-lg"
+        className="text-white p-2 xs:p-4 bg-blue-600 relative max-w-[500px] rounded-lg"
         onClick={(e) => e.stopPropagation()}
         variants={dropIn}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <div className="flex items-center space-x-2 ">
+        <div className="flex items-center flex-col xs:flex-row space-x-2 w-full ">
           <CategoryDropdown setCategory={setCategory} category={category} />
-
-          <IoSearchOutline />
-          <form onSubmit={handleSubmit} className="relative">
-            <input
-              onChange={(e) => setTerm(e.target.value)}
-              type="text"
-              className="bg-transparent outline-none border-b p-2  placeholder:text-gray-300"
-              placeholder="Search anime, manga and more..."
-            />
-          </form>
+          <div className="flex items-center gap-x-1">
+            <IoSearchOutline />
+            <form onSubmit={handleSubmit} className="relative">
+              <input
+                onChange={(e) => setTerm(e.target.value)}
+                type="text"
+                className="bg-transparent outline-none border-b p-2  placeholder:text-gray-300"
+                placeholder="Search anime, manga and more..."
+              />
+            </form>
+          </div>
         </div>
       </motion.div>
     </BackdropModal>

@@ -9,6 +9,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import MotionBtn from "../../../components/MotionBtn";
 import { useTheme } from "../../../lib/zustand";
+import Loader from "../../../components/Loader";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const CharactersPage = () => {
@@ -43,11 +44,11 @@ const CharactersPage = () => {
         <div className="px-4 pb-4">
           <h1 className="text-2xl font-bold pb-2">Characters</h1>
           <div
-            className={`divide-y last:divide-y-0 bg-${theme}-100 p-2 divide-gray-300 mb-4`}
+            className={`divide-y last:divide-y-0 bg-blue-100 p-2 divide-gray-300 mb-4`}
           >
             {characters.slice(0, loadMoreCharacters).map((character) => (
-              <div key={uuidv4()} className="flex  py-2 justify-between">
-                <div className="flex gap-x-2 self-start">
+              <div key={uuidv4()} className="flex gap-x-2  py-2 justify-between">
+                <div className="flex gap-x-2 self-start ">
                   <Image
                     className="rounded-lg"
                     src={character?.character.images.jpg.image_url}
@@ -56,21 +57,21 @@ const CharactersPage = () => {
                     alt={character.character.name}
                     objectFit="cover"
                   />
-                  <div className="space-y-3">
-                    <p className={`font-semibold text-${theme}-500`}>
+                  <div className="space-y-3 truncate text-xs sm:text-base">
+                    <p className={`font-semibold truncate text-blue-500`}>
                       {character?.character.name}
                     </p>
-                    <p className="text-sm text-gray-500">{character?.role}</p>
+                    <p className=" text-gray-500">{character?.role}</p>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-4">
                   {character?.voice_actors.map((voice_actor) => (
                     <div
                       key={uuidv4()}
-                      className="flex gap-x-2 justify-between w-[200px]"
+                      className="flex min-[500px]:gap-2  min-[500px]:items-start min-[500px]:text-start items-center  text-center flex-col min-[500px]:flex-row justify-between min-[500px]:w-[200px]"
                     >
-                      <div className="">
-                        <p className={`font-semibold text-${theme}-500`}>
+                      <div className="text-xs sm:text-base">
+                        <p className={`font-semibold text-blue-500`}>
                           {voice_actor.person.name}
                         </p>
                         <p className="text-sm text-gray-500">
@@ -149,9 +150,7 @@ const CharactersPage = () => {
           </div>
         </div>
       ) : (
-        <div className="h-full w-full grid place-items-center">
-          <Jelly color="#007CEF" />
-        </div>
+        <Loader />
       )}
     </div>
   );

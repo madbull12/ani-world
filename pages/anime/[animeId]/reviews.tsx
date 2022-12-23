@@ -10,6 +10,7 @@ import { Jelly } from "@uiball/loaders";
 import fetcher from "../../../helper/fetcher";
 import { Review } from "../../../interface";
 import { BiConfused } from 'react-icons/bi'
+import Loader from "../../../components/Loader";
 
 const ReviewComponent = ({ review }: { review: Review }) => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const ReviewComponent = ({ review }: { review: Review }) => {
 
   return (
     <div className="w-full bg-blue-50 p-2 divide-y divide-gray-300">
-      <div className="flex space-between text-sm md:text-base  ">
+      <div className="flex gap-x-1 space-between text-sm md:text-base  ">
         <div className="flex gap-x-2 items-start">
           <Image
             src={review.user.images.jpg.image_url}
@@ -67,8 +68,8 @@ const ReviewComponent = ({ review }: { review: Review }) => {
             </div>
           </div>
         </div>
-        <div className="ml-auto space-y-2 text-xs md:text-sm">
-          <p className="text-xs md:text-sm">{moment(review.date).format("LL")}</p>
+        <div className="ml-auto space-y-2 text-[10px] md:text-sm">
+          <p className="">{moment(review.date).format("LL")}</p>
           {/* <p className='text-sm text-gray-400'>{review.episodes_watched} of {videos?.episodes.length} episodes watched</p> */}
           <p>Overall rating: {review?.score}</p>
         </div>
@@ -128,9 +129,7 @@ const ReviewPage = () => {
           )}
         </div>
       ) : (
-        <div className="h-full w-full grid place-items-center">
-          <Jelly color="#007CEF" />
-        </div>
+        <Loader />
       )}
     </div>
   );

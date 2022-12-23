@@ -8,6 +8,7 @@ import Link from "next/link";
 import moment from "moment";
 import useLocalStorage from "../hooks/useLocalStorage";
 import fetcher from "../helper/fetcher";
+import TopAnimeRow from "../components/TopAnimeRow";
 
 const TopAnimePage = () => {
   const [page, setPage] = useLocalStorage("page", 1);
@@ -21,6 +22,7 @@ const TopAnimePage = () => {
   // const [itemOffset, setItemOffset] = useState(0);
 
   console.log(topAnime);
+  
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -52,43 +54,7 @@ const TopAnimePage = () => {
             <th>Status</th>
           </tr>
           {anime?.map((item) => (
-            <tr
-              key={uuidv4()}
-              className="[&>*]:text-center [&>*]:p-2 [&:nth-child(even)]:bg-blue-50 divide-x"
-            >
-              <td className="text-gray-400 text-2xl md:text-4xl font-bold">{item.rank}</td>
-              <td className="flex gap-x-2 items-center flex-col xs:flex-row">
-                <Image
-                  alt={item.title}
-                  src={item.images.jpg.image_url}
-                  width={60}
-                  height={80}
-                />
-                <div className="[&>p]:text-gray-400 [&>p]:text-xs  text-center xs:text-start  ">
-                  <Link href={`/anime/${item.mal_id}`}>
-                    <span className="font-bold text-xs  text-blue-500 cursor-pointer hover:text-blue-400">
-                      {item.title}
-                    </span>
-                  </Link>
-                  <p>
-                    {item.type} ({item.episodes} eps)
-                  </p>
-
-                  <p>
-                    {moment(item.aired.from).format("LL")} -{" "}
-                    {moment(item.aired.to).format("LL")}
-                  </p>
-                  <p>{item.members.toLocaleString()} members</p>
-                </div>
-              </td>
-              <td className="text-sm">{item.score}</td>
-              <td>
-                <MotionBtn
-                  string="Add to list"
-                  handleClick={() => console.log("clicked")}
-                />
-              </td>
-            </tr>
+            <TopAnimeRow item={item} />
           ))}
         </tbody>
       </table>
