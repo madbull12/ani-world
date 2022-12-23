@@ -12,35 +12,20 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import fetcher from "../helper/fetcher";
 import { signIn, useSession } from "next-auth/react";
+import useWatchLater from "../hooks/useWatchLater";
 
 interface IProps {
   anime: AnimeDetailsProps;
 }
 const CardInfo = ({ anime }: IProps) => {
   const [expand, setExpand] = useState<boolean>(false);
-  const router = useRouter();
-  const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
-  const { status } = useSession();
-  const [watchLaterClicked, setWatchLaterClicked] = useState(false);
 
-  const addedToWatchLater = watchLater?.find(
-    (watchLater: ISavedResp) => watchLater.malId === anime.mal_id
-  );
-  const handleAddWatchLater = async () => {
-    setWatchLaterClicked(true)
-
-    await addToWatchLater(
-      anime.title,
-      anime.images.jpg.image_url,
-      anime.mal_id
-    );
-    router.push("/user/watchLater", undefined, { scroll: false });
-  };
-
-  const handleDeleteWatchLater = async () => {
-    setWatchLaterClicked(false)
-    await deleteWatchLater(addedToWatchLater?.id);
-  };
+  const {
+    handleAddWatchLater,
+    watchLaterClicked,
+    addedToWatchLater,
+    handleDeleteWatchLater,
+  } = useWatchLater(anime);
 
   return (
     <article className="border p-2">
@@ -108,19 +93,15 @@ const CardInfo = ({ anime }: IProps) => {
         </div>
         <button
           onClick={() => {
-            status === "authenticated"
-              ? addedToWatchLater
-                ?  handleDeleteWatchLater()
-                : handleAddWatchLater() 
-              : signIn("google");
+            addedToWatchLater
+              ? handleDeleteWatchLater()
+              : handleAddWatchLater();
           }}
           className="bg-blue-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-blue-400"
         >
-              {addedToWatchLater || watchLaterClicked ? (
-                    "Remove from list"
-                  ) : (
-                    "Add to list"
-                  )}
+          {addedToWatchLater || watchLaterClicked
+            ? "Remove from list"
+            : "Add to list"}
         </button>
       </div>
     </article>

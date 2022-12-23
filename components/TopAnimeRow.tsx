@@ -17,7 +17,7 @@ import useWatchLater from "../hooks/useWatchLater";
 import { Anime, ISavedResp } from "../interface";
 import MotionBtn from "./MotionBtn";
 
-const TopAnimeRow = ({ item }: { item: Anime }) => {
+const TopAnimeRow = ({ item,i }: { item: Anime,i:number }) => {
   // const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
   const {
     handleAddWatchLater,
@@ -55,7 +55,7 @@ const TopAnimeRow = ({ item }: { item: Anime }) => {
       className="[&>*]:text-center [&>*]:p-2 [&:nth-child(even)]:bg-blue-50 divide-x"
     >
       <td className="text-gray-400 text-2xl md:text-4xl font-bold">
-        {item.rank}
+        {i+1}
       </td>
       <td className="flex gap-x-2 items-center flex-col xs:flex-row">
         <Image

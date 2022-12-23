@@ -9,11 +9,13 @@ import moment from "moment";
 import useLocalStorage from "../hooks/useLocalStorage";
 import fetcher from "../helper/fetcher";
 import TopAnimeRow from "../components/TopAnimeRow";
+import TopNav from "../components/TopNav";
 
 const TopAnimePage = () => {
   const [page, setPage] = useLocalStorage("page", 1);
+  const [filter,setFilter]=useState("")
   const { data: topAnime } = useSWR(
-    `https://api.jikan.moe/v4/top/anime?page=${page}`,
+    `https://api.jikan.moe/v4/top/anime?page=${page}&filter=${filter}`,
     fetcher
   );
 
@@ -27,6 +29,7 @@ const TopAnimePage = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold p-2">Top Anime</h1>
+      <TopNav setFilter={setFilter} filter={filter} />
       <div className="text-blue-500 font-bold justify-end my-4  flex gap-x-2">
         {page > 1 && (
           <button
@@ -53,8 +56,8 @@ const TopAnimePage = () => {
             <th>Score</th>
             <th>Status</th>
           </tr>
-          {anime?.map((item) => (
-            <TopAnimeRow key={uuidv4()} item={item} />
+          {anime?.map((item,i) => (
+            <TopAnimeRow i={i} key={uuidv4()} item={item} />
           ))}
         </tbody>
       </table>
