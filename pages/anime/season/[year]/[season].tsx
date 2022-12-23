@@ -17,7 +17,6 @@ const SeasonalPage = () => {
     `https://api.jikan.moe/v4/seasons/${yearId}/${seasonId}?page=${page}`,
     fetcher
   );
-  
 
   const { data: anime }: { data: AnimeDetailsProps[] } = data || {};
 
