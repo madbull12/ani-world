@@ -12,28 +12,42 @@ import {
   addToWatchLater,
   deleteWatchLater,
 } from "../helper/functions";
+import useFavourites from "../hooks/useFavourites";
+import useWatchLater from "../hooks/useWatchLater";
 import { Anime, ISavedResp } from "../interface";
 import MotionBtn from "./MotionBtn";
 
 const TopAnimeRow = ({ item }: { item: Anime }) => {
-  const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
-  const router = useRouter();
-  const addedToWatchLater = watchLater?.find(
-    (watchLater: ISavedResp) => watchLater.malId === item.mal_id
-  );
-  const { status } = useSession();
-  const [watchLaterClicked, setWatchLaterClicked] = useState<boolean>(false);
+  // const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
+  const {
+    handleAddWatchLater,
+    watchLaterClicked,
+    addedToWatchLater,
+    handleDeleteWatchLater,
+  } = useWatchLater(item);
+  console.log(watchLaterClicked);
+  const {
+    handleDeleteFavourite,
+    handleAddFavourite,
+    addedToFavourites,
+    favorited,
+  } = useFavourites(item);
+  // const addedToWatchLater = watchLater?.find(
+  //   (watchLater: ISavedResp) => watchLater.malId === item.mal_id
+  // );
+  // const { status } = useSession();
+  // const [watchLaterClicked, setWatchLaterClicked] = useState<boolean>(false);
 
-  const handleAddWatchLater = async () => {
-    setWatchLaterClicked(true);
-    await addToWatchLater(item.title, item.images.jpg.image_url, item.mal_id);
-    router.push("/user/watchLater", undefined, { shallow: true });
-  };
+  // const handleAddWatchLater = async () => {
+  //   setWatchLaterClicked(true);
+  //   await addToWatchLater(item.title, item.images.jpg.image_url, item.mal_id);
+  //   router.push("/user/watchLater", undefined, { shallow: true });
+  // };
 
-  const handleDeleteWatchLater = async () => {
-    setWatchLaterClicked(false);
-    await deleteWatchLater(addedToWatchLater?.id);
-  };
+  // const handleDeleteWatchLater = async () => {
+  //   setWatchLaterClicked(false);
+  //   await deleteWatchLater(addedToWatchLater?.id);
+  // };
 
   return (
     <tr
@@ -76,11 +90,10 @@ const TopAnimeRow = ({ item }: { item: Anime }) => {
               : "Add to list"
           }
           handleClick={() =>
-            status === "authenticated"
-              ? addedToWatchLater
+               addedToWatchLater
                 ? handleDeleteWatchLater()
                 : handleAddWatchLater()
-              : signIn("google")
+           
           }
         />
       </td>

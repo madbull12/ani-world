@@ -27,6 +27,8 @@ import { signIn, useSession } from "next-auth/react";
 import useMediaQuery from "../hooks/useMediaQuery";
 import useSWR from "swr";
 import fetcher from "../helper/fetcher";
+import useWatchLater from "../hooks/useWatchLater";
+import useFavourites from "../hooks/useFavourites";
 
 interface IDetails {
   anime: AnimeDetailsProps;
@@ -151,38 +153,19 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
     window.scrollTo(0, 0);
   };
 
-  const [favorited, setFavorited] = useState(false);
-  const [watchLaterClicked, setWatchLaterClicked] = useState(false);
+  const {
+    handleAddWatchLater,
+    watchLaterClicked,
+    addedToWatchLater,
+    handleDeleteWatchLater,
+  } = useWatchLater(anime);
 
-  const { data: favourites } = useSWR(`/api/favorite`, fetcher);
-  const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
-
-  const addedToFavourites = favourites?.find(
-    (favourite: ISavedResp) => favourite.malId === anime.mal_id
-  );
-  const addedToWatchLater = watchLater?.find(
-    (watchLater: ISavedResp) => watchLater.malId === anime.mal_id
-  );
-
-  const handleAddFavourite = async () => {
-    await addToFavourite(anime.title, anime.images.jpg.image_url, anime.mal_id);
-    router.push("/user/favourites", undefined, { shallow: true });
-  };
-  const handleAddWatchLater = async () => {
-    await addToWatchLater(
-      anime.title,
-      anime.images.jpg.image_url,
-      anime.mal_id
-    );
-    router.push("/user/watchLater", undefined, { shallow: true });
-  };
-
-  const handleDeleteWatchLater = async () => {
-    await deleteWatchLater(addedToWatchLater?.id);
-  };
-  const handleDeleteFavourite = async () => {
-    await deleteFavourite(addedToFavourites?.id);
-  };
+  const {
+    handleDeleteFavourite,
+    handleAddFavourite,
+    addedToFavourites,
+    favorited,
+  } = useFavourites(anime);
 
   return (
     <div>
@@ -234,12 +217,9 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               <div className=" md:pt-12 md:ml-auto text-white text-4xl flex self-start">
                 <motion.button
                   onClick={() => {
-                    setWatchLaterClicked((prev) => !prev);
-                    status === "authenticated"
-                      ? addedToWatchLater
-                        ? handleDeleteWatchLater()
-                        : handleAddWatchLater()
-                      : signIn("google");
+                    addedToWatchLater
+                      ? handleDeleteWatchLater()
+                      : handleAddWatchLater();
                   }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -254,12 +234,9 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => {
-                    setFavorited((prev) => !prev);
-                    status === "authenticated"
-                      ? addedToFavourites
-                        ? handleDeleteFavourite()
-                        : handleAddFavourite()
-                      : signIn("google");
+                    addedToFavourites
+                      ? handleDeleteFavourite()
+                      : handleAddFavourite();
                   }}
                 >
                   {addedToFavourites || favorited ? (

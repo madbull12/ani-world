@@ -7,29 +7,19 @@ import useSWR from "swr";
 import { v4 } from "uuid";
 import fetcher from "../helper/fetcher";
 import { addToFavourite, deleteFavourite } from "../helper/functions";
+import useFavourites from "../hooks/useFavourites";
 import { Anime, ISavedResp } from "../interface";
 
 const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
   const router = useRouter();
-  const { data:session,status } = useSession();
-  const [favourited,setFavourited] = useState(false);
-  const { data: favourites } = useSWR(`/api/favorite`, fetcher);
 
-  const addedToFavourites = favourites?.find(
-    (favourite: ISavedResp) => favourite.malId === anime.mal_id
-  );
-  const handleAddFavourite = async () => {
-    setFavourited((prev) => !prev)
 
-    await addToFavourite(anime.title, anime.images.jpg.image_url, anime.mal_id);
-    router.push("/user/favourites", undefined, { shallow: true });
-  };
-
-  const handleDeleteFavourite = async () => {
-    setFavourited((prev) => !prev)
-
-    await deleteFavourite(addedToFavourites?.id)
-  }
+  const {
+    handleDeleteFavourite,
+    handleAddFavourite,
+    addedToFavourites,
+    favorited,
+  } = useFavourites(anime);
 
   return (
     <Link key={v4()} href={`/anime/${anime.mal_id}`}>
@@ -57,12 +47,10 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
           className={`self-start justify-self-end ml-auto  font-semibold text-blue-500`}
           onClick={(e) => {
             e.stopPropagation();
-            status === "authenticated"
-              ? addedToFavourites ? handleDeleteFavourite() : handleAddFavourite()
-              : signIn("google");
+               addedToFavourites ? handleDeleteFavourite() : handleAddFavourite()
           }}
         >
-          {(addedToFavourites || favourited) ? "added" : "add"}
+          {(addedToFavourites || favorited) ? "added" : "add"}
         </button>
       </div>
     </Link>
