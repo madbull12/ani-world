@@ -13,12 +13,15 @@ import {
   deleteWatchLater,
 } from "../helper/functions";
 import useFavourites from "../hooks/useFavourites";
+import useLocalStorage from "../hooks/useLocalStorage";
 import useWatchLater from "../hooks/useWatchLater";
 import { Anime, ISavedResp } from "../interface";
 import MotionBtn from "./MotionBtn";
 
-const TopAnimeRow = ({ item,i }: { item: Anime,i:number }) => {
+const TopAnimeRow = ({ item,i,page }: { item: Anime,i:number,page:number }) => {
   // const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
+
+
   const {
     handleAddWatchLater,
     watchLaterClicked,
@@ -55,7 +58,7 @@ const TopAnimeRow = ({ item,i }: { item: Anime,i:number }) => {
       className="[&>*]:text-center [&>*]:p-2 [&:nth-child(even)]:bg-blue-50 divide-x"
     >
       <td className="text-gray-400 text-2xl md:text-4xl font-bold">
-        {i+1}
+        {page >= 2 ?i+1 + 25 * (page-1) : i+1}
       </td>
       <td className="flex gap-x-2 items-center flex-col xs:flex-row">
         <Image
