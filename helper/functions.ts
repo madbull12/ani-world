@@ -162,3 +162,7 @@ export const getSeason = (month:number) => {
   // Months 12, 01, 02
   return "winter";
 };
+
+export const genreConverter = (malId:number) => {
+  
+}
