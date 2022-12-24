@@ -1,12 +1,16 @@
-import React from 'react'
-import { IGenre } from '../interface'
+import Link from "next/link";
+import React from "react";
+import { IGenre } from "../interface";
 
-const GenreBox = ({ genre }:{ genre:IGenre }) => {
+const GenreBox = ({ genre }: { genre: IGenre }) => {
   return (
-    <div className='border-blue-500 cursor-pointer text-blue-500 hover:bg-blue-100 border p-4 rounded-xl'>
-        {genre.name}
-    </div>
-  )
-}
+    <Link href={`/genres/anime/${genre.mal_id}`}>
+      <div className="border-blue-500 flex flex-col cursor-pointer text-blue-500 hover:bg-blue-100 border p-4 rounded-xl">
+        <p>{genre.name}</p>
+        <p>{genre.count}</p>
+      </div>
+    </Link>
+  );
+};
 
-export default GenreBox
+export default GenreBox;

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import useSWR from "swr";
-import Container from "../../components/Container";
-import GenreBox from "../../components/GenreBox";
-import fetcher from "../../helper/fetcher";
-import { IGenre } from "../../interface";
+import Container from "../../../components/Container";
+import GenreBox from "../../../components/GenreBox";
+import fetcher from "../../../helper/fetcher";
+import { IGenre } from "../../../interface";
 
 const AnimeGenrePage = () => {
   const { data: animeGenres } = useSWR(

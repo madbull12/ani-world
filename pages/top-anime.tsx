@@ -10,6 +10,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import fetcher from "../helper/fetcher";
 import TopAnimeRow from "../components/TopAnimeRow";
 import TopNav from "../components/TopNav";
+import Container from "../components/Container";
 
 const TopAnimePage = () => {
   const [page, setPage] = useLocalStorage("page", 1);
@@ -27,7 +28,7 @@ const TopAnimePage = () => {
   
 
   return (
-    <div className="max-w-7xl mx-auto p-2">
+    <Container>
       <h1 className="text-2xl font-bold ">Top Anime</h1>
       <TopNav setFilter={setFilter} filter={filter} />
       <div className="text-blue-500 font-bold justify-end my-4 pr-2 flex gap-x-2">
@@ -78,7 +79,7 @@ const TopAnimePage = () => {
           Next
         </button>
       </div>
-    </div>
+    </Container>
   );
 };
 

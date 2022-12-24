@@ -46,6 +46,9 @@ const LinkItem = () => {
             <Link href={`/anime/season/${currentYear}/${currentSeason}`}>
               Seasonal Anime
             </Link>
+            <Link href={`/genres/anime`}>
+              Anime Genres
+            </Link>
           </motion.div>
         </AnimatePresence>
       )}
