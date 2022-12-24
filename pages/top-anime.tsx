@@ -27,10 +27,10 @@ const TopAnimePage = () => {
   
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <h1 className="text-2xl font-bold p-2">Top Anime</h1>
+    <div className="max-w-7xl mx-auto p-2">
+      <h1 className="text-2xl font-bold ">Top Anime</h1>
       <TopNav setFilter={setFilter} filter={filter} />
-      <div className="text-blue-500 font-bold justify-end my-4  flex gap-x-2">
+      <div className="text-blue-500 font-bold justify-end my-4 pr-2 flex gap-x-2">
         {page > 1 && (
           <button
             onClick={() => setPage(page - 1)}

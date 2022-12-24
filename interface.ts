@@ -204,3 +204,8 @@ export interface ISavedResp {
 
 }
 
+export interface IGenre {
+  name:string;
+  count:number;
+  mal_id:number;
+}

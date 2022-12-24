@@ -45,7 +45,7 @@ const Home = ({ seasonsNow, seasonYear, seasonsUpcoming }: IMain) => {
 export const getStaticProps = async () => {
   const [seasonsNow, seasonYear, seasonsUpcoming] = [
     await getSeasonNowAnime(),
-    await getSeasonYearAnime(2022, "winter"),
+    await getSeasonYearAnime(2023, "winter"),
     await getSeasonUpcomingAnime(),
   ];
 

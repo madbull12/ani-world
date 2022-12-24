@@ -35,7 +35,7 @@ const TopNav = ({ filter, setFilter }: IProps) => {
     },
   ];
   return (
-    <ul className="grid grid-cols-1 xs:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 sm:gap-x-2 gap-x-1">
+    <ul className="grid grid-cols-1 xs:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 sm:gap-x-2 gap-y-2 gap-x-1">
       {links.map((link: Link) => (
         <li
           className={`${

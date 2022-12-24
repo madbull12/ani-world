@@ -9,7 +9,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { signOut,signIn, useSession } from 'next-auth/react'
+import { signOut, signIn, useSession } from "next-auth/react";
 import { getSeason, themeConverter } from "../helper/functions";
 
 const showIn = {
@@ -33,7 +33,6 @@ interface ILink {
 }
 
 const LinkItem = ({ title, isManga }: ILink) => {
-  
   const [isHovered, setIsHovered] = useState<boolean>();
   const d = new Date();
   let month = d.getMonth();
@@ -73,6 +72,11 @@ const LinkItem = ({ title, isManga }: ILink) => {
                 </Link>
               </div>
             )}
+            <div className="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
+              <Link href={`/genres/anime`}>
+                Anime Genres
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -86,7 +90,7 @@ const Header = () => {
   const { toggleNav } = useToggle();
   const { theme } = useTheme();
 
-  const { data:session,status } = useSession()
+  const { data: session, status } = useSession();
   //   useEffect(()=>{
   //      setTheme(window.localStorage.getItem("theme")?.slice(1,-1))
   //   },[theme])
@@ -105,10 +109,10 @@ const Header = () => {
             <LinkItem isManga={false} title="anime" />
 
             <LinkItem isManga={true} title="manga" />
-            {status==='authenticated' ? (
-              <button onClick={()=>signOut()}>Sign out</button>
+            {status === "authenticated" ? (
+              <button onClick={() => signOut()}>Sign out</button>
             ) : (
-              <button onClick={()=>signIn("google")}>Sign in</button>
+              <button onClick={() => signIn("google")}>Sign in</button>
             )}
             <IoSearchCircle
               className="text-3xl cursor-pointer"
@@ -118,7 +122,7 @@ const Header = () => {
                 window.scrollTo(0, 0);
               }}
             />
-            {status==="authenticated" && (
+            {status === "authenticated" && (
               <Link href="/user/favourites">
                 <Image
                   alt={"profile"}
