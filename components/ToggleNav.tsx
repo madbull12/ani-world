@@ -9,7 +9,7 @@ import Image from "next/legacy/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { getSeason } from "../helper/functions";
 
-const LinkItem = () => {
+const LinkItem = ({ isManga }: { isManga: boolean }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const d = new Date();
@@ -27,7 +27,7 @@ const LinkItem = () => {
         className=" cursor-pointer"
         onClick={() => setIsClicked(!isClicked)}
       >
-        Anime
+        {isManga ? "Manga" : "Anime"}
       </motion.li>
       {isClicked && (
         <AnimatePresence exitBeforeEnter={true} onExitComplete={() => null}>
@@ -42,12 +42,17 @@ const LinkItem = () => {
               stiffness: 150,
             }}
           >
-            <Link href="/top-anime">Top Anime</Link>
-            <Link href={`/anime/season/${currentYear}/${currentSeason}`}>
-              Seasonal Anime
+            <Link href={`${isManga ? "/top-anime" : "/top-manga"}`}>
+              {isManga ? "Top Manga" : "Top Anime"}
             </Link>
-            <Link href={`/genres/anime`}>
-              Anime Genres
+            {!isManga ? (
+              <Link href={`/anime/season/${currentYear}/${currentSeason}`}>
+                Seasonal Anime
+              </Link>
+            ) : null}
+
+            <Link href={`${isManga ? "/genres/manga" : "/genres/anime"}`}>
+              {isManga ? "Manga Genres" : "Anime Genres"}
             </Link>
           </motion.div>
         </AnimatePresence>
@@ -102,9 +107,8 @@ const ToggleNav = () => {
           }}
         />
         <ul className="flex flex-col text-xl items-center gap-y-2 mb-2 md:hidden">
-          <LinkItem />
-
-          <li className="cursor-pointer">Manga</li>
+          <LinkItem isManga={false} />
+          <LinkItem isManga={true} />
           <li
             className="cursor-pointer"
             onClick={() => {

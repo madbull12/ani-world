@@ -61,7 +61,7 @@ const LinkItem = ({ title, isManga }: ILink) => {
             className="absolute rounded-md  text-sm flex flex-col shadow-md whitespace-nowrap -bottom-20 z-[999] text-blue-500 font-semibold bg-blue-50"
           >
             <div className="hover:bg-blue-500 px-4 flexflex-col py-2 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
-              <Link href="/top-anime" className="hover:text-blue-400">
+              <Link href={`${isManga ? "/top-manga":"/top-anime"}`} className="hover:text-blue-400">
                 <span>Top {isManga ? "Manga" : "Anime"}</span>
               </Link>
             </div>
@@ -74,8 +74,8 @@ const LinkItem = ({ title, isManga }: ILink) => {
               </div>
             )}
             <div className="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer ease-in duration-100 transition-all ">
-              <Link href={`/genres/anime`}>
-                Anime Genres
+              <Link href={`${isManga ? "/genres/manga" : "/genres/anime"}`}>
+                {isManga ?"Manga Genres":"Anime Genres" }
               </Link>
             </div>
           </motion.div>

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { v4 } from "uuid";
 
@@ -12,14 +13,19 @@ interface IProps {
 }
 
 const TopNav = ({ filter, setFilter }: IProps) => {
+  const router = useRouter();
   const links: Link[] = [
     {
-      name: "All Anime",
-      slug:""
+      name: `${router.pathname === "/top-anime" ? "All anime" : "All manga"}`,
+      slug: "",
     },
     {
-      name: "Top airing",
-      slug: "airing",
+      name: `${
+        router.pathname === "/top-anime" ? "Top airing" : "Top publishing"
+      }`,
+      slug: `${
+        router.pathname === "/top-anime" ? "airing" : "publishing"
+      }`,
     },
     {
       name: "Top upcoming",
@@ -35,7 +41,7 @@ const TopNav = ({ filter, setFilter }: IProps) => {
     },
   ];
   return (
-    <ul className="grid grid-cols-1 xs:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 sm:gap-x-2 gap-y-2 gap-x-1">
+    <ul className="grid grid-cols-1 my-4 xs:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 sm:gap-x-2 gap-y-2 gap-x-1">
       {links.map((link: Link) => (
         <li
           className={`${

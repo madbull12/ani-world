@@ -77,10 +77,10 @@ const TopAnimeRow = ({ item,i,page }: { item: Anime,i:number,page:number }) => {
             {item.type} ({item.episodes} eps)
           </p>
 
-          <p>
+          {/* <p>
             {moment(item.aired.from).format("LL")} -{" "}
             {moment(item.aired.to).format("LL")}
-          </p>
+          </p> */}
           <p>{item.members.toLocaleString()} members</p>
         </div>
       </td>
