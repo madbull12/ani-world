@@ -37,6 +37,7 @@ import {
 } from "chart.js";
 import { Stats } from "../../../interface";
 import { useTheme } from "../../../lib/zustand";
+import Loader from "../../../components/Loader";
 Chart.register(
   ArcElement,
   LineElement,
@@ -137,9 +138,7 @@ const Stats = () => {
           />
         </div>
       ) : (
-        <div className="h-full w-full grid place-items-center">
-          <Jelly color="#007CEF" />
-        </div>
+        <Loader />
       )}
     </div>
   );

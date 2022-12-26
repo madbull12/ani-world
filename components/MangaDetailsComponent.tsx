@@ -22,8 +22,7 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
   const [showSynopsis, setShowSynopsis] = useState(false);
   console.log(manga)
   const tabLinks = [
-    "videos",
-    "episodes",
+  
     "reviews",
     "recommendations",
     "stats",

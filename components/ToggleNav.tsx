@@ -42,7 +42,7 @@ const LinkItem = ({ isManga }: { isManga: boolean }) => {
               stiffness: 150,
             }}
           >
-            <Link href={`${isManga ? "/top-anime" : "/top-manga"}`}>
+            <Link href={`${isManga ? "/top-manga" : "/top-anime"}`}>
               {isManga ? "Top Manga" : "Top Anime"}
             </Link>
             {!isManga ? (

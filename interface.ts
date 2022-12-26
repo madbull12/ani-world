@@ -68,7 +68,11 @@ export interface Stats {
   plan_to_watch: number;
   total: number;
   scores: Score[];
+  reading: number;
+
+  plan_to_read: number;
 }
+
 
 export interface Character {
   character: SingleCharacter;
@@ -197,84 +201,81 @@ export interface IMusicVideo {
 }
 
 export interface ISavedResp {
-    id:string;
-    title: string;
-    imageUrl: string;
-    malId: number;
-
+  id: string;
+  title: string;
+  imageUrl: string;
+  malId: number;
 }
 
 export interface IGenre {
-  name:string;
-  count:number;
-  mal_id:number;
+  name: string;
+  count: number;
+  mal_id: number;
 }
 
-
-
 export interface Manga {
-    mal_id:          number;
-    url:             string;
-    images:          { [key: string]: Image };
-    approved:        boolean;
-    titles:          Title[];
-    title:           string;
-    title_english:   string;
-    title_japanese:  string;
-    type:            string;
-    chapters:        number;
-    volumes:         number;
-    status:          string;
-    publishing:      boolean;
-    published:       Published;
-    score:           number;
-    scored_by:       number;
-    rank:            number;
-    popularity:      number;
-    members:         number;
-    favorites:       number;
-    synopsis:        string;
-    background:      string;
-    authors:         Author[];
-    serializations:  Author[];
-    genres:          Author[];
-    explicit_genres: Author[];
-    themes:          Author[];
-    demographics:    Author[];
+  mal_id: number;
+  url: string;
+  images: { [key: string]: Image };
+  approved: boolean;
+  titles: Title[];
+  title: string;
+  title_english: string;
+  title_japanese: string;
+  type: string;
+  chapters: number;
+  volumes: number;
+  status: string;
+  publishing: boolean;
+  published: Published;
+  score: number;
+  scored_by: number;
+  rank: number;
+  popularity: number;
+  members: number;
+  favorites: number;
+  synopsis: string;
+  background: string;
+  authors: Author[];
+  serializations: Author[];
+  genres: Author[];
+  explicit_genres: Author[];
+  themes: Author[];
+  demographics: Author[];
 }
 
 export interface Author {
-    mal_id: number;
-    type:   string;
-    name:   string;
-    url:    string;
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
 }
 
 export interface Image {
-    image_url:       string;
-    small_image_url: string;
-    large_image_url: string;
+  image_url: string;
+  small_image_url: string;
+  large_image_url: string;
 }
 
 export interface Published {
-    from: string;
-    to:   string;
-    prop: Prop;
+  from: string;
+  to: string;
+  prop: Prop;
 }
 
 export interface Prop {
-    from:   From;
-    to:     From;
-    string: string;
+  from: From;
+  to: From;
+  string: string;
 }
 
 export interface From {
-    day:   number;
-    month: number;
-    year:  number;
+  day: number;
+  month: number;
+  year: number;
 }
 
 export interface Title {
-    type:  string;
-    title: string;
+  type: string;
+  title: string;
 }

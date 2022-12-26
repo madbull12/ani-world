@@ -18,9 +18,16 @@ import useWatchLater from "../hooks/useWatchLater";
 import { Anime, ISavedResp } from "../interface";
 import MotionBtn from "./MotionBtn";
 
-const TopAnimeRow = ({ item,i,page }: { item: Anime,i:number,page:number }) => {
+const TopAnimeRow = ({
+  item,
+  i,
+  page,
+}: {
+  item: Anime;
+  i: number;
+  page: number;
+}) => {
   // const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
-
 
   const {
     handleAddWatchLater,
@@ -51,14 +58,14 @@ const TopAnimeRow = ({ item,i,page }: { item: Anime,i:number,page:number }) => {
   //   setWatchLaterClicked(false);
   //   await deleteWatchLater(addedToWatchLater?.id);
   // };
-
+  const router = useRouter();
   return (
     <tr
       key={uuidv4()}
       className="[&>*]:text-center [&>*]:p-2 [&:nth-child(even)]:bg-blue-50 divide-x"
     >
       <td className="text-gray-400 text-2xl md:text-4xl font-bold">
-        {page >= 2 ?i+1 + 25 * (page-1) : i+1}
+        {page >= 2 ? i + 1 + 25 * (page - 1) : i + 1}
       </td>
       <td className="flex gap-x-2 items-center flex-col xs:flex-row">
         <Image
@@ -68,7 +75,11 @@ const TopAnimeRow = ({ item,i,page }: { item: Anime,i:number,page:number }) => {
           height={80}
         />
         <div className="[&>p]:text-gray-400 [&>p]:text-xs  text-center xs:text-start  ">
-          <Link href={`/anime/${item.mal_id}`}>
+          <Link
+            href={`/${router.pathname === "/top-anime" ? "anime" : "manga"}/${
+              item.mal_id
+            }`}
+          >
             <span className="font-bold text-xs  text-blue-500 cursor-pointer hover:text-blue-400">
               {item.title}
             </span>
@@ -93,10 +104,7 @@ const TopAnimeRow = ({ item,i,page }: { item: Anime,i:number,page:number }) => {
               : "Add to list"
           }
           handleClick={() =>
-               addedToWatchLater
-                ? handleDeleteWatchLater()
-                : handleAddWatchLater()
-           
+            addedToWatchLater ? handleDeleteWatchLater() : handleAddWatchLater()
           }
         />
       </td>

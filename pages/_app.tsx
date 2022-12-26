@@ -30,30 +30,29 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   }
 
   return (
-    <SessionProvider session={session}>
-      <AuthWrapper>
-        <AnimatePresence
-          initial={false}
-          exitBeforeEnter={true}
-          onExitComplete={() => null}
-        >
-          {isOpen && <Search />}
-        </AnimatePresence>
-        <AnimatePresence
-          initial={false}
-          exitBeforeEnter={true}
-          onExitComplete={() => null}
-        >
-          {isToggle && <ToggleNav />}
-        </AnimatePresence>
-
-        <SkeletonTheme baseColor="#EFF6FF" highlightColor="#fff">
-          <Toaster />
-          <Header />
-          <Component {...pageProps} />
-        </SkeletonTheme>
-      </AuthWrapper>
-    </SessionProvider>
+      <SessionProvider session={session}>
+        <AuthWrapper>
+          <AnimatePresence
+            initial={false}
+            exitBeforeEnter={true}
+            onExitComplete={() => null}
+          >
+            {isOpen && <Search />}
+          </AnimatePresence>
+          <AnimatePresence
+            initial={false}
+            exitBeforeEnter={true}
+            onExitComplete={() => null}
+          >
+            {isToggle && <ToggleNav />}
+          </AnimatePresence>
+          <SkeletonTheme baseColor="#EFF6FF" highlightColor="#fff">
+            <Toaster />
+            <Header />
+            <Component {...pageProps} />
+          </SkeletonTheme>
+        </AuthWrapper>
+      </SessionProvider>
   );
 }
 
