@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { signOut, signIn, useSession } from "next-auth/react";
 import { getSeason, themeConverter } from "../helper/functions";
+import Container from "./Container";
 
 const showIn = {
   hidden: {
@@ -100,7 +101,7 @@ const Header = () => {
   return (
     // header component
     <header className={` p-2 md:p-4 text-white bg-blue-500  `}>
-      <div className="max-w-7xl mx-auto">
+      <Container>
         <nav className="flex justify-between items-center">
           <span className="font-bold text-2xl whitespace-nowrap">
             <Link href="/">アニワルド</Link>
@@ -142,7 +143,7 @@ const Header = () => {
             }}
           />
         </nav>
-      </div>
+      </Container>
     </header>
   );
 };

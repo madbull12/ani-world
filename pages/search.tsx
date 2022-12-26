@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import Link from "next/link";
 import ReactPaginate from "react-paginate";
+import Container from "../components/Container";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -21,7 +22,7 @@ const SearchPage = () => {
   const { data: anime }: { data: Anime[] } = animeItem || {};
 
   return (
-    <main className="max-w-7xl mx-auto">
+    <Container>
       <h1 className="text-2xl text-center my-2 font-bold">Search results</h1>
       {anime ? (
         <div className="mt-4 space-y-2 ">
@@ -67,7 +68,7 @@ const SearchPage = () => {
           <Jelly color="#007CEF" />
         </div>
       )}
-    </main>
+    </Container>
   );
 };
 

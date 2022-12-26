@@ -29,68 +29,16 @@ import useSWR from "swr";
 import fetcher from "../helper/fetcher";
 import useWatchLater from "../hooks/useWatchLater";
 import useFavourites from "../hooks/useFavourites";
+import SynopsisModal from "./SynopsisModal";
 
 interface IDetails {
   anime: AnimeDetailsProps;
   children?: React.ReactNode;
 }
 
-const dropIn = {
-  hidden: {
-    y: "-100vh",
-    opacity: 0,
-  },
-  visible: {
-    y: "0",
-    opacity: 1,
-    transition: {
-      duration: 0.1,
-      type: "spring",
-      damping: 25,
-      stiffness: 500,
-    },
-  },
-  exit: {
-    y: "100vh",
-    opacity: 0,
-  },
-};
 
-const Synopsis = ({
-  text,
-  handleClose,
-}: {
-  text: string;
-  handleClose: () => void;
-}) => {
-  const { setScroll } = useSetBodyScroll();
-  const { theme } = useTheme();
 
-  return (
-    <BackdropModal
-      onClick={() => {
-        handleClose();
-        setScroll();
-      }}
-    >
-      <motion.div
-        className={`bg-${theme}-500 text-white p-4  relative max-w-[500px] mx-auto rounded-lg`}
-        onClick={(e) => e.stopPropagation()}
-        variants={dropIn}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        <h1 className="font-bold text-2xl">Synopsis</h1>
-        <p className="text-xs xs:text-sm md:text-base">{text}</p>
-        <IoClose
-          className="text-2xl absolute top-2 right-2 cursor-pointer"
-          onClick={handleClose}
-        />
-      </motion.div>
-    </BackdropModal>
-  );
-};
+
 
 const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   const matches = useMediaQuery("(min-width: 768px)");
@@ -177,7 +125,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
             onExitComplete={() => null}
           >
             {showSynopsis && (
-              <Synopsis text={anime.synopsis} handleClose={handleClose} />
+              <SynopsisModal text={anime.synopsis} handleClose={handleClose} />
             )}
           </AnimatePresence>
 
@@ -295,7 +243,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                 {anime.synopsis}
               </p>
             </div>
-            <div className="p-8 flex gap-x-4 mt-44 sm:mt-72  lg:mt-20">
+            <div className="p-8 items-center flex gap-x-4  mt-44 sm:mt-72  lg:mt-20">
               <div className="text-white bg-[#FF9901] rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
                 <span className="font-bold text-[8px]  text-xs hidden md:block">
                   SCORE
