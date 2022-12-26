@@ -4,6 +4,7 @@ import React from "react";
 import useSWR from "swr";
 import { v4 as uuidv4 } from "uuid";
 import AnimeDetailsComponent from "../../../components/AnimeDetailsComponent";
+import Container from "../../../components/Container";
 import fetcher from "../../../helper/fetcher";
 
 const EpisodePage = () => {
@@ -24,7 +25,7 @@ const EpisodePage = () => {
   return (
     <div>
       <AnimeDetailsComponent anime={anime} />
-      <div>
+      <Container>
         {videos ? (
           <>
             {videos?.episodes.length === 0 ? (
@@ -49,10 +50,10 @@ const EpisodePage = () => {
                         className="rounded-lg"
                       />
                       <div>
-                        <h1 className="font-bold text-lg">
+                        <h1 className="font-bold text-base sm:text-lg">
                           {_episode.episode}
                         </h1>
-                        <p>{_episode.title}</p>
+                        <p className="text-xs sm:text-sm">{_episode.title}</p>
                       </div>
                     </div>
                   ))}
@@ -63,7 +64,7 @@ const EpisodePage = () => {
         ) : (
           <p>Theres an error</p>
         )}
-      </div>
+      </Container>
     </div>
   );
 };

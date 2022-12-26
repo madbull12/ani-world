@@ -57,8 +57,11 @@ const VideoPage = () => {
           <h1 className="text-2xl font-bold">Trailers</h1>
           <div className="grid lg:grid-cols-4 xl:grid-cols-5 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
             {videos?.promo.map((promo: IPromo) => (
-              <div className="w-56 h-44 "  key={v4()}>
-                <iframe src={promo.trailer.embed_url} className="w-full h-full"></iframe>
+              <div className="w-56 h-44 " key={v4()}>
+                <iframe
+                  src={promo.trailer.embed_url}
+                  className="w-full h-full"
+                ></iframe>
               </div>
             ))}
           </div>
@@ -68,7 +71,12 @@ const VideoPage = () => {
           <h1 className="text-2xl font-bold">Music Videos</h1>
           <div className="grid-cols-1 grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {videos?.music_videos.map((video: IMusicVideo) => (
-              <ReactPlayer url={video?.video.url} key={v4()} />
+              <div className="w-56 h-44 " key={v4()}>
+                <iframe
+                  src={video.video.embed_url}
+                  className="w-full h-full"
+                ></iframe>
+              </div>
             ))}
           </div>
         </div>

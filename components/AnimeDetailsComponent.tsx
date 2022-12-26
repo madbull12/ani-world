@@ -87,7 +87,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   } = useFavourites(anime);
 
   return (
-    <div>
+    <div >
       {anime && (
         <div>
           <AnimatePresence
@@ -110,7 +110,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               />
             </div>
 
-            <div className="absolute  z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
+            <div className="absolute  z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-4 sm:px-6 md:px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
               <div className="relative w-1/2 h-44 sm:w-[220px] sm:h-[300px]">
                 <Image
                   alt={anime.title}
@@ -214,8 +214,8 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                 {anime.synopsis}
               </p>
             </div>
-            <div className="p-8 items-center flex gap-x-4  mt-44 sm:mt-72  lg:mt-20">
-              <div className="text-white bg-[#FF9901] rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
+            <div className="p-4 md:p-8 items-center flex gap-x-4  mt-44 sm:mt-72  lg:mt-20">
+              <div className="text-white bg-[#FF9901]  rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
                 <span className="font-bold text-[8px]  text-xs hidden md:block">
                   SCORE
                 </span>
@@ -226,7 +226,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   {anime.scored_by?.toLocaleString() || "N/A"} users
                 </span>
               </div>
-              <div className="rounded-lg border-2 border-gray-700 p-3 space-y-2 flex flex-col text-xs xs:text-sm md:text-base ">
+              <div className="rounded-lg border-2 border-gray-700 p-3 flex-[1] space-y-2 flex flex-col text-xs xs:text-sm md:text-base ">
                 <div className="space-x-4">
                   <span className="font-semibold">
                     Type: <span className="font-normal">{anime.type}</span>
