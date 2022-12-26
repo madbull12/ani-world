@@ -1,10 +1,12 @@
 import Image from "next/legacy/image";
+import { useRouter } from "next/router";
 import React from "react";
 import { v4 } from "uuid";
 import { Character } from "../interface";
 import VoiceActorComponent from "./VoiceActorComponent";
 
-const CharacterComponent = ({ character }:{ character:Character }) => {
+const CharacterComponent = ({ character }: { character: Character }) => {
+  const router = useRouter();
   return (
     <div className="flex gap-x-2  py-2 justify-between">
       <div className="flex gap-x-2 self-start ">
@@ -23,11 +25,13 @@ const CharacterComponent = ({ character }:{ character:Character }) => {
           <p className=" text-gray-500">{character?.role}</p>
         </div>
       </div>
-      <div className="space-y-4">
-        {character?.voice_actors.map((voice_actor) => (
-         <VoiceActorComponent key={v4()} voice_actor={voice_actor} />
-        ))}
-      </div>
+      {router.pathname.includes("/anime") ? (
+        <div className="space-y-4">
+          {character?.voice_actors.map((voice_actor) => (
+            <VoiceActorComponent key={v4()} voice_actor={voice_actor} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

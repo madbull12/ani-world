@@ -20,6 +20,7 @@ import { useSetBodyScroll, useTheme } from "../lib/zustand";
 import {
   addToFavourite,
   addToWatchLater,
+  convertToDate,
   deleteFavourite,
   deleteWatchLater,
 } from "../helper/functions";
@@ -61,37 +62,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   const { animeId } = router.query;
   const [showSynopsis, setShowSynopsis] = useState(false);
 
-  const convertToDate = (x: string) => {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const date = new Date(x);
 
-    const year = date.getFullYear();
-    let dt: string | number = date.getDate();
-    let month = monthNames[date.getMonth()];
-
-    if (dt < 10) {
-      dt = "0" + dt;
-    }
-
-    if (!x) {
-      return "N/A";
-    }
-
-    return `${dt} ${month}, ${year}`;
-  };
 
   const handleClose = () => {
     setShowSynopsis(false);

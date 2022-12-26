@@ -16,10 +16,11 @@ import { useRouter } from 'next/router';
 
 interface IProps {
     manga:Manga;
-    children:React.ReactNode
+    children?:React.ReactNode
 }
 const MangaDetailsComponent = ({ manga,children }:IProps) => {
   const [showSynopsis, setShowSynopsis] = useState(false);
+  console.log(manga)
   const tabLinks = [
     "videos",
     "episodes",
@@ -58,7 +59,7 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
           <div className="w-full h-96 hidden md:block">
             <Image
               alt={manga.title}
-              src={manga.images.jpg.large_image_url}
+              src={manga.images.jpg.image_url}
               layout="fill"
               objectFit="cover"
             />

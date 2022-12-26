@@ -1,17 +1,10 @@
-import { Jelly } from "@uiball/loaders";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import useSWR from "swr";
 import AnimeDetailsComponent from "../../../components/AnimeDetailsComponent";
 import { Character, Staff } from "../../../interface";
-import { v4 as uuidv4 } from "uuid";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import MotionBtn from "../../../components/MotionBtn";
-import { useTheme } from "../../../lib/zustand";
 import Loader from "../../../components/Loader";
 import fetcher from "../../../helper/fetcher";
-import CharacterComponent from "../../../components/CharacterComponent";
 import CharactersList from "../../../components/CharactersList";
 import StaffList from "../../../components/StaffList";
 
