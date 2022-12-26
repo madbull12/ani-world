@@ -11,6 +11,9 @@ export interface Anime {
   status: string;
   airing: boolean;
   aired: Aired;
+  published:Aired;
+  volumes:number;
+  chapters:number
   duration: string;
   rating: string;
   score: number;
