@@ -88,7 +88,7 @@ interface SingleCharacter {
   name: string;
 }
 
-interface VoiceActor {
+export interface VoiceActor {
   person: SingleCharacter;
   language: string;
 }

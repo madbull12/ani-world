@@ -145,6 +145,38 @@ export const themeConverter = (theme: string, isBg: boolean, shade: string) => {
       break;
   }
 };
+export const convertToDate = (x: string) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const date = new Date(x);
+
+  const year = date.getFullYear();
+  let dt: string | number = date.getDate();
+  let month = monthNames[date.getMonth()];
+
+  if (dt < 10) {
+    dt = "0" + dt;
+  }
+
+  if (!x) {
+    return "N/A";
+  }
+
+  return `${dt} ${month}, ${year}`;
+};
+
 
 export const getSeason = (month:number) => {
   if (month >= 3 && month <= 5) {

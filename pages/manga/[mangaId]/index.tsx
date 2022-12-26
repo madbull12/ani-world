@@ -13,7 +13,6 @@ const MangaDetailsPage = () => {
     `https://api.jikan.moe/v4/manga/${mangaId}`,
     fetcher
   );
-  console.log(manga.data);
   return (
     <main className="">
       <MangaDetailsComponent manga={manga?.data}>

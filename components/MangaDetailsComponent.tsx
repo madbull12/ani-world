@@ -10,6 +10,8 @@ import { IoAddCircleOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
 import Backdrop from './Backdrop';
 import { v4 } from 'uuid';
 import { useSetBodyScroll } from '../lib/zustand';
+import { convertToDate } from '../helper/functions';
+import { useRouter } from 'next/router';
 
 
 interface IProps {
@@ -18,6 +20,18 @@ interface IProps {
 }
 const MangaDetailsComponent = ({ manga,children }:IProps) => {
   const [showSynopsis, setShowSynopsis] = useState(false);
+  const tabLinks = [
+    "videos",
+    "episodes",
+    "reviews",
+    "recommendations",
+    "stats",
+    "characters",
+  ];
+  const [_link, setLink] = useState("videos");
+
+  const router = useRouter();
+  const { mangaId } = router.query
   const { unsetScroll } = useSetBodyScroll();
 
   const scrollToTop = () => {
@@ -190,13 +204,13 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
                 </span>
               </div>
               <div className="space-x-4">
-                {/* <span className="font-semibold">
-                  Aired:{" "}
+                <span className="font-semibold">
+                  Published:{" "}
                   <span className="font-normal">
-                    from {convertToDate(anime.aired.from)} to{" "}
-                    {convertToDate(anime.aired.to)}{" "}
+                    from {convertToDate(manga.published.from)} to{" "}
+                    {convertToDate(manga.published.to)}{" "}
                   </span>
-                </span> */}
+                </span>
                 {/* <span className="font-semibold">
                   <span className="font-normal">
                     Broadcast: {anime.broadcast.string}
@@ -226,19 +240,19 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
             </div>
           </div>
         </section>
-        {/* <section className="bg-white p-8 max-7xl mx-auto">
+        <section className="bg-white p-8 max-7xl mx-auto">
           <nav>
             <ul className="flex justify-between flex-wrap gap-2">
               {tabLinks.map((link, i) => (
                 <Link
-                  href={`/anime/${animeId}/${link}`}
-                  key={uuidv4()}
+                  href={`/manga/${mangaId}/${link}`}
+                  key={v4()}
                   scroll={false}
                 >
                   <li
                     className={`font-bold pb-2 uppercase text-xs xs:text-sm cursor-pointer ${
                       router.pathname.includes(link)
-                        ? `border-b-4 border-${theme}-500`
+                        ? `border-b-4 border-blue-500`
                         : ""
                     }`}
                     onClick={() => setLink(link)}
@@ -250,7 +264,7 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
             </ul>
           </nav>
           {children}
-        </section> */}
+        </section>
       </div>
     )}
   </div>
