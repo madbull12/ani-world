@@ -25,7 +25,7 @@ const CharacterComponent = ({ character }:{ character:Character }) => {
       </div>
       <div className="space-y-4">
         {character?.voice_actors.map((voice_actor) => (
-         <VoiceActorComponent voice_actor={voice_actor} />
+         <VoiceActorComponent key={v4()} voice_actor={voice_actor} />
         ))}
       </div>
     </div>
