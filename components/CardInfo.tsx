@@ -30,7 +30,7 @@ const CardInfo = ({ anime }: IProps) => {
   return (
     <article className="border p-2">
       <p className="text-sm md:text-base h-[80px] grid place-items-center py-2 cursor-pointer text-blue-500 hover:text-blue-400 font-bold text-center ">
-        <Link href={`${router.pathname.includes("/anime") ? `/anime/${anime.mal_id}/videos` : `/manga/${anime.mal_id}`}/characters`}>{anime.title}</Link>
+        <Link href={`${router.pathname.includes("/anime") ? `/anime/${anime.mal_id}` : `/manga/${anime.mal_id}`}/characters`}>{anime.title}</Link>
       </p>
 
       <div className="bg-blue-50 p-2 flex items-center gap-x-3 sm:gap-x-4 md:gap-x-8 ">
