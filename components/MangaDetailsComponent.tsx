@@ -184,7 +184,7 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
             </p>
           </div>
           <div className="p-8 flex gap-x-4 mt-44 sm:mt-72  lg:mt-20">
-            <div className="text-white bg-[#FF9901] rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
+            <div className="text-white bg-[#FF9901]  rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
               <span className="font-bold text-[8px]  text-xs hidden md:block">
                 SCORE
               </span>
@@ -195,7 +195,7 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
                 {manga.scored_by?.toLocaleString() || "N/A"} users
               </span>
             </div>
-            <div className="rounded-lg border-2 border-gray-700 p-3 space-y-2 flex flex-col text-xs xs:text-sm md:text-base ">
+            <div className="rounded-lg border-2 flex-[1] border-gray-700 p-3 space-y-2 flex flex-col text-xs xs:text-sm md:text-base ">
               <div className="space-x-4">
                 <span className="font-semibold">
                   Type: <span className="font-normal">{manga.type}</span>
