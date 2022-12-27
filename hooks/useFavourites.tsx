@@ -23,7 +23,7 @@ const useFavourites = (anime: Anime) => {
   const { data: favourites } = useSWR(`/api/favorite`, fetcher);
 
   const addedToFavourites = favourites?.find(
-    (favourite: ISavedResp) => favourite.malId === anime.mal_id
+    (favourite: ISavedResp) => favourite.malId === anime?.mal_id
   );
 
   const handleAddFavourite = async () => {

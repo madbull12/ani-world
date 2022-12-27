@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Anime, Recommendation } from "../interface";
 import { useTheme } from "../lib/zustand";
@@ -11,8 +12,9 @@ interface IProps {
 const Poster = ({ anime }: IProps) => {
   const [showTitle, setShowTitle] = useState<boolean>(false);
   const { theme } = useTheme();
+  const router = useRouter()
   return (
-    <Link href={`/anime/${anime.mal_id}`}>
+    <Link href={`${router.pathname.includes("/manga") ?`/manga/${anime.mal_id}/characters` : `/anime/${anime.mal_id}/videos` }`}>
       <article
         className="cursor-pointer relative group overflow-hidden h-full "
         onMouseEnter={() => setShowTitle(true)}

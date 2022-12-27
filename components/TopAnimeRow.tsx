@@ -78,7 +78,7 @@ const TopAnimeRow = ({
           <Link
             href={`/${router.pathname === "/top-anime" ? "anime" : "manga"}/${
               item.mal_id
-            }`}
+            }/characters`}
           >
             <span className="font-bold text-xs  text-blue-500 cursor-pointer hover:text-blue-400">
               {item.title}

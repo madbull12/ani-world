@@ -22,7 +22,7 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
   } = useFavourites(anime);
 
   return (
-    <Link key={v4()} href={`/anime/${anime.mal_id}`}>
+    <Link key={v4()} href={`/anime/${anime.mal_id}/videos`}>
       <div className="flex gap-x-2 cursor-pointer mb-4 ">
         <span className="font-bold text-2xl text-gray-500">{i + 1}</span>
         <Image
