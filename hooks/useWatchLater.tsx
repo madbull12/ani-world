@@ -6,7 +6,6 @@ import fetcher from "../helper/fetcher";
 import { addToWatchLater, deleteWatchLater } from "../helper/functions";
 import { Anime, ISavedResp } from "../interface";
 
-const animeTypes = ["tv", "movie", "ova", "special", "ona", "music"];
 
 const useWatchLater = (anime: Anime) => {
   const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);

@@ -49,3 +49,15 @@ export const getAnimeNews = async() => {
         console.log(err)
     }
 }
+
+export const animeTypes = ["tv", "movie", "ova", "special", "ona", "music"];
+
+export const bookTypes = [
+  "manga",
+  "novel",
+  "lightnovel",
+  "oneshot",
+  "doujin",
+  "manhwa",
+  "manhua",
+];

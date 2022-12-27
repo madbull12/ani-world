@@ -208,6 +208,7 @@ export interface ISavedResp {
   title: string;
   imageUrl: string;
   malId: number;
+  type:string;
 }
 
 export interface IGenre {

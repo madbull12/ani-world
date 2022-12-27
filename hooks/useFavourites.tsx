@@ -10,18 +10,9 @@ import {
   deleteWatchLater,
 } from "../helper/functions";
 import { Anime, ISavedResp } from "../interface";
+import { animeTypes } from "../pages/api/anime";
 
-const animeTypes = ["tv", "movie", "ova", "special", "ona", "music"];
 
-const bookTypes = [
-  "manga",
-  "novel",
-  "lightnovel",
-  "oneshot",
-  "doujin",
-  "manhwa",
-  "manhua",
-];
 
 const useFavourites = (anime: Anime) => {
   const router = useRouter();
@@ -37,7 +28,6 @@ const useFavourites = (anime: Anime) => {
 
   const handleAddFavourite = async () => {
     if (status === "authenticated") {
-      console.log(animeTypes.includes(anime?.type));
 
       await addToFavourite(
         anime.title,
