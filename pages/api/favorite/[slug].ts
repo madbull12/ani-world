@@ -9,7 +9,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
     console.log(session);
 
      if(req.method==="DELETE"){
-        const anime = await prisma.favouriteAnime.delete({
+        const anime = await prisma.favourite.delete({
             where:{
                 id:animeId as string
             }

@@ -12,14 +12,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { title, imageUrl, malId } = req.body;
+  const { title, imageUrl, malId,isAnime } = req.body;
   const session: any = await unstable_getServerSession(req, res, authOptions);
 
   console.log(session);
   if (req.method === "POST") {
     try {
-      await prisma.favouriteAnime.create({
+      await prisma.favourite.create({
         data: {
+              isAnime:isAnime as boolean,
               title: title as string,
               imageUrl: imageUrl as string,
               malId: malId as number,
@@ -40,7 +41,7 @@ export default async function handler(
   }
   if (req.method === "GET") {
     try {
-      const data = await prisma.favouriteAnime.findMany({
+      const data = await prisma.favourite.findMany({
         where: {
             userId: session?.user?.id as string,
           },

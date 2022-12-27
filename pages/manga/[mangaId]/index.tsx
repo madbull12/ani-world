@@ -15,9 +15,7 @@ const MangaDetailsPage = () => {
   );
   return (
     <main className="">
-      <MangaDetailsComponent manga={manga?.data}>
-        <h1>fdd</h1>
-      </MangaDetailsComponent>
+      <MangaDetailsComponent manga={manga?.data} />
     </main>
   );
 };

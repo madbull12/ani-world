@@ -6,6 +6,9 @@ import fetcher from "../helper/fetcher";
 import { addToWatchLater, deleteWatchLater } from "../helper/functions";
 import { Anime, ISavedResp } from "../interface";
 
+const animeTypes = ["tv", "movie", "ova", "special", "ona", "music"];
+
+
 const useWatchLater = (anime:Anime) => {
     const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
     const router = useRouter();
@@ -15,15 +18,15 @@ const useWatchLater = (anime:Anime) => {
     const { status } = useSession();
     const [watchLaterClicked, setWatchLaterClicked] = useState<boolean>(false);
   
-    const handleAddWatchLater =  useCallback(()=>{
+    const handleAddWatchLater =  async()=>{
         if(status==="authenticated") {
             setWatchLaterClicked(true);
-             addToWatchLater(anime.title, anime.images.jpg.image_url, anime.mal_id);
+             addToWatchLater(anime.title, anime.images.jpg.image_url, anime.mal_id,animeTypes.includes(anime.type));
             router.push("/user/watchLater", undefined, { shallow: true });
         } else {
             signIn("google")
         }
-    },[])
+    }
   
     const handleDeleteWatchLater = async () => {
         if(status==="authenticated") {

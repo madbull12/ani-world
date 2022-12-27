@@ -44,6 +44,7 @@ interface IDetails {
 const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   const matches = useMediaQuery("(min-width: 768px)");
 
+  console.log(anime)
   const tabLinks = [
     "videos",
     "episodes",

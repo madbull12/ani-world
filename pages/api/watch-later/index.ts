@@ -12,7 +12,7 @@ import {
     req: NextApiRequest,
     res: NextApiResponse
   ) {
-    const { title, imageUrl, malId } = req.body;
+    const { title, imageUrl, malId,isAnime } = req.body;
     const session: any = await unstable_getServerSession(req, res, authOptions);
   
     console.log(session);
@@ -20,6 +20,7 @@ import {
       try {
         await prisma.watchLater.create({
           data: {
+                isAnime:isAnime as boolean,
                 title: title as string,
                 imageUrl: imageUrl as string,
                 malId: malId as number,

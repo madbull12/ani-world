@@ -2,16 +2,18 @@ import { AnimatePresence } from 'framer-motion';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import React,{ useState } from 'react'
-import { Author, Genre, IGenre, Manga } from '../interface'
+import { Anime, Author, Genre, IGenre, Manga } from '../interface'
 import MotionBtn from './MotionBtn';
 import SynopsisModal from './SynopsisModal';
 import { motion } from 'framer-motion';
-import { IoAddCircleOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
+import { IoAddCircleOutline, IoCheckmarkCircleOutline, IoHeartCircle, IoHeartCircleOutline } from 'react-icons/io5';
 import Backdrop from './Backdrop';
 import { v4 } from 'uuid';
 import { useSetBodyScroll } from '../lib/zustand';
 import { convertToDate } from '../helper/functions';
 import { useRouter } from 'next/router';
+import useWatchLater from '../hooks/useWatchLater';
+import useFavourites from '../hooks/useFavourites';
 
 
 interface IProps {
@@ -20,6 +22,19 @@ interface IProps {
 }
 const MangaDetailsComponent = ({ manga,children }:IProps) => {
   const [showSynopsis, setShowSynopsis] = useState(false);
+  const {
+    handleAddWatchLater,
+    watchLaterClicked,
+    addedToWatchLater,
+    handleDeleteWatchLater,
+  } = useWatchLater(manga as any);
+
+  const {
+    handleDeleteFavourite,
+    handleAddFavourite,
+    addedToFavourites,
+    favorited,
+  } = useFavourites(manga as any);
   console.log(manga)
   const tabLinks = [
   
@@ -87,7 +102,7 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
                 </p>
               </div>
             </div>
-            {/* <div className=" md:pt-12 md:ml-auto text-white text-4xl flex self-start">
+            <div className=" md:pt-12 md:ml-auto text-white text-4xl flex self-start">
               <motion.button
                 onClick={() => {
                   addedToWatchLater
@@ -118,7 +133,7 @@ const MangaDetailsComponent = ({ manga,children }:IProps) => {
                   <IoHeartCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
                 )}
               </motion.button>
-            </div> */}
+            </div>
           </div>
           <Backdrop color="#1085f1" />
         </div>

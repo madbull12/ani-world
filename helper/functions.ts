@@ -27,12 +27,14 @@ import toast from "react-hot-toast";
 export const addToFavourite = async (
   title: string,
   imageUrl: string,
-  malId: number
+  malId: number,
+  isAnime:boolean
 ) => {
   const data = {
     title,
     imageUrl,
     malId,
+    isAnime
   };
 
   try {
@@ -99,11 +101,13 @@ export const deleteFavourite = async (id: string) => {
 export const addToWatchLater = async (
   title: string,
   imageUrl: string,
-  malId: number
+  malId: number,
+  isAnime:boolean
 ) => {
   const data = {
     title,
     imageUrl,
+    isAnime,
     malId,
   };
 

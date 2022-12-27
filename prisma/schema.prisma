@@ -10,9 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
-model FavouriteAnime {
+model Favourite {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   malId     Int
@@ -20,7 +18,7 @@ model FavouriteAnime {
   imageUrl  String
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-
+  isAnime   Boolean
   @@unique([malId, userId])
 }
 
@@ -32,6 +30,7 @@ model WatchLater {
   imageUrl  String
   userId    String
   user      User     @relation(fields: [userId], references: [id])
+  isAnime   Boolean
 
   @@unique([malId, userId])
 }
@@ -64,15 +63,15 @@ model Session {
 }
 
 model User {
-  id             String           @id @default(cuid())
-  name           String?
-  email          String?          @unique
-  emailVerified  DateTime?
-  image          String?
-  accounts       Account[]
-  sessions       Session[]
-  watchLater     WatchLater[]
-  favouriteAnime FavouriteAnime[]
+  id            String       @id @default(cuid())
+  name          String?
+  email         String?      @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  watchLater    WatchLater[]
+  favourites    Favourite[]
 }
 
 model VerificationToken {
