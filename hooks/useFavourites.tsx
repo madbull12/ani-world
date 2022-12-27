@@ -37,11 +37,13 @@ const useFavourites = (anime: Anime) => {
 
   const handleAddFavourite = async () => {
     if (status === "authenticated") {
+      console.log(animeTypes.includes(anime?.type));
+
       await addToFavourite(
         anime.title,
         anime.images.jpg.image_url,
         anime.mal_id,
-        animeTypes.includes(anime.type)
+        anime.type
       );
       router.push("/user/favourites", undefined, { shallow: true });
     } else {

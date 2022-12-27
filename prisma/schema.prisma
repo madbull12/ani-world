@@ -18,7 +18,8 @@ model Favourite {
   imageUrl  String
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  isAnime   Boolean
+  type      String
+
   @@unique([malId, userId])
 }
 
@@ -30,7 +31,7 @@ model WatchLater {
   imageUrl  String
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  isAnime   Boolean
+  type      String
 
   @@unique([malId, userId])
 }

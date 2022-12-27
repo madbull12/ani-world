@@ -28,13 +28,13 @@ export const addToFavourite = async (
   title: string,
   imageUrl: string,
   malId: number,
-  isAnime:boolean
+  type:string
 ) => {
   const data = {
     title,
     imageUrl,
     malId,
-    isAnime
+    type
   };
 
   try {
@@ -102,12 +102,12 @@ export const addToWatchLater = async (
   title: string,
   imageUrl: string,
   malId: number,
-  isAnime:boolean
+  type:string
 ) => {
   const data = {
     title,
     imageUrl,
-    isAnime,
+    type,
     malId,
   };
 
