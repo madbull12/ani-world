@@ -7,11 +7,8 @@ import { AnimeDetailsProps, ISavedResp } from "../interface";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import truncate from "../helper/truncate";
-import { addToWatchLater, deleteWatchLater } from "../helper/functions";
 import { useRouter } from "next/router";
-import useSWR from "swr";
-import fetcher from "../helper/fetcher";
-import { signIn, useSession } from "next-auth/react";
+
 import useWatchLater from "../hooks/useWatchLater";
 
 interface IProps {
@@ -30,17 +27,29 @@ const CardInfo = ({ anime }: IProps) => {
   return (
     <article className="border p-2">
       <p className="text-sm md:text-base h-[80px] grid place-items-center py-2 cursor-pointer text-blue-500 hover:text-blue-400 font-bold text-center ">
-        <Link href={`${router.pathname.includes("/anime") ? `/anime/${anime.mal_id}` : `/manga/${anime.mal_id}`}/characters`}>{anime.title}</Link>
+        <Link
+          href={`${
+            router.pathname.includes("/anime")
+              ? `/anime/${anime.mal_id}`
+              : `/manga/${anime.mal_id}`
+          }/characters`}
+        >
+          {anime.title}
+        </Link>
       </p>
 
       <div className="bg-blue-50 p-2 flex items-center gap-x-3 sm:gap-x-4 md:gap-x-8 ">
-        {router.pathname.includes("/manga")?(
+        {router.pathname.includes("/manga") ? (
           <div className="flex justify-center w-full gap-x-2 text-[10px] font-semibold sm:text-xs items-center text-gray-400 ">
-            <p>{anime.type}, {anime.published.prop.from.year}</p>
+            <p>
+              {anime.type}, {anime.published.prop.from.year}
+            </p>
             <p>{anime.status}</p>
-            <p>{anime.volumes ?? "?"} vols, {anime.chapters ?? "?"} chp</p>
+            <p>
+              {anime.volumes ?? "?"} vols, {anime.chapters ?? "?"} chp
+            </p>
           </div>
-        ):null}
+        ) : null}
         {router.pathname.includes("/anime") ? (
           <div className="w-6 text-white xs:text-sm text-xs h-6 rounded-full bg-blue-500 grid place-items-center">
             <a
@@ -62,7 +71,7 @@ const CardInfo = ({ anime }: IProps) => {
         ) : null}
       </div>
       <div className="bg-blue-100 text-blue-500 justify-center p-2 flex gap-x-2 text-xs">
-        {anime.genres.slice(0,3).map((genre) => (
+        {anime.genres.slice(0, 3).map((genre) => (
           <p key={uuidv4()} className="cursor-pointer hover:text-blue-400">
             {genre.name}
           </p>

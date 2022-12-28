@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface IProps {
   children: ReactNode;

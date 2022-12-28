@@ -1,5 +1,4 @@
-import React, { ReactNode } from "react";
-import { motion } from "framer-motion";
+import Reac from "react";
 import { useTheme } from "../lib/zustand";
 
 const Backdrop = ({ color }: { color?: string }) => {

@@ -1,33 +1,21 @@
-import Image from "next/image";
-import React, { FC, useEffect, useState } from "react";
+import Image from "next/legacy/image";
+import React, {  useState } from "react";
 import {
   IoAddCircleOutline,
-  IoClose,
   IoHeartCircleOutline,
-  IoTimeSharp,
   IoCheckmarkCircleOutline,
   IoHeartCircle,
 } from "react-icons/io5";
-import { Anime, AnimeDetailsProps, Genre, ISavedResp } from "../interface";
+import { AnimeDetailsProps, Genre } from "../interface";
 import Backdrop from "./Backdrop";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import MotionBtn from "./MotionBtn";
-import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme } from "../lib/zustand";
-import {
-  addToFavourite,
-  addToWatchLater,
-  convertToDate,
-  deleteFavourite,
-  deleteWatchLater,
-} from "../helper/functions";
-import { signIn, useSession } from "next-auth/react";
-import useMediaQuery from "../hooks/useMediaQuery";
-import useSWR from "swr";
-import fetcher from "../helper/fetcher";
+import { convertToDate } from "../helper/functions";
+
 import useWatchLater from "../hooks/useWatchLater";
 import useFavourites from "../hooks/useFavourites";
 import SynopsisModal from "./SynopsisModal";
@@ -37,14 +25,8 @@ interface IDetails {
   children?: React.ReactNode;
 }
 
-
-
-
-
 const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
-  const matches = useMediaQuery("(min-width: 768px)");
-
-  console.log(anime)
+  console.log(anime);
   const tabLinks = [
     "videos",
     "episodes",
@@ -57,13 +39,10 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   const { theme } = useTheme();
 
   // const { user } = useUser();
-  const { data: session, status } = useSession();
   const [_link, setLink] = useState("videos");
   const router = useRouter();
   const { animeId } = router.query;
   const [showSynopsis, setShowSynopsis] = useState(false);
-
-
 
   const handleClose = () => {
     setShowSynopsis(false);
@@ -88,7 +67,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
   } = useFavourites(anime);
 
   return (
-    <div >
+    <div>
       {anime && (
         <div>
           <AnimatePresence

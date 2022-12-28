@@ -4,8 +4,9 @@ import useSWR from "swr";
 import CharactersList from "../../../components/CharactersList";
 import Loader from "../../../components/Loader";
 import MangaDetailsComponent from "../../../components/MangaDetailsComponent";
+import StaffList from "../../../components/StaffList";
 import fetcher from "../../../helper/fetcher";
-import { Character, Manga } from "../../../interface";
+import { Character, Manga, Staff } from "../../../interface";
 
 const MangaCharacter = () => {
   const { mangaId } = useRouter().query;
@@ -17,6 +18,9 @@ const MangaCharacter = () => {
     `https://api.jikan.moe/v4/manga/${mangaId}/characters`,
     fetcher
   );
+
+
+
 
   console.log(mangaCharacters);
   return (
