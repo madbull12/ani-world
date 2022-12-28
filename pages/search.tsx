@@ -41,7 +41,7 @@ const SearchPage = () => {
                   />
                   <div>
                     <span className="mb-3 text-blue-600 items-center gap-x-2 font-bold text-sm md:text-base flex">
-                      <Link href={`/${cat}/${item.mal_id}`}>{item.title}</Link>
+                      <Link href={`/${cat}/${item.mal_id}/characters`}>{item.title}</Link>
                       <span className="font-normal text-sm cursor-pointer">
                         add
                       </span>
