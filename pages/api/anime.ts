@@ -19,6 +19,15 @@ export const getSeasonYearAnime = async(year:number,season:string) => {
         console.log(err)
     }
 }
+export const getTopFavoritedAnime = async() => {
+    try {
+        const res = await fetch(`${API_ENDPOINT}top/anime?filter=favorite`);
+        const data = await res.json();
+        return data?.data;
+    } catch(err) {
+        console.log(err)
+    }
+}
 
 export const getSeasonUpcomingAnime = async() => {
     try {

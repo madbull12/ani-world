@@ -10,6 +10,7 @@ import {
   getSeasonNowAnime,
   getSeasonUpcomingAnime,
   getSeasonYearAnime,
+  getTopFavoritedAnime,
 } from "./api/anime";
 
 const Home = ({ seasonsNow, seasonYear, seasonsUpcoming }: IMain) => {
@@ -45,7 +46,7 @@ const Home = ({ seasonsNow, seasonYear, seasonsUpcoming }: IMain) => {
 export const getStaticProps = async () => {
   const [seasonsNow, seasonYear, seasonsUpcoming] = [
     await getSeasonNowAnime(),
-    await getSeasonYearAnime(2023, "winter"),
+    await getTopFavoritedAnime(),
     await getSeasonUpcomingAnime(),
   ];
 

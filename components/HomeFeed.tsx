@@ -16,7 +16,7 @@ const HomeFeed = ({ seasonsNow, seasonYear, seasonsUpcoming }: IMain) => {
         />
         <Row
           items={seasonYear}
-          title={`${seasonYear[0]?.season}, ${seasonYear[0]?.year}`}
+          title={`Top Anime`}
         />
         <Row items={seasonsUpcoming} title="Upcoming Season" />
         {/* <NewsRow /> */}

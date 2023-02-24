@@ -12,7 +12,7 @@ import { Anime, ISavedResp } from "../interface";
 
 const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
   const router = useRouter();
-
+  const { status } = useSession()
 
   const {
     handleDeleteFavourite,
@@ -45,12 +45,19 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
         </div>
         <button
           className={`self-start justify-self-end ml-auto  font-semibold text-blue-500`}
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
-               addedToFavourites ? handleDeleteFavourite() : handleAddFavourite()
+            e.preventDefault()
+            addedToFavourites ? handleDeleteFavourite() : handleAddFavourite()
           }}
         >
+          {status==="authenticated" ? (
+            <>
           {(addedToFavourites || favorited) ? "added" : "add"}
+
+            </>
+          ):"add"}
         </button>
       </div>
     </Link>
