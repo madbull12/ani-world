@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IoMenu, IoSearchCircle } from "react-icons/io5";
+import { IoMenu, IoSearch, IoSearchCircle } from "react-icons/io5";
 import {
   useSearch,
   useSetBodyScroll,
@@ -46,7 +46,9 @@ const LinkItem = ({ title, isManga }: ILink) => {
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <li className="cursor-pointer capitalize">{title}</li>
+      <li className="cursor-pointer text-sm tracking-wide uppercase font-thin">
+        {title}
+      </li>
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}
@@ -100,29 +102,44 @@ const Header = () => {
 
   return (
     // header component
-    <header className={` p-2 md:p-4 text-white bg-blue-500  `}>
+    <header className={` p-2 md:p-4 text-white bg-transparent  `}>
       <Container>
         <nav className="flex justify-between items-center">
           <span className="font-bold text-2xl whitespace-nowrap">
             <Link href="/">アニワルド</Link>
           </span>
-          <ul className="space-x-2  items-center hidden md:flex ml-auto">
+          <ul className="space-x-2  items-center hidden md:flex ml-auto font-semibold">
             <LinkItem isManga={false} title="anime" />
 
             <LinkItem isManga={true} title="manga" />
-            {status === "authenticated" ? (
-              <button onClick={() => signOut()}>Sign out</button>
-            ) : (
-              <button onClick={() => signIn("google")}>Sign in</button>
-            )}
-            <IoSearchCircle
-              className="text-3xl cursor-pointer"
-              onClick={() => {
-                openSearch();
-                unsetScroll();
-                window.scrollTo(0, 0);
-              }}
-            />
+            <div className="text-sm tracking-wide font-thin ">
+              {status === "authenticated" ? (
+                <button
+                  onClick={() => signOut()}
+                  className="uppercase  bg-[#FF0077] px-2 py-1 rounded-full"
+                >
+                  Sign out
+                </button>
+              ) : (
+                <button
+                  onClick={() => signIn("google")}
+                  className="uppercase   bg-[#FF0077] px-2 py-1 rounded-full"
+                >
+                  Sign in
+                </button>
+              )}
+            </div>
+            <div className="grid p-1 place-items-center bg-[#ff0077] rounded-full">
+              <IoSearch
+                className="text-xl cursor-pointer text-white "
+                onClick={() => {
+                  openSearch();
+                  unsetScroll();
+                  window.scrollTo(0, 0);
+                }}
+              />
+            </div>
+
             {status === "authenticated" && (
               <Link href="/user/favourites">
                 <Image

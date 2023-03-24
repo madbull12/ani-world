@@ -21,14 +21,14 @@ const useFavourites = (anime: Anime) => {
   const [favorited, setFavorited] = useState(false);
 
   const { data: favourites } = useSWR(`/api/favorite`, fetcher);
-
+  console.log(favourites)
   const addedToFavourites = favourites?.find(
     (favourite: ISavedResp) => favourite.malId === anime?.mal_id
   );
 
   const handleAddFavourite = async () => {
     if (status === "authenticated") {
-
+      setFavorited(true)
       await addToFavourite(
         anime.title,
         anime.images.jpg.image_url,

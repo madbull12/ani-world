@@ -11,6 +11,7 @@ import ToggleNav from "../components/ToggleNav";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import AuthWrapper from "../components/AuthWrapper";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { scrollSet } = useSetBodyScroll();
@@ -46,11 +47,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           >
             {isToggle && <ToggleNav />}
           </AnimatePresence>
-          <SkeletonTheme baseColor="#EFF6FF" highlightColor="#fff">
+          <Layout>
             <Toaster />
             <Header />
             <Component {...pageProps} />
-          </SkeletonTheme>
+          </Layout>
         </AuthWrapper>
       </SessionProvider>
   );

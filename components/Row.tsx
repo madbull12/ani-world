@@ -12,12 +12,12 @@ const Row = ({ items, title }: IRow) => {
   return (
     <section className="space-y-4 ">
       <div className="flex justify-between items-center gap-x-2">
-        <h1 className="font-black text-xl text-gray-700 whitespace-nowrap capitalize">
+        <h1 className="font-black text-xl text-white whitespace-nowrap capitalize">
           {title}
         </h1>
-        <div className="h-[2px] w-full bg-gray-200"></div>
+        <div className="h-[.9px] w-full borderGradient"></div>
         <button
-          className={`whitespace-nowrap font-black text-sm  text-${theme}-500 uppercase`}
+          className={`whitespace-nowrap font-black text-xs hover:border-white hover:text-white transition-all ease-linear border-gray-500 border rounded-sm px-2 py-1 tracking-wide  text-gray-500 uppercase`}
           onClick={() => setViewAll(!viewAll)}
         >
           {viewAll ? "View Less" : "View All"}

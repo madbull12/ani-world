@@ -3,18 +3,41 @@
 @tailwind utilities;
 
 @layer components {
-    .backdrop {
-        @apply absolute  top-0 right-0 left-0 bottom-0 w-full flex justify-center items-center h-full z-[99999] 
-    }
+  .backdrop {
+    @apply absolute  top-0 right-0 left-0 bottom-0 w-full flex justify-center items-center h-full z-[99999];
+  }
+  .radialOverlayGradient {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg, #ff00773b 0%, rgba(0, 0, 0, 0.13) 40%);
+    /* background: radial-gradient(circle, rgba(159, 18, 58, 0.507) 0%, rgba(0,0,0,0.16850490196078427) 77%); */
+    /* background-attachment: fixed;
+    background-position: bottom -400px center;
+    background-repeat: no-repeat; */
+    /* background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(159, 18, 57, 1)) */
+    
+  }
 
+  .borderGradient {
+    background: radial-gradient(circle, #FF0077 0%, rgba(0,0,0,0) 100%);
+  }
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
+  background-color: #a8bbbf;
 }
+
+/* .radialOverlayGradient {
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(159, 18, 57, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+} */

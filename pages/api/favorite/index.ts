@@ -41,6 +41,7 @@ export default async function handler(
   }
   if (req.method === "GET") {
     try {
+      if(!session) return null;
       const data = await prisma.favourite.findMany({
         where: {
             userId: session?.user?.id as string,

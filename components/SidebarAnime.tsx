@@ -23,7 +23,7 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
 
   return (
     <Link key={v4()} href={`/anime/${anime.mal_id}/videos`}>
-      <div className="flex gap-x-2 cursor-pointer mb-4 ">
+      <div className="flex gap-x-2  cursor-pointer mb-4 ">
         <span className="font-bold text-2xl text-gray-500">{i + 1}</span>
         <Image
           src={anime.images.jpg.image_url}
@@ -33,7 +33,7 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
         />
         <div>
           <div>
-            <h1 className={`font-bold text-blue-500`}>{anime.title}</h1>
+            <h1 className={`font-bold text-white`}>{anime.title}</h1>
             <p className="text-gray-500 text-sm">
               {anime.type}, {anime.episodes === null ? 0 : anime.episodes} eps,
               scored {anime.score === null ? "N/A" : anime.score}
@@ -44,7 +44,7 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
           </div>
         </div>
         <button
-          className={`self-start justify-self-end ml-auto  font-semibold text-blue-500`}
+          className={`self-start justify-self-end ml-auto  font-semibold text-[#FF0077]`}
           type="button"
           onClick={(e) => {
             e.stopPropagation();
