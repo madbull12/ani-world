@@ -81,16 +81,16 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
           </AnimatePresence>
 
           <div className="relative">
-            <div className="w-full h-96 hidden md:block">
+            {/* <div className="w-full h-96 hidden md:block">
               <Image
                 alt={anime.title}
                 src={anime.images.jpg.large_image_url}
                 layout="fill"
                 objectFit="cover"
               />
-            </div>
+            </div> */}
 
-            <div className="absolute  z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-4 sm:px-6 md:px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
+            <div className=" z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-4 sm:px-6 md:px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
               <div className="relative w-1/2 h-44 sm:w-[220px] sm:h-[300px]">
                 <Image
                   alt={anime.title}
@@ -146,9 +146,9 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                 </motion.button>
               </div>
             </div>
-            <Backdrop color="#1085f1" />
+            {/* <Backdrop color="#1085f1" /> */}
           </div>
-          <section className={`bg-blue-500 w-full py-4 pr-4 text-white`}>
+          <section className={` w-full py-4 pr-4 text-white`}>
             <div className="ml-[150px] xxs:ml-[200px] xs:ml-[310px] sm:ml-[350px] lg:ml-[300px] space-y-3 z-[999] relative">
               <header className="flex justify-between items-center gap-x-4 w-full  flex-col md:flex-row">
                 <h1 className="lg:text-xl text-base font-bold hidden md:block">

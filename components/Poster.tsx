@@ -22,7 +22,7 @@ const Poster = ({ anime }: IProps) => {
       }`}
     >
       <article
-        className="cursor-pointer relative group w-[120px] h-[150px] "
+        className="cursor-pointer relative  group w-[120px] h-[150px] "
         onMouseEnter={() => setShowTitle(true)}
         onMouseLeave={() => setShowTitle(false)}
       >
@@ -31,12 +31,19 @@ const Poster = ({ anime }: IProps) => {
           src={anime.images.jpg.image_url}
           layout="fill"
           objectFit="cover"
-          className=" ease-in-out duration-150 rounded-tl-[30px] rounded-br-[30px] transition-all group-hover:scale-105 "
+          className=" ease-in-out duration-150  rounded-tl-[30px] rounded-br-[30px] transition-all group-hover:scale-105 "
         />
 
-        <div className={`${showTitle ? "block" : "hidden"} absolute bottom-0 text-xs`}>
-          <h1 className=" text-white  truncate font-bold">{anime.title}</h1>
+        <div className={`z-50  text-xs  `}>
+          <h1 className=" text-white w-24  group-hover:opacity-100 bg-[#00000056] ease-linear text-xs delay-150 transition-all opacity-0 absolute top-2  left-4 truncate font-bold">
+            {anime.title}
+          </h1>
+          <button className="border group-hover:opacity-100 opacity-0 delay-300 px-2 py-1 absolute bottom-2 left-2 bg-[rgba(255,0,119,0.12)]  text-[#ff0077] z-50 border-[#ff0077] rounded-sm">
+            add
+          </button>
         </div>
+
+        <div className="absolute w-full h-full bottom-0 right-0 left-0 bg-gradient-to-t  from-[#100014] "></div>
       </article>
     </Link>
   );
