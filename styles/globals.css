@@ -8,12 +8,15 @@
   }
   .radialOverlayGradient {
     background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, #ff00773b 0%, rgba(0, 0, 0, 0.13) 40%);
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(97,17,68,0.4990371148459384) 50%, rgba(0,0,0,0) 100%);
+    /* background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(97,17,68,1) 48%, rgba(0,0,0,0) 100%); */
+     /* background: linear-gradient(0deg, #ff00773b 0%, rgba(0, 0, 0, 0.13) 40%); */
     /* background: radial-gradient(circle, rgba(159, 18, 58, 0.507) 0%, rgba(0,0,0,0.16850490196078427) 77%); */
-    /* background-attachment: fixed;
-    background-position: bottom -400px center;
-    background-repeat: no-repeat; */
-    /* background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(159, 18, 57, 1)) */
+     background-attachment: fixed;
+     /* box-shadow: 0 0 8px 8px black inset; */
+    background-position: bottom -200px center;
+    background-repeat: no-repeat;
+     /* background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(159, 18, 57, 1)); */
     
   }
 

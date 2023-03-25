@@ -41,6 +41,7 @@ import {
     }
     if (req.method === "GET") {
       try {
+        if(!session) return null;
         const data = await prisma.watchLater.findMany({
           where: {
               userId: session?.user?.id as string,

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -12,28 +12,29 @@ interface IProps {
 const Poster = ({ anime }: IProps) => {
   const [showTitle, setShowTitle] = useState<boolean>(false);
   const { theme } = useTheme();
-  const router = useRouter()
+  const router = useRouter();
   return (
-    <Link href={`${router.pathname.includes("/manga") ?`/manga/${anime.mal_id}/characters` : `/anime/${anime.mal_id}/videos` }`}>
+    <Link
+      href={`${
+        router.pathname.includes("/manga")
+          ? `/manga/${anime.mal_id}/characters`
+          : `/anime/${anime.mal_id}/videos`
+      }`}
+    >
       <article
-        className="cursor-pointer relative group overflow-hidden h-full "
+        className="cursor-pointer relative group w-[120px] h-[150px] "
         onMouseEnter={() => setShowTitle(true)}
         onMouseLeave={() => setShowTitle(false)}
       >
         <Image
           alt={anime.title}
           src={anime.images.jpg.image_url}
-          width={180}
-          height={220}
+          layout="fill"
           objectFit="cover"
-          className="rounded-lg ease-in-out duration-150 transition-all group-hover:scale-105 "
+          className=" ease-in-out duration-150 rounded-tl-[30px] rounded-br-[30px] transition-all group-hover:scale-105 "
         />
 
-        <div
-          className={` bg-${theme}-500 overflow-hidden absolute bottom-0 rounded-b-lg   w-full ease-in-out duration-150 transition-all ${
-            showTitle ? "h-[40px] p-2" : "h-0"
-          }`}
-        >
+        <div className={`${showTitle ? "block" : "hidden"} absolute bottom-0 text-xs`}>
           <h1 className=" text-white  truncate font-bold">{anime.title}</h1>
         </div>
       </article>
