@@ -45,11 +45,11 @@ const SidebarRow = ({ items, title, limit, loading }: IProps) => {
             className={`flex justify-between items-center text-white p-2 `}
           >
             <h1 className="text-lg font-bold">{title}</h1>
-            <span className={`text-[#FF0077]  font-bold `}>
+            <span className={`text-primary  font-bold `}>
               <Link href="/">More</Link>
             </span>
           </div>
-          <div className={`  p-4 border-[#ff0077] border  rounded-sm`}>
+          <div className={`  p-4 border-primary border  rounded-sm`}>
             {items?.slice(0, limit).map((anime, i) => (
               <SidebarAnime  anime={anime} key={v4()} i={i} />
             ))}

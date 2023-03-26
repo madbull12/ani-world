@@ -116,20 +116,20 @@ const Header = () => {
               {status === "authenticated" ? (
                 <button
                   onClick={() => signOut()}
-                  className="uppercase  bg-[#FF0077] px-2 py-1 rounded-full"
+                  className="uppercase  bg-primary px-2 py-1 rounded-full"
                 >
                   Sign out
                 </button>
               ) : (
                 <button
                   onClick={() => signIn("google")}
-                  className="uppercase   bg-[#FF0077] px-2 py-1 rounded-full"
+                  className="uppercase   bg-primary px-2 py-1 rounded-full"
                 >
                   Sign in
                 </button>
               )}
             </div>
-            <div className="grid p-1 place-items-center bg-[#ff0077] rounded-full">
+            <div className="grid p-1 place-items-center bg-primary rounded-full">
               <IoSearch
                 className="text-xl cursor-pointer text-white "
                 onClick={() => {

@@ -44,7 +44,7 @@ const SidebarAnime = ({ anime,i }: { anime: Anime,i:number }) => {
           </div>
         </div>
         <button
-          className={`self-start justify-self-end ml-auto  font-semibold text-[#FF0077]`}
+          className={`self-start justify-self-end ml-auto  font-semibold text-primary`}
           type="button"
           onClick={(e) => {
             e.stopPropagation();

@@ -12,6 +12,7 @@
     "@next-auth/prisma-adapter": "^1.0.5",
     "@uiball/loaders": "^1.2.6",
     "chart.js": "^3.8.0",
+    "daisyui": "^2.51.5",
     "framer-motion": "^6.5.1",
     "moment": "^2.29.3",
     "next": "^13.0.6",

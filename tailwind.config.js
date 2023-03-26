@@ -14,5 +14,17 @@ module.exports = {
   },
   plugins: [
     require('tailwind-scrollbar')({ nocompatible: true }),
+    require("daisyui")
+
   ],
+  daisyui:{
+    themes:[
+      {
+        pinkTheme:{
+          "primary":"#FF0077",
+          "btnOverlay":"#ff007728"
+        }
+      }
+    ]
+  }
 }
