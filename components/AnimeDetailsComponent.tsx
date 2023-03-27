@@ -2,9 +2,7 @@ import Image from "next/legacy/image";
 import React, {  useState } from "react";
 import {
   IoAddCircleOutline,
-  IoHeartCircleOutline,
   IoCheckmarkCircleOutline,
-  IoHeartCircle,
 } from "react-icons/io5";
 import { AnimeDetailsProps, Genre } from "../interface";
 import Backdrop from "./Backdrop";
@@ -19,6 +17,7 @@ import { convertToDate } from "../helper/functions";
 import useWatchLater from "../hooks/useWatchLater";
 import useFavourites from "../hooks/useFavourites";
 import SynopsisModal from "./SynopsisModal";
+import { AiFillHeart, AiOutlineCheck, AiOutlineHeart } from "react-icons/ai";
 
 interface IDetails {
   anime: AnimeDetailsProps;
@@ -113,7 +112,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   </p>
                 </div>
               </div>
-              <div className=" md:pt-12 md:ml-auto text-white text-4xl flex self-start">
+              <div className=" md:pt-12 md:ml-auto text-white gap-x-2 flex self-start">
                 <motion.button
                   onClick={() => {
                     addedToWatchLater
@@ -124,9 +123,9 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   whileTap={{ scale: 0.9 }}
                 >
                   {addedToWatchLater || watchLaterClicked ? (
-                    <IoCheckmarkCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                    <AiOutlineCheck className="text-xl text-primary cursor-pointer" />
                   ) : (
-                    <IoAddCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                    <AiOutlineCheck className="text-xl cursor-pointer hover:text-primary" />
                   )}
                 </motion.button>
                 <motion.button
@@ -139,9 +138,9 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   }}
                 >
                   {addedToFavourites || favorited ? (
-                    <IoHeartCircle className="text-3xl lg:text-4xl cursor-pointer" />
+                    <AiFillHeart className="text-xl text-primary cursor-pointer" />
                   ) : (
-                    <IoHeartCircleOutline className="text-3xl lg:text-4xl cursor-pointer" />
+                    <AiOutlineHeart className="text-xl cursor-pointer hover:text-primary" />
                   )}
                 </motion.button>
               </div>
@@ -195,7 +194,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               </p>
             </div>
             <div className="p-4 md:p-8 items-center flex gap-x-4  mt-44 sm:mt-72  lg:mt-20">
-              <div className="text-white bg-[#FF9901]  rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
+              <div className="text-white bg-primary  rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
                 <span className="font-bold text-[8px]  text-xs hidden md:block">
                   SCORE
                 </span>
@@ -206,7 +205,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                   {anime.scored_by?.toLocaleString() || "N/A"} users
                 </span>
               </div>
-              <div className="rounded-lg border-2 border-gray-700 p-3 flex-[1] space-y-2 flex flex-col text-xs xs:text-sm md:text-base ">
+              <div className="rounded-lg border-2 border-primary p-3 flex-[1] space-y-2 flex flex-col text-xs xs:text-sm md:text-base ">
                 <div className="space-x-4">
                   <span className="font-semibold">
                     Type: <span className="font-normal">{anime.type}</span>

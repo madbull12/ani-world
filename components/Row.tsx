@@ -68,7 +68,7 @@ const Row = ({ items, title }: IRow) => {
         <h1 className="font-black text-xl text-white whitespace-nowrap capitalize">
           {title}
         </h1>
-        <div className="h-[1px] w-full borderGradient"></div>
+        <div className="h-[1px] w-full borderOverlay"></div>
         <button
           className={`whitespace-nowrap font-black text-xs hover:border-white hover:text-white transition-all ease-linear border-gray-500 border rounded-sm px-2 py-1 tracking-wide  text-gray-500 uppercase`}
           onClick={() => setViewAll(!viewAll)}

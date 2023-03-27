@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   }
 
   return (
-    <div data-theme="pinkTheme">
+    <div data-theme="purpleTheme">
       <SessionProvider session={session}>
         <AuthWrapper>
           <AnimatePresence
