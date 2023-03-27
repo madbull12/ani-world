@@ -11,7 +11,7 @@ const Overlay = ()=>{
 
 const Layout = ({children}:{children:React.ReactNode}) => {
   return <main className="bg-black relative min-h-[450vh] z-50 ">
-    <div className="relative z-20">
+    <div className="relative z-20 max-w-7xl mx-auto">
     {children}
 
     </div>

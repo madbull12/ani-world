@@ -1,9 +1,6 @@
 import Image from "next/legacy/image";
-import React, {  useState } from "react";
-import {
-  IoAddCircleOutline,
-  IoCheckmarkCircleOutline,
-} from "react-icons/io5";
+import React, { useState } from "react";
+import { IoAddCircleOutline, IoCheckmarkCircleOutline } from "react-icons/io5";
 import { AnimeDetailsProps, Genre } from "../interface";
 import Backdrop from "./Backdrop";
 import { v4 as uuidv4 } from "uuid";
@@ -89,110 +86,116 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               />
             </div> */}
 
-            <div className=" z-50 md:-bottom-36  lg:-bottom-40 left-0  pt-4 md:pt-0 px-4 sm:px-6 md:px-8 flex flex-col items-start md:flex-row  gap-x-8 w-full gap-y-2">
-              <div className="relative w-1/2 h-44 sm:w-[220px] sm:h-[300px]">
-                <Image
-                  alt={anime.title}
-                  src={anime.images.jpg.large_image_url}
-                  layout="fill"
-                  // width={matches ? 220 : 150}
-                  // height={matches ? 300 : 200}
-                  className="rounded-lg  z-[999]"
-                  objectFit="cover"
-                />
+            <div className=" flex gap-x-4 items-center">
+              <div className="flex-[0.25] flex flex-col gap-y-4">
+                <div className="relative  h-44 sm:h-[300px] ">
+                  <Image
+                    alt={anime.title}
+                    src={anime.images.jpg.large_image_url}
+                    layout="fill"
+                    // width={matches ? 220 : 150}
+                    // height={matches ? 300 : 200}
+                    className="rounded-lg  z-[999]"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className="  text-white gap-x-2 flex self-start">
+                  <motion.button
+                    onClick={() => {
+                      addedToWatchLater
+                        ? handleDeleteWatchLater()
+                        : handleAddWatchLater();
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {addedToWatchLater || watchLaterClicked ? (
+                      <AiOutlineCheck className="text-xl text-primary cursor-pointer" />
+                    ) : (
+                      <AiOutlineCheck className="text-xl cursor-pointer hover:text-primary" />
+                    )}
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => {
+                      addedToFavourites
+                        ? handleDeleteFavourite()
+                        : handleAddFavourite();
+                    }}
+                  >
+                    {addedToFavourites || favorited ? (
+                      <AiFillHeart className="text-xl text-primary cursor-pointer" />
+                    ) : (
+                      <AiOutlineHeart className="text-xl cursor-pointer hover:text-primary" />
+                    )}
+                  </motion.button>
+                </div>
               </div>
 
-              <div className=" md:pt-12  ">
-                <div className=" max-w-[250px] md:max-w-full">
-                  <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl">
-                    {anime.title}
-                  </h1>
-                  <p className="text-white font-thin text-sm sm:text-sm md:text-base ">
-                    {anime.title_japanese}
+              <div className="flex flex-col flex-[0.75]">
+                <div className=" md:pt-12  ">
+                  <div className=" max-w-[250px] md:max-w-full">
+                    <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl">
+                      {anime.title}
+                    </h1>
+                    <p className="text-white font-thin text-sm sm:text-sm md:text-base ">
+                      {anime.title_japanese}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 z-[999] relative">
+                  <header className="flex justify-between items-center gap-x-4 w-full  flex-col md:flex-row">
+                    <h1 className="lg:text-xl text-base font-bold hidden md:block">
+                      Synopsis
+                    </h1>
+
+                    <div className="flex gap-2 flex-wrap text-xs sm:text-sm md:text-base">
+                      <p className=" font-semibold ">
+                        Ranked:
+                        <span className="font-normal">
+                          {" "}
+                          #{anime.rank?.toLocaleString() || "N/A"}
+                        </span>
+                      </p>
+                      <p className="font-semibold  ">
+                        Popularity:
+                        <span className="font-normal">
+                          {" "}
+                          #{anime.popularity?.toLocaleString() || "N/A"}
+                        </span>
+                      </p>
+                      <p className="font-semibold ">
+                        Members:
+                        <span className="font-normal">
+                          {" "}
+                          {anime.members?.toLocaleString() || "N/A"}
+                        </span>
+                      </p>
+                    </div>
+                  </header>
+                  <div className="md:hidden">
+                    <MotionBtn
+                      handleClick={() => {
+                        setShowSynopsis(true);
+                      }}
+                      unsetScroll={unsetScroll}
+                      string="Read Synopsis"
+                      scrollToTop={scrollToTop}
+                    />
+                  </div>
+
+                  <p className="text-sm lg:text-base hidden md:block">
+                    {anime.synopsis}
                   </p>
                 </div>
               </div>
-              <div className=" md:pt-12 md:ml-auto text-white gap-x-2 flex self-start">
-                <motion.button
-                  onClick={() => {
-                    addedToWatchLater
-                      ? handleDeleteWatchLater()
-                      : handleAddWatchLater();
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  {addedToWatchLater || watchLaterClicked ? (
-                    <AiOutlineCheck className="text-xl text-primary cursor-pointer" />
-                  ) : (
-                    <AiOutlineCheck className="text-xl cursor-pointer hover:text-primary" />
-                  )}
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => {
-                    addedToFavourites
-                      ? handleDeleteFavourite()
-                      : handleAddFavourite();
-                  }}
-                >
-                  {addedToFavourites || favorited ? (
-                    <AiFillHeart className="text-xl text-primary cursor-pointer" />
-                  ) : (
-                    <AiOutlineHeart className="text-xl cursor-pointer hover:text-primary" />
-                  )}
-                </motion.button>
-              </div>
             </div>
+
             {/* <Backdrop color="#1085f1" /> */}
           </div>
           <section className={` w-full py-4 pr-4 text-white`}>
-            <div className="ml-[150px] xxs:ml-[200px] xs:ml-[310px] sm:ml-[350px] lg:ml-[300px] space-y-3 z-[999] relative">
-              <header className="flex justify-between items-center gap-x-4 w-full  flex-col md:flex-row">
-                <h1 className="lg:text-xl text-base font-bold hidden md:block">
-                  Synopsis
-                </h1>
-
-                <div className="flex gap-2 flex-wrap text-xs sm:text-sm md:text-base">
-                  <p className=" font-semibold ">
-                    Ranked:
-                    <span className="font-normal">
-                      {" "}
-                      #{anime.rank?.toLocaleString() || "N/A"}
-                    </span>
-                  </p>
-                  <p className="font-semibold  ">
-                    Popularity:
-                    <span className="font-normal">
-                      {" "}
-                      #{anime.popularity?.toLocaleString() || "N/A"}
-                    </span>
-                  </p>
-                  <p className="font-semibold ">
-                    Members:
-                    <span className="font-normal">
-                      {" "}
-                      {anime.members?.toLocaleString() || "N/A"}
-                    </span>
-                  </p>
-                </div>
-              </header>
-              <div className="md:hidden">
-                <MotionBtn
-                  handleClick={() => {
-                    setShowSynopsis(true);
-                  }}
-                  unsetScroll={unsetScroll}
-                  string="Read Synopsis"
-                  scrollToTop={scrollToTop}
-                />
-              </div>
-
-              <p className="text-sm lg:text-base hidden md:block">
-                {anime.synopsis}
-              </p>
-            </div>
             <div className="p-4 md:p-8 items-center flex gap-x-4  mt-44 sm:mt-72  lg:mt-20">
               <div className="text-white bg-primary  rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
                 <span className="font-bold text-[8px]  text-xs hidden md:block">
