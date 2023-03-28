@@ -120,7 +120,7 @@ const Search = () => {
       }}
     >
       <motion.div
-        className="text-white p-2 xs:p-4 bg-blue-600 relative max-w-[500px] rounded-lg"
+        className="text-white p-2 xs:p-4 bg-primary relative max-w-[500px] rounded-lg"
         onClick={(e) => e.stopPropagation()}
         variants={dropIn}
         initial="hidden"

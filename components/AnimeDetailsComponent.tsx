@@ -146,7 +146,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                 </div>
 
                 <div className="space-y-3 z-[999] relative">
-                  <header className="flex justify-between items-center gap-x-4 w-full  flex-col md:flex-row">
+                  <header className="flex justify-between items-center gap-x-4 w-full my-4 flex-col md:flex-row">
                     <h1 className="lg:text-xl text-base font-bold hidden md:block">
                       Synopsis
                     </h1>

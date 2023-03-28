@@ -46,7 +46,7 @@ const Saved = ({ item }: { item: ISavedResp }) => {
           <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#00000073] overflow-hidden rounded-lg"></div>
         </div>
 
-        <Link href={`/anime/${item.malId}`} className="text-blue-500">
+        <Link href={`/anime/${item.malId}`} className="text-primary">
           {item.title}
         </Link>
         {showTrash && (

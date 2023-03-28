@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { v4 } from "uuid";
 import { Character } from "../interface";
 import CharacterComponent from "./CharacterComponent";
+import LineOverlay from "./LineOverlay";
 import MotionBtn from "./MotionBtn";
 const CharactersList = ({ characters }: { characters: Character[] }) => {
   const [loadMoreCharacters, setLoadMoreCharacters] = useState(10);
@@ -11,7 +12,7 @@ const CharactersList = ({ characters }: { characters: Character[] }) => {
       <h1 className="text-2xl font-bold pb-2">Characters</h1>
 
       <div
-        className={`divide-y last:divide-y-0 bg-blue-100 p-2 divide-gray-300 mb-4`}
+        className={`  p-2  space-y-2 mb-4`}
       >
         {characters.slice(0, loadMoreCharacters).map((character) => (
           <CharacterComponent key={v4()} character={character} />

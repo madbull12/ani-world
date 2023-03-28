@@ -24,13 +24,13 @@ const FavouritePage = () => {
             <>
               {favourites?.length !== 0 ? (
                 <>
-                  <h1 className="text-xl font-bold text-blue-500">Favourite Anime</h1>
+                  <h1 className="text-xl font-bold text-primary">Favourite Anime</h1>
                   <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1">
                     {favourites?.filter((item:ISavedResp)=>animeTypes.includes(item.type.toLowerCase())).map((item: ISavedResp) => (
                       <Saved item={item} key={uuidv4()} />
                     ))}
                   </div>
-                  <h1 className="text-xl font-bold text-blue-500 mt-4">Favourite Books</h1>
+                  <h1 className="text-xl font-bold text-primary mt-4">Favourite Books</h1>
                   <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1">
                     {favourites?.filter((item:ISavedResp)=>bookTypes.includes(item.type.toLowerCase())).map((item: ISavedResp) => (
                       <Saved item={item} key={uuidv4()} />

@@ -22,14 +22,14 @@ const UserProfile = () => {
         <p className="text-lg font-semibold">{session?.user?.name}</p>
         <p className="text-sm text-gray-500">{session?.user?.email}</p>
       </div>
-      <nav className="list-none flex items-center gap-x-2 font-bold mt-4">
+      <nav className="list-none flex items-center t gap-x-2 font-bold mt-4">
         <li
-          className={`${router.pathname === "/user/favourites" ? "border-b-2 border-blue-500" : ""} `}
+          className={`${router.pathname === "/user/favourites" ? "border-b-2 border-primary text-primary" : ""} `}
         >
           <Link href="/user/favourites">Favourites</Link>
         </li>
         <li
-          className={router.pathname === "/user/watchLater" ? "border-b-2 border-blue-500" : ""}
+          className={router.pathname === "/user/watchLater" ? "border-b-2 border-primary text-primary" : ""}
         >
           <Link href="/user/watchLater">Watch later</Link>
         </li>

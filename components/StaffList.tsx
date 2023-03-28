@@ -11,7 +11,7 @@ const StaffList = ({ staff }:{ staff:Staff[] }) => {
   return (
     <>
       <h1 className="text-2xl font-bold pb-2">Staff</h1>
-      <div className={`divide-y  bg-blue-100 p-2 space-y-4 divide-gray-300 `}>
+      <div className={` p-2 space-y-4  `}>
         {staff?.slice(0, loadMoreStaff).map((item) => (
           <StaffComponent key={v4()} item={item} />
         ))}
