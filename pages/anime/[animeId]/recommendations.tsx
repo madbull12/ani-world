@@ -11,6 +11,7 @@ import RecommendationsList from "../../../components/RecommendationsList";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const RecommendationsPage = () => {
   const router = useRouter();
+  
   const { animeId } = router.query;
   const { data, error } = useSWR(
     `https://api.jikan.moe/v4/anime/${animeId}`,
