@@ -13,9 +13,9 @@ const ReviewComponent = ({ review }: { review: Review }) => {
   const [readMore, setReadMore] = useState<boolean>(false);
 
   return (
-    <div className="w-full bg-blue-50 p-2 divide-y divide-gray-300">
+    <div className="w-full  p-2 border-b-2 border-[#a8a8a8]">
       <div className="flex gap-x-1 space-between text-sm md:text-base  ">
-        <div className="flex gap-x-2 items-start">
+        <div className="flex gap-x-2 items-start py-4">
           <Image
             src={review.user.images.jpg.image_url}
             width={50}
@@ -67,6 +67,8 @@ const ReviewComponent = ({ review }: { review: Review }) => {
           <p>Overall rating: {review?.score}</p>
         </div>
       </div>
+      <div className="borderOverlay h-[1px] w-full"></div>
+
       <div>
         <p className="text-xs md:text-sm py-4">
           {readMore ? review.review : truncate(review.review, 1000)}

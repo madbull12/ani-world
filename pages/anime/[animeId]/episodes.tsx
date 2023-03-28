@@ -29,15 +29,15 @@ const EpisodePage = () => {
         {videos ? (
           <>
             {videos?.episodes.length === 0 ? (
-              <h1 className="text-lg font-semibold">No episodes added</h1>
+              <h1 className="text-lg font-semibold ">No episodes added</h1>
             ) : (
               <>
-                <h1 className="text-2xl font-bold">Episode Lists</h1>
+                <h1 className="text-2xl font-bold mb-4">Episode Lists</h1>
                 <div className=" gap-4 grid grid-cols-1 md:grid-cols-2">
                   {videos?.episodes?.map((_episode: any) => (
                     <div
                       key={uuidv4()}
-                      className="flex  items-start bg-gray-100 p-2 gap-x-2"
+                      className="flex  items-start border-b-2  border-primary rounded-sm p-2 gap-x-2"
                     >
                       <Image
                         src={

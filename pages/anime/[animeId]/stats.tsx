@@ -93,31 +93,31 @@ const Stats = () => {
           <div
             className={`grid grid-cols-1 xxs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 justify-center  `}
           >
-            <div className={`text-blue-500 max-w-[200px] bg-blue-100  p-4 xs:p-2 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce `}>
+            <div className={`text-primary max-w-[200px] border-primary border  p-4 xs:p-2 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce `}>
               <AiFillEye className={`text-5xl `} />
               <p className="text-sm  font-semibold text-center">
                 Watching: {stats.watching.toLocaleString()}
               </p>
             </div>
-            <div className={`text-blue-500 max-w-[200px]  bg-blue-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
+            <div className={`text-primary max-w-[200px]  border-primary border  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <MdOutlineIncompleteCircle className="text-5xl " />
               <p className="text-sm  font-semibold text-center">
                 Completed: {stats.completed.toLocaleString()}
               </p>
             </div>
-            <div className={`text-blue-500 max-w-[200px]  bg-blue-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
+            <div className={`text-primary max-w-[200px]  border-primary border  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <IoPauseCircleSharp className="text-5xl " />
               <p className="text-sm  font-semibold text-center">
                 On hold: {stats.on_hold.toLocaleString()}
               </p>
             </div>
-            <div className={`text-blue-500 max-w-[200px]  bg-blue-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
+            <div className={`text-primary max-w-[200px]  border-primary border  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <MdCancel className="text-5xl " />
               <p className="text-sm  font-semibold text-center">
                 Dropped: {stats.dropped.toLocaleString()}
               </p>
             </div>
-            <div className={`text-blue-500  max-w-[200px] text-center bg-blue-100  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
+            <div className={`text-primary  max-w-[200px] text-center border-primary border  p-4 rounded-lg cursor-pointer flex flex-col items-center hover:animate-bounce`}>
               <AiFillSchedule className="text-5xl " />
               <p className="text-sm  font-semibold text-center">
                 Plan to watch: {stats.plan_to_watch.toLocaleString()}
@@ -131,7 +131,7 @@ const Stats = () => {
                 {
                   label: "Number of user's voted rating",
                   data: stats?.scores.map((score) => score.votes),
-                  backgroundColor: "rgba(59, 130 ,246,0.2)",
+                  backgroundColor: "#ff0077",
                 },
               ],
             }}

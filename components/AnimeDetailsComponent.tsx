@@ -195,8 +195,8 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
 
             {/* <Backdrop color="#1085f1" /> */}
           </div>
-          <section className={` w-full py-4 pr-4 text-white`}>
-            <div className="p-4 md:p-8 items-center flex gap-x-4  mt-44 sm:mt-72  lg:mt-20">
+          <section className={` w-full py-8  text-white`}>
+            <div className="  items-center flex gap-x-4  ">
               <div className="text-white bg-primary  rounded-full md:rounded-lg w-[50px] h-[50px] p-0  md:h-auto md:w-auto grid place-items-center md:p-2 self-start md:flex md:flex-col md:items-center">
                 <span className="font-bold text-[8px]  text-xs hidden md:block">
                   SCORE
@@ -268,7 +268,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
               </div>
             </div>
           </section>
-          <section className="bg-white p-8 max-7xl mx-auto">
+          <section className=" p-8 max-7xl mx-auto">
             <nav>
               <ul className="flex justify-between flex-wrap gap-2">
                 {tabLinks.map((link, i) => (
@@ -280,7 +280,7 @@ const AnimeDetailsComponent = ({ anime, children }: IDetails) => {
                     <li
                       className={`font-bold pb-2 uppercase text-xs xs:text-sm cursor-pointer ${
                         router.pathname.includes(link)
-                          ? `border-b-4 border-${theme}-500`
+                          ? `border-b-4 border-primary`
                           : ""
                       }`}
                       onClick={() => setLink(link)}
