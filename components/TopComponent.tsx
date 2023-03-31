@@ -21,11 +21,11 @@ const TopComponent = ({ isManga,item,setFilter,filter,page,setPage }:IProps) => 
       <h1 className="text-2xl font-bold ">Top {isManga ? "Manga" : "Anime"}</h1>
 
       <TopNav filter={filter} setFilter={setFilter} />
-      <div className="text-blue-500 font-bold justify-end my-4 pr-2 flex gap-x-2">
+      <div className="text-primary  font-bold justify-end my-4 pr-2 flex gap-x-2">
         {page > 1 && (
           <button
             onClick={() => setPage(page - 1)}
-            className="hover:text-blue-400"
+            className="hover:text-primary-focus"
           >
             Previous
           </button>
@@ -33,7 +33,7 @@ const TopComponent = ({ isManga,item,setFilter,filter,page,setPage }:IProps) => 
 
         <button
           onClick={() => setPage(page + 1)}
-          className="hover:text-blue-400"
+          className="hover:text-primary-focus"
         >
           Next
         </button>
@@ -41,7 +41,7 @@ const TopComponent = ({ isManga,item,setFilter,filter,page,setPage }:IProps) => 
       {/* <button onClick={()=>setPage((prev)=>prev+1)}>Next page</button> */}
       <table className="w-full mt-2 border ">
         <tbody>
-          <tr className="bg-blue-500 text-white md:text-base sm:text-sm text-xs">
+          <tr className="bg-primary text-white md:text-base sm:text-sm text-xs">
             <th>Rank</th>
             <th className="w-[70%]">Title</th>
             <th>Score</th>

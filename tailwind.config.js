@@ -21,7 +21,8 @@ module.exports = {
       {
         pinkTheme: {
           primary: "#FF0077",
-          secondary:"#ffc7e1",
+          secondary:"rgb(253 242 248)",
+          "primary-focus":"#ff57a5",
 
           ".btnOverlay": {
             "background-color": "rgba(255,0,115,0.14)",

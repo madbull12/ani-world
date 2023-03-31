@@ -16,6 +16,7 @@ import useFavourites from "../hooks/useFavourites";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useWatchLater from "../hooks/useWatchLater";
 import { Anime, ISavedResp } from "../interface";
+import LineOverlay from "./LineOverlay";
 import MotionBtn from "./MotionBtn";
 
 const TopAnimeRow = ({
@@ -60,42 +61,42 @@ const TopAnimeRow = ({
   // };
   const router = useRouter();
   return (
-    <tr
-      key={uuidv4()}
-      className="[&>*]:text-center [&>*]:p-2 [&:nth-child(even)]:bg-blue-50 divide-x"
-    >
+    <tr key={uuidv4()} className="[&>*]:text-center [&>*]:p-2   divide-x">
       <td className="text-gray-400 text-2xl md:text-4xl font-bold">
         {page >= 2 ? i + 1 + 25 * (page - 1) : i + 1}
       </td>
-      <td className="flex gap-x-2 items-center flex-col xs:flex-row">
-        <Image
-          alt={item.title}
-          src={item.images.jpg.image_url}
-          width={60}
-          height={80}
-        />
-        <div className="[&>p]:text-gray-400 [&>p]:text-xs  text-center xs:text-start  ">
-          <Link
-            href={`/${router.pathname === "/top-anime" ? "anime" : "manga"}/${
-              item.mal_id
-            }/characters`}
-          >
-            <span className="font-bold text-xs  text-blue-500 cursor-pointer hover:text-blue-400">
-              {item.title}
-            </span>
-          </Link>
-          <p>
-            {item.type} ({item.episodes} eps)
-          </p>
+      <td>
+        <div className="flex gap-x-2 items-center flex-col xs:flex-row py-4 px-2">
+          <Image
+            alt={item.title}
+            src={item.images.jpg.image_url}
+            width={60}
+            height={80}
+          />
+          <div className="[&>p]:text-gray-400 [&>p]:text-xs  text-center xs:text-start  ">
+            <Link
+              href={`/${router.pathname === "/top-anime" ? "anime" : "manga"}/${
+                item.mal_id
+              }/characters`}
+            >
+              <span className="font-bold text-xs hover:text-primary-focus text-primary cursor-pointer ">
+                {item.title}
+              </span>
+            </Link>
+            <p>
+              {item.type} ({item.episodes} eps)
+            </p>
 
-          {/* <p>
+            {/* <p>
             {moment(item.aired.from).format("LL")} -{" "}
             {moment(item.aired.to).format("LL")}
           </p> */}
-          <p>{item.members.toLocaleString()} members</p>
+            <p>{item.members.toLocaleString()} members</p>
+          </div>
         </div>
+        <LineOverlay />
       </td>
-      <td className="text-sm">{item.score}</td>
+      <td className="text-sm">{item.score || "-"}</td>
       <td>
         <MotionBtn
           string={

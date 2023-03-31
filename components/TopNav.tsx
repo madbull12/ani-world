@@ -46,8 +46,8 @@ const TopNav = ({ filter, setFilter }: IProps) => {
         <li
           className={`${
             link.slug === filter
-              ? "text-white px-2 py-1 bg-blue-500"
-              : "text-blue-500"
+              ? "text-white px-2 py-1 bg-primary"
+              : "text-primary"
           } cursor-pointer whitespace-nowrap text-xs sm:text-sm md:text-base`}
           onClick={() => setFilter(link.slug)}
           key={v4()}

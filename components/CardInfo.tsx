@@ -10,6 +10,7 @@ import truncate from "../helper/truncate";
 import { useRouter } from "next/router";
 
 import useWatchLater from "../hooks/useWatchLater";
+import LineOverlay from "./LineOverlay";
 
 interface IProps {
   anime: AnimeDetailsProps;
@@ -26,7 +27,7 @@ const CardInfo = ({ anime }: IProps) => {
 
   return (
     <article className="border p-2">
-      <p className="text-sm md:text-base h-[80px] grid place-items-center py-2 cursor-pointer text-blue-500 hover:text-blue-400 font-bold text-center ">
+      <p className="text-sm md:text-base h-[80px] grid place-items-center py-2 cursor-pointer text-primary hover:text- font-bold text-center ">
         <Link
           href={`${
             router.pathname.includes("/anime")
@@ -37,8 +38,8 @@ const CardInfo = ({ anime }: IProps) => {
           {anime.title}
         </Link>
       </p>
-
-      <div className="bg-blue-50 p-2 flex items-center gap-x-3 sm:gap-x-4 md:gap-x-8 ">
+        <LineOverlay />
+      <div className=" px-4 py-3 flex items-center gap-x-3 sm:gap-x-4 md:gap-x-8 ">
         {router.pathname.includes("/manga") ? (
           <div className="flex justify-center w-full gap-x-2 text-[10px] font-semibold sm:text-xs items-center text-gray-400 ">
             <p>
@@ -51,7 +52,7 @@ const CardInfo = ({ anime }: IProps) => {
           </div>
         ) : null}
         {router.pathname.includes("/anime") ? (
-          <div className="w-6 text-white xs:text-sm text-xs h-6 rounded-full bg-blue-500 grid place-items-center">
+          <div className="w-6 text-white xs:text-sm text-xs h-6 rounded-full bg-primary grid place-items-center">
             <a
               rel="noopener noreferrer"
               href={anime.trailer.url}
@@ -70,9 +71,10 @@ const CardInfo = ({ anime }: IProps) => {
           </div>
         ) : null}
       </div>
-      <div className="bg-blue-100 text-blue-500 justify-center p-2 flex gap-x-2 text-xs">
+      <LineOverlay />
+      <div className=" text-primary justify-center p-2 flex gap-x-2 text-xs">
         {anime.genres.slice(0, 3).map((genre) => (
-          <p key={uuidv4()} className="cursor-pointer hover:text-blue-400">
+          <p key={uuidv4()} className="cursor-pointer hover:text-primary-focus">
             {genre.name}
           </p>
         ))}
@@ -106,7 +108,7 @@ const CardInfo = ({ anime }: IProps) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between items-center [&>*]:flex [&>*]:items-center [&>*]:gap-x-2 text-xs xs:text-sm text-gray-500 mt-2">
+      <div className="flex justify-between items-center [&>*]:flex [&>*]:items-center [&>*]:gap-x-2 text-xs xs:text-sm text-primary mt-2">
         <div>
           <IoStar />
           {anime.score}
@@ -121,7 +123,7 @@ const CardInfo = ({ anime }: IProps) => {
               ? handleDeleteWatchLater()
               : handleAddWatchLater();
           }}
-          className="bg-blue-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-blue-400"
+          className="bg-primary text-white font-bold px-4 py-2 rounded-lg hover:bg-primary-focus"
         >
           {addedToWatchLater || watchLaterClicked
             ? "Remove from list"

@@ -22,12 +22,12 @@ const GenreDetails = () => {
     <Container>
         {anime ? (
         <>
-            <h1 className="text-blue-500 font-bold text-xl">{genre}</h1>
-          <div className="text-blue-500 font-bold justify-end my-4  flex gap-x-2">
+            <h1 className="text-primary font-bold text-xl">{genre}</h1>
+          <div className="text-primary font-bold justify-end my-4  flex gap-x-2">
             {page > 1 && (
               <button
                 onClick={() => setPage(page - 1)}
-                className="hover:text-blue-400"
+                className="hover:text-primary-focus"
               >
                 Previous
               </button>
@@ -35,7 +35,7 @@ const GenreDetails = () => {
 
             <button
               onClick={() => setPage(page + 1)}
-              className="hover:text-blue-400"
+              className="hover:text-primary-focus"
             >
               Next
             </button>
@@ -45,11 +45,11 @@ const GenreDetails = () => {
               <CardInfo key={v4()} anime={item} />
             ))}
           </div>
-          <div className="text-blue-500 font-bold justify-center my-4  flex gap-x-2">
+          <div className="text-primary font-bold justify-center my-4  flex gap-x-2">
             {page > 1 && (
               <button
                 onClick={() => setPage(page - 1)}
-                className="hover:text-blue-400"
+                className="hover:text-primary-focus"
               >
                 Previous
               </button>
@@ -57,7 +57,7 @@ const GenreDetails = () => {
 
             <button
               onClick={() => setPage(page + 1)}
-              className="hover:text-blue-400"
+              className="hover:text-primary-focus"
             >
               Next
             </button>

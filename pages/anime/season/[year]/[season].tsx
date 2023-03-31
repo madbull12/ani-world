@@ -28,11 +28,11 @@ const SeasonalPage = () => {
 
       {anime ? (
         <>
-          <div className="text-blue-500 font-bold justify-end my-4  flex gap-x-2">
+          <div className="text-primary font-bold justify-end my-4  flex gap-x-2">
             {page > 1 && (
               <button
                 onClick={() => setPage(page - 1)}
-                className="hover:text-blue-400"
+                className="hover:text-primary-focus"
               >
                 Previous
               </button>
@@ -40,7 +40,7 @@ const SeasonalPage = () => {
 
             <button
               onClick={() => setPage(page + 1)}
-              className="hover:text-blue-400"
+              className="hover:text-primary-focus"
             >
               Next
             </button>

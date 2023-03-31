@@ -77,7 +77,7 @@ const ReviewComponent = ({ review }: { review: Review }) => {
             <>
               <button
                 onClick={() => setReadMore(!readMore)}
-                className=" font-semibold  text-blue-500 cursor-pointer ml-1"
+                className=" font-semibold  text-primary cursor-pointer ml-1"
               >
                 {readMore ? "Show less" : "Read more"}
               </button>

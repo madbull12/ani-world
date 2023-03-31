@@ -13,7 +13,7 @@ const GenreBox = ({ genre }: { genre: IGenre }) => {
           : `/genres/manga/${genre.mal_id}`
       }`}
     >
-      <div className="border-blue-500 flex flex-col cursor-pointer text-blue-500 hover:bg-blue-100 border p-4 rounded-xl">
+      <div className="border-primary flex flex-col cursor-pointer text-primary hover:btnOverlay border p-4 rounded-xl">
         <p>{genre.name}</p>
         <p>{genre.count}</p>
       </div>

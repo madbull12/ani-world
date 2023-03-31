@@ -31,11 +31,11 @@ const TopAnimePage = () => {
     <Container>
       <h1 className="text-2xl font-bold ">Top Anime</h1>
       <TopNav setFilter={setFilter} filter={filter} />
-      <div className="text-blue-500 font-bold justify-end my-4 pr-2 flex gap-x-2">
+      <div className="text-primary hover:text-primary-focus font-bold justify-end my-4 pr-2 flex gap-x-2">
         {page > 1 && (
           <button
             onClick={() => setPage(page - 1)}
-            className="hover:text-blue-400"
+            className=""
           >
             Previous
           </button>
@@ -43,7 +43,7 @@ const TopAnimePage = () => {
 
         <button
           onClick={() => setPage(page + 1)}
-          className="hover:text-blue-400"
+          className=""
         >
           Next
         </button>
@@ -51,7 +51,7 @@ const TopAnimePage = () => {
       {/* <button onClick={()=>setPage((prev)=>prev+1)}>Next page</button> */}
       <table className="w-full mt-2 border ">
         <tbody>
-          <tr className="bg-blue-500 text-white md:text-base sm:text-sm text-xs">
+          <tr className="bg-primary text-white md:text-base sm:text-sm text-xs">
             <th>Rank</th>
             <th className="w-[70%]">Title</th>
             <th>Score</th>
@@ -62,7 +62,7 @@ const TopAnimePage = () => {
           ))}
         </tbody>
       </table>
-      <div className="text-blue-500 font-bold justify-center my-4  flex gap-x-2">
+      <div className="text-primary hover:text-primary-focus font-bold justify-center my-4  flex gap-x-2">
         {page > 1 && (
           <button
             onClick={() => setPage(page - 1)}
