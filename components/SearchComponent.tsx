@@ -6,6 +6,7 @@ import { Anime } from "../interface";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import LineOverlay from "./LineOverlay";
 const SearchComponent = ({ anime }: { anime: Anime }) => {
   const router = useRouter();
   const {
@@ -18,7 +19,8 @@ const SearchComponent = ({ anime }: { anime: Anime }) => {
   const { status } = useSession();
 
   return (
-    <div key={v4()} className="flex gap-x-2 py-2 bg-blue-50">
+    <>
+    <div key={v4()} className="flex gap-x-2 py-2 ">
       <Image
         objectFit="cover"
         alt={anime.title}
@@ -27,10 +29,10 @@ const SearchComponent = ({ anime }: { anime: Anime }) => {
         src={anime.images.jpg.image_url}
       />
       <div>
-        <span className="mb-3 text-blue-600 items-center gap-x-2 font-bold text-sm md:text-base flex">
+        <span className="mb-3  items-center gap-x-2 font-bold text-sm md:text-base flex">
           <Link href={`/${cat}/${anime.mal_id}/characters`}>{anime.title}</Link>
           <button
-            className="font-normal text-sm cursor-pointer"
+            className="font-normal text-sm text-primary cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
@@ -48,7 +50,7 @@ const SearchComponent = ({ anime }: { anime: Anime }) => {
         </span>
 
         <p className="text-gray-500 text-xs md:text-sm">
-          <span className="text-blue-500">{anime.type}</span> ({anime.episodes}{" "}
+          <span className=" font-bold">{anime.type}</span> ({anime.episodes}{" "}
           eps)
         </p>
         <p className="text-gray-500 text-xs font-semibold">
@@ -59,6 +61,9 @@ const SearchComponent = ({ anime }: { anime: Anime }) => {
         </p>
       </div>
     </div>
+    <LineOverlay />
+    </>
+    
   );
 };
 

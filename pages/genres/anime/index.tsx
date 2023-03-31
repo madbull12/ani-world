@@ -19,7 +19,7 @@ const AnimeGenrePage = () => {
   return (
     <Container>
       <h1 className="text-xl  font-bold py-4">Anime Genres</h1>
-      <input type="text" placeholder="Search genre" className="my-4 px-2 py-1   rounded-lg outline-none  focus:border-2 border-primary"  onChange={(e) => setFilter(e.target.value)} />
+      <input type="text" placeholder="Search genre" className="my-4 px-2 py-1 ring-primary focus:ring-2 outline-none rounded-sm text-sm  border-primary"  onChange={(e) => setFilter(e.target.value)} />
       <div className="grid-cols-1 grid gap-2 min-[300px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4">
         {genres?.filter((genre)=>genre.name.toLowerCase().includes(filter.toLowerCase())).map((genre) => (
           <GenreBox genre={genre} key={v4()} />

@@ -12,6 +12,7 @@ import Image from "next/image";
 import { signOut, signIn, useSession } from "next-auth/react";
 import { getSeason, themeConverter } from "../helper/functions";
 import Container from "./Container";
+import Dropdown from "./Dropdown";
 
 const showIn = {
   hidden: {
@@ -93,6 +94,30 @@ const Header = () => {
   const { toggleNav } = useToggle();
   const { theme } = useTheme();
 
+  //get current season and  year
+  const d = new Date();
+  let month = d.getMonth();
+  const currentYear = d.getFullYear();
+  const currentSeason = getSeason((month += 1));
+
+  const animeItems = [{
+    text:"Top Anime",
+    link:"/top-anime"
+  },{
+    text:"Seasonal Anime",
+    link:`/anime/season/${currentYear}/${currentSeason}`
+  },{
+    text:"Anime Genres",
+    link:"/genres/anime"
+  }];
+  const mangaItems = [{
+    text:"Top Anime",
+    link:"/top-manga"
+  },{
+    text:"Anime Genres",
+    link:"/genres/manga"
+  }];
+
   const { data: session, status } = useSession();
   //   useEffect(()=>{
   //      setTheme(window.localStorage.getItem("theme")?.slice(1,-1))
@@ -109,9 +134,11 @@ const Header = () => {
             <Link href="/">アニワルド</Link>
           </span>
           <ul className="space-x-2  items-center hidden md:flex ml-auto font-semibold">
-            <LinkItem isManga={false} title="anime" />
+            {/* <LinkItem isManga={false} title="anime" />
 
-            <LinkItem isManga={true} title="manga" />
+            <LinkItem isManga={true} title="manga" /> */}
+            <Dropdown title="ANIME" items={animeItems} />
+            <Dropdown title="MANGA" items={mangaItems} />
             <div className="text-sm tracking-wide font-thin ">
               {status === "authenticated" ? (
                 <button

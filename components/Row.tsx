@@ -81,9 +81,8 @@ const Row = ({ items, title }: IRow) => {
           <NavButtons />
           {items?.slice(0, viewAll ? items.length : 8).map((anime) => (
             <SwiperSlide key={v4()}>
-              <div className="rounded-tl-[30px]  rounded-br-[30px] overflow-hidden">
                 <Poster anime={anime} />
-              </div>
+              
             </SwiperSlide>
           ))}
 
