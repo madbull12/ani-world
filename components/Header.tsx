@@ -111,10 +111,10 @@ const Header = () => {
     link:"/genres/anime"
   }];
   const mangaItems = [{
-    text:"Top Anime",
+    text:"Top Manga",
     link:"/top-manga"
   },{
-    text:"Anime Genres",
+    text:"Manga Genres",
     link:"/genres/manga"
   }];
 
