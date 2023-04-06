@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
-export const favoriteRouter = createTRPCRouter({
+export const watchLaterRouter = createTRPCRouter({
   addWatchLater: publicProcedure
     .input(
       z.object({

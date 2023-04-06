@@ -1,7 +1,5 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import Header from "../components/Header";
-import { SkeletonTheme } from "react-loading-skeleton";
 import { useEffect } from "react";
 import { useSearch, useSetBodyScroll, useToggle } from "../lib/zustand";
 import { AnimatePresence } from "framer-motion";
@@ -12,8 +10,14 @@ import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import AuthWrapper from "../components/AuthWrapper";
 import Layout from "../components/Layout";
+import { api } from "../utils/api";
+import { type AppType } from "next/app";
+import { type Session } from "next-auth";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+const MyApp: AppType<{ session: Session | null }> = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
   const { scrollSet } = useSetBodyScroll();
   const { isOpen } = useSearch();
   const { isToggle } = useToggle();
@@ -29,7 +33,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       window.localStorage.setItem("page", JSON.stringify(1));
     }
   }
-
   return (
     <div data-theme="purpleTheme">
       <SessionProvider session={session}>
@@ -56,8 +59,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         </AuthWrapper>
       </SessionProvider>
     </div>
-      
   );
-}
+};
 
-export default MyApp;
+
+export default api.withTRPC(MyApp);
