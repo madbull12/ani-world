@@ -8,9 +8,10 @@ import {  ISavedResp } from "../../interface";
 
 import { v4 as uuidv4 } from "uuid";
 import { animeTypes, bookTypes } from "../api/anime";
+import { api } from "../../utils/api";
 
 const FavouritePage = () => {
-  const { data: favourites } = useSWR(`/api/favorite`, fetcher);
+  const { data: favourites } = api.favorite.getFavorites.useQuery();
   console.log(favourites);
   return (
     <main className="flex min-h-[90vh] justify-center items-center p-4">

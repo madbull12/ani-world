@@ -8,9 +8,10 @@ import { v4 as uuidv4 } from "uuid";
 import Loader from "../../components/Loader";
 import Container from "../../components/Container";
 import { animeTypes, bookTypes } from "../api/anime";
+import { api } from "../../utils/api";
 
 const WatchLaterPage = () => {
-  const { data: watchLater } = useSWR(`/api/watch-later`, fetcher);
+  const { data: watchLater } = api.watchLater.getWatchLater.useQuery();
   console.log(watchLater);
   return (
     <Container>
