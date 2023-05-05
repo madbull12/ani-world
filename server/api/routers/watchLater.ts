@@ -1,8 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { TRPCError } from "@trpc/server";
 
 export const watchLaterRouter = createTRPCRouter({
-  addWatchLater: publicProcedure
+  addWatchLater: protectedProcedure
     .input(
       z.object({
         type: z.string(),
@@ -14,11 +15,10 @@ export const watchLaterRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       const userId = ctx.session?.user.id;
       const { type, title, imageUrl, malId } = input;
-      if (!ctx.session) {
-        throw new Error("You have to be logged in first!!");
-      }
+
 
       return ctx.prisma.watchLater.create({
+        
         data: {
           type: type as string,
           title: title as string,
@@ -33,7 +33,8 @@ export const watchLaterRouter = createTRPCRouter({
       });
     }),
 
-  getWatchLater: publicProcedure.query(({ ctx }) => {
+  getWatchLater: protectedProcedure.query(({ ctx }) => {
+
     return ctx.prisma.watchLater.findMany({
       where: {
         userId:ctx?.session?.user.id as string
@@ -41,7 +42,8 @@ export const watchLaterRouter = createTRPCRouter({
     });
   }),
 
-  deleteWatchLater:publicProcedure.input(z.object({ malId:z.number() })).mutation(({ ctx,input })=>{
+  deleteWatchLater:protectedProcedure.input(z.object({ malId:z.number() })).mutation(({ ctx,input })=>{
+
     return ctx.prisma.watchLater.delete({
         where:{
             malId_userId:{

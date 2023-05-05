@@ -12,6 +12,7 @@ import {
 import { Anime, ISavedResp } from "../interface";
 import { animeTypes } from "../pages/api/anime";
 import { api } from "../utils/api";
+import { toast } from "react-hot-toast";
 
 
 const useFavourites = (anime: Anime) => {
@@ -41,7 +42,11 @@ const useFavourites = (anime: Anime) => {
   const handleAddFavourite = async () => {
     if (status === "authenticated") {
       setFavorited(true) 
-      await addFavorite({ title:anime.title,malId:anime.mal_id,imageUrl:anime.images.jpg.large_image_url,type:anime.type});
+      await toast.promise(addFavorite({ title:anime.title,malId:anime.mal_id,imageUrl:anime.images.jpg.large_image_url,type:anime.type}),{
+        loading:"Adding to favorites",
+        success:"Added to favorites",
+        error:(err)=>"Ooops somethin went wrong..." + err
+      })
       router.push("/user/favourites", undefined, { shallow: true });
     } else {
       signIn("google");
@@ -51,7 +56,11 @@ const useFavourites = (anime: Anime) => {
   const handleDeleteFavourite = async () => {
     if (status === "authenticated") {
       setFavorited(false);
-      await deleteFavorite({ malId:addedToFavourites?.malId as number });
+      await toast.promise(deleteFavorite({ malId:addedToFavourites?.malId as number }),{
+        loading:"Deleting from favorites",
+        success:"Deleted from favorites",
+        error:(err)=>"Ooops somethin went wrong..." + err
+      })
     } else {
       signIn("google");
     }

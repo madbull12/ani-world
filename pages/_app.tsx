@@ -34,7 +34,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     }
   }
   return (
-    <div data-theme="purpleTheme">
+    <div data-theme="pinkTheme">
       <SessionProvider session={session}>
         <AuthWrapper>
           <AnimatePresence

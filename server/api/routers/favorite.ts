@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const favoriteRouter = createTRPCRouter({
-  addFavorite: publicProcedure
+  addFavorite: protectedProcedure
     .input(
       z.object({
         type: z.string(),
@@ -14,9 +14,7 @@ export const favoriteRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       const userId = ctx.session?.user.id;
       const { type, title, imageUrl, malId } = input;
-      if (!ctx.session) {
-        throw new Error("You have to be logged in first!!");
-      }
+
 
       return ctx.prisma.favourite.create({
         data: {
@@ -33,7 +31,8 @@ export const favoriteRouter = createTRPCRouter({
       });
     }),
 
-  getFavorites: publicProcedure.query(({ ctx }) => {
+  getFavorites: protectedProcedure.query(({ ctx }) => {
+    
     return ctx.prisma.favourite.findMany({
       where: {
         userId:ctx?.session?.user.id as string
@@ -41,7 +40,8 @@ export const favoriteRouter = createTRPCRouter({
     });
   }),
 
-  deleteFavourite:publicProcedure.input(z.object({ malId:z.number() })).mutation(({ ctx,input })=>{
+  deleteFavourite:protectedProcedure.input(z.object({ malId:z.number() })).mutation(({ ctx,input })=>{
+
     return ctx.prisma.favourite.delete({
         where:{
             malId_userId:{
