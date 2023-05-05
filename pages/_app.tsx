@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import Header from "../components/Header";
-import { useEffect } from "react";
-import { useSearch, useSetBodyScroll, useToggle } from "../lib/zustand";
+import { useEffect,useState } from "react";
+import { useSearch, useSetBodyScroll, useThemeModal, useToggle } from "../lib/zustand";
 import { AnimatePresence } from "framer-motion";
 import Search from "../components/Search";
 import { useRouter } from "next/router";
@@ -13,14 +13,18 @@ import Layout from "../components/Layout";
 import { api } from "../utils/api";
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
+import ThemeChangerModal from "../components/ThemeChangerModal";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   const { scrollSet } = useSetBodyScroll();
-  const { isOpen } = useSearch();
+  const { isOpen:isOpenSearch } = useSearch();
+  const { isOpen:isOpenThemeModal } = useThemeModal();
   const { isToggle } = useToggle();
+  const [theme,setTheme] = useLocalStorage<string>("theme","");
 
   const router = useRouter();
 
@@ -33,8 +37,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
       window.localStorage.setItem("page", JSON.stringify(1));
     }
   }
+
+  useEffect(()=>{
+    if(typeof window !== "undefined") {
+      setTheme(JSON.parse(localStorage.getItem("theme")) as string);
+    }
+  },[theme])
+
+  console.log(theme)
   return (
-    <div data-theme="pinkTheme">
+    <div data-theme={theme}>
       <SessionProvider session={session}>
         <AuthWrapper>
           <AnimatePresence
@@ -42,7 +54,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
             exitBeforeEnter={true}
             onExitComplete={() => null}
           >
-            {isOpen && <Search />}
+            {isOpenSearch && <Search />}
+          </AnimatePresence>
+          <AnimatePresence
+            initial={false}
+            exitBeforeEnter={true}
+            onExitComplete={() => null}
+          >
+            {isOpenThemeModal && <ThemeChangerModal />}
           </AnimatePresence>
           <AnimatePresence
             initial={false}

@@ -13,6 +13,7 @@ import { signOut, signIn, useSession } from "next-auth/react";
 import { getSeason, themeConverter } from "../helper/functions";
 import Container from "./Container";
 import Dropdown from "./Dropdown";
+import ThemeTooltip from "./ThemeTooltip";
 
 const showIn = {
   hidden: {
@@ -89,7 +90,7 @@ const LinkItem = ({ title, isManga }: ILink) => {
 };
 
 const Header = () => {
-  const { openSearch } = useSearch();
+  const { open:openSearch } = useSearch();
   const { unsetScroll } = useSetBodyScroll();
   const { toggleNav } = useToggle();
   const { theme } = useTheme();
@@ -178,6 +179,8 @@ const Header = () => {
                 />
               </Link>
             )}
+            <ThemeTooltip />
+
           </ul>
           <IoMenu
             className="md:hidden text-xl cursor-pointer ml-2"

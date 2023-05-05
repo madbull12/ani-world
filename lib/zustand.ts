@@ -22,6 +22,11 @@ interface ITheme {
   theme: any;
   setTheme: (theme: any) => void;
 }
+interface Modal {
+  isOpen:boolean;
+  open:()=>void;
+  close:()=>void;
+}
 
 export const useSetBodyScroll = create<IScroll>((set) => ({
   scrollSet: true,
@@ -29,10 +34,10 @@ export const useSetBodyScroll = create<IScroll>((set) => ({
   setScroll: () => set((state) => ({ scrollSet: (state.scrollSet = true) })),
 }));
 
-export const useSearch = create<ISearch>((set) => ({
+export const useSearch = create<Modal>((set) => ({
   isOpen: false,
-  openSearch: () => set((state) => ({ isOpen: (state.isOpen = true) })),
-  closeSearch: () => set((state) => ({ isOpen: (state.isOpen = false) })),
+  open: () => set((state) => ({ isOpen: (state.isOpen = true) })),
+  close: () => set((state) => ({ isOpen: (state.isOpen = false) })),
 }));
 
 export const useToggle = create<IToggle>((set) => ({
@@ -42,6 +47,12 @@ export const useToggle = create<IToggle>((set) => ({
 }));
 
 export const useTheme = create<ITheme>((set) => ({
-  theme: "blue",
+  theme: "pinkTheme",
   setTheme: (theme: string) => set({ theme }),
+}));
+
+export const useThemeModal = create<Modal>((set)=>({
+  isOpen: false,
+  open: () => set((state) => ({ isOpen: (state.isOpen = true) })),
+  close: () => set((state) => ({ isOpen: (state.isOpen = false) })),
 }));

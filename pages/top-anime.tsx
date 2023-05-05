@@ -66,7 +66,6 @@ const TopAnimePage = () => {
         {page > 1 && (
           <button
             onClick={() => setPage(page - 1)}
-            className="hover:text-blue-400"
           >
             Previous
           </button>
@@ -74,7 +73,6 @@ const TopAnimePage = () => {
 
         <button
           onClick={() => setPage(page + 1)}
-          className="hover:text-blue-400"
         >
           Next
         </button>

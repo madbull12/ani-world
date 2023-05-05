@@ -93,7 +93,7 @@ const CategoryDropdown = ({ setCategory, category }: IDropdown) => {
 
 const Search = () => {
   const { setScroll } = useSetBodyScroll();
-  const { closeSearch } = useSearch();
+  const { close:closeSearch } = useSearch();
   const router = useRouter();
   const [term, setTerm] = useState<string>("");
   const [category, setCategory] = useState<string>("anime");
