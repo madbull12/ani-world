@@ -10,7 +10,7 @@ const BackdropModal = ({ children, onClick }: IProps) => {
   return (
     <>
       <motion.div
-        className="backdrop bg-[#000000e1] "
+        className="backdrop bg-[#00000076] backdrop-blur-md "
         onClick={onClick}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

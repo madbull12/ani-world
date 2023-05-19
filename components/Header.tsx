@@ -129,7 +129,6 @@ const Header = () => {
   return (
     // header component
     <header className={` p-2 md:p-4 text-white bg-transparent  `}>
-      <Container>
         <nav className="flex justify-between items-center">
           <span className="font-bold text-2xl whitespace-nowrap">
             <Link href="/">アニワルド</Link>
@@ -190,7 +189,6 @@ const Header = () => {
             }}
           />
         </nav>
-      </Container>
     </header>
   );
 };

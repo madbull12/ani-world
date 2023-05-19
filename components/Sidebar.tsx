@@ -40,7 +40,7 @@ const Sidebar = () => {
           ...values,
           error: err,
         });
-      }
+      } 
     };
 
     fetchSidebarAnime();

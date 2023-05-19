@@ -19,12 +19,7 @@ const LinkItem = ({ isManga }: { isManga: boolean }) => {
   return (
     <div className="relative ">
       <motion.li
-        whileHover={{
-          scale: 1.2,
-          borderBottom: "2px solid black",
-          fontWeight: "bold",
-        }}
-        className=" cursor-pointer"
+        className=" cursor-pointer text-gray-500"
         onClick={() => setIsClicked(!isClicked)}
       >
         {isManga ? "Manga" : "Anime"}
@@ -62,7 +57,7 @@ const LinkItem = ({ isManga }: { isManga: boolean }) => {
 };
 
 const ToggleNav = () => {
-  const { openSearch } = useSearch();
+  const { open } = useSearch();
   const { untoggleNav } = useToggle();
   const { setScroll, unsetScroll } = useSetBodyScroll();
   const handleClose = () => {
@@ -76,18 +71,22 @@ const ToggleNav = () => {
       opacity: 1,
       transition: {
         type: "spring",
-        damping: 20,
-        stiffness: 200,
+        damping: 40,
+        stiffness: 300,
       },
     },
     hidden: {
-      x: "100%",
+      x: "-100%",
       opacity: 0,
     },
   };
 
   // const { user } = useUser();
   const { data: session, status } = useSession();
+  const d = new Date();
+  let month = d.getMonth();
+  const currentYear = d.getFullYear();
+  const currentSeason = getSeason((month += 1));
 
   return (
     <BackdropModal onClick={handleClose}>
@@ -97,31 +96,81 @@ const ToggleNav = () => {
         initial="hidden"
         exit="hidden"
         animate="show"
-        className="min-h-screen fixed top-0 right-0 bg-white min-w-[30vw] z-[999] text-gray-700 p-4 "
+        className="min-h-screen fixed flex flex-col top-0 left-0 bg-black min-w-[40vw] z-[999]  p-4 "
       >
         <IoClose
-          className="text-2xl cursor-pointer"
+          className="text-2xl self-end mb-4 cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             handleClose();
           }}
         />
-        <ul className="flex flex-col text-xl items-center gap-y-2 mb-2 md:hidden">
+        {/* <ul className="flex flex-col  gap-y-2 mb-2 md:hidden">
           <LinkItem isManga={false} />
           <LinkItem isManga={true} />
           <li
             className="cursor-pointer"
             onClick={() => {
               unsetScroll();
-              openSearch();
+              open();
               untoggleNav();
             }}
           >
             Search
           </li>
+        </ul> */}
+        <ul className="menu ">
+          <li tabIndex={0}>
+            <span>Anime</span>
+            <ul className="bg-base-200 rounded-sm text-sm ">
+              <li>
+                <Link href="/top-anime">Top Anime</Link>
+              </li>
+              <li>
+                <Link href={`/anime/season/${currentYear}/${currentSeason}`}>
+                  Seasonal Anime
+                </Link>
+              </li>
+              <li>
+                <Link href="/genres/anime">Anime Genres</Link>
+              </li>
+            </ul>
+          </li>
+          <li tabIndex={1}>
+            <span>Manga</span>
+            <ul className="bg-base-200 text-sm rounded-sm">
+              <li>
+                <Link href="/top-manga">Top Manga</Link>
+              </li>
+              <li>
+                <Link href="/genres/manga">Manga Genres</Link>
+              </li>
+            </ul>
+          </li>
+          <li
+            tabIndex={2}
+            className="cursor-pointer"
+            onClick={() => {
+              unsetScroll();
+              open();
+              untoggleNav();
+            }}
+          >
+            <span>Search</span>
+          </li>
         </ul>
-        {/* <ColorTheme /> */}
-        <div className="md:hidden">
+        {status === "authenticated" ? (
+          <li tabIndex={3} >
+            <button onClick={() => signOut()}>
+              <span className="flex font-semibold items-center gap-x-2  cursor-pointer">
+                <IoLogOutOutline />
+                Sign out
+              </span>
+            </button>
+          </li>
+        ) : null}
+
+        {/* <div className="md:hidden">
           {status === "authenticated" ? (
             <div className="flex justify-between flex-col">
               <button onClick={() => signOut()}>
@@ -152,7 +201,8 @@ const ToggleNav = () => {
               </span>
             </button>
           )}
-        </div>
+        </div> */}
+        {/* <ColorTheme /> */}
       </motion.section>
     </BackdropModal>
   );
