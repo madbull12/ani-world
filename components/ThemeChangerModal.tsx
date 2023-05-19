@@ -3,11 +3,25 @@ import BackdropModal from "./BackdropModal";
 import { useSetBodyScroll, useTheme, useThemeModal } from "../lib/zustand";
 import { motion } from "framer-motion";
 import { dropIn } from "../lib/animationProperties";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useLocalStorage } from 'usehooks-ts'
 
-const ColorTheme = ({ color,value }: { color: string,value:string }) => {
-    const [theme,setTheme] = useLocalStorage<string>("theme","")
-  return <div className={`${color} rounded-full h-8 w-8 cursor-pointer`} onClick={()=>setTheme(value)}></div>;
+const ColorTheme = ({ color, value }: { color: string; value: string }) => {
+  const [theme, setTheme] = useLocalStorage<string>("theme", "pinkTheme");
+  const { close: closeThemeModal } = useThemeModal();
+
+  // console.log(theme);
+  const handleTheme = (value:string) => {
+    setTheme(value)
+  }
+  return (
+    <button
+      className={`${color} rounded-full h-8 w-8 cursor-pointer`}
+      onClick={() => {
+        handleTheme(value)
+        closeThemeModal();
+      }}
+    ></button>
+  );
 };
 
 const ThemeChangerModal = () => {
