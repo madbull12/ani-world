@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Anime, Recommendation } from "../interface";
 import { useTheme } from "../lib/zustand";
+import useWatchLater from "../hooks/useWatchLater";
 
 interface IProps {
   anime: Anime;
@@ -13,6 +14,16 @@ const Poster = ({ anime }: IProps) => {
   const [showTitle, setShowTitle] = useState<boolean>(false);
   const { theme } = useTheme();
   const router = useRouter();
+  const {
+    handleAddWatchLater,
+    watchLaterClicked,
+    addedToWatchLater,
+    handleDeleteWatchLater,
+  } = useWatchLater(anime);
+
+  const handleWatchLater = () => {
+    addedToWatchLater ? handleDeleteWatchLater() : handleAddWatchLater()
+  }
   return (
     <Link
       href={`${
@@ -39,8 +50,12 @@ const Poster = ({ anime }: IProps) => {
             <h1 className=" text-white w-24  group-hover:opacity-100 bg-[#00000056] ease-linear text-xs delay-150 transition-all opacity-0 absolute top-2  left-4 truncate font-bold">
               {anime.title}
             </h1>
-            <button className="border  group-hover:opacity-100 opacity-0 delay-300 px-2 py-1 absolute bottom-2 left-2 border-primary btnOverlay text-primary z-50  rounded-sm">
-              add
+            <button onClick={(e)=>{
+              e.stopPropagation();
+              handleWatchLater();
+              e.preventDefault()
+            }} className="border  group-hover:opacity-100 opacity-0 delay-300 px-2 py-1 absolute bottom-2 left-2 border-primary btnOverlay text-primary z-50  rounded-sm">
+              {addedToWatchLater ? "remove" : "add"}
             </button>
           </div>
 

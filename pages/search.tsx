@@ -10,6 +10,7 @@ import Link from "next/link";
 import ReactPaginate from "react-paginate";
 import Container from "../components/Container";
 import SearchComponent from "../components/SearchComponent";
+import Loader from "../components/Loader";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -39,7 +40,7 @@ const SearchPage = () => {
         </div>
       ) : (
         <div className="h-full w-full grid place-items-center">
-          <Jelly color="#007CEF" />
+          <Loader />
         </div>
       )}
     </Container>

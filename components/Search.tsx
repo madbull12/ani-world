@@ -59,41 +59,59 @@ const CategoryDropdown = ({ setCategory, category }: IDropdown) => {
   // const [category,setCategory] = useState<string>("anime");
 
   return (
-    <div onClick={() => setDropDown(!isDropped)}>
-      <div className="flex items-center gap-x-1 cursor-pointer">
-        <span className="capitalize">{category}</span>
-        <IoFilter />
-      </div>
-      {isDropped && (
-        <motion.ul
-          className="text-black bg-white absolute rounded-sm mt-1"
-          variants={dropDown}
-          initial="exit"
-          animate={isDropped ? "enter" : "exit"}
-          exit="exit"
-        >
-          {dropdownItem.map((item) => (
-            <motion.li
-              key={uuidv4()}
-              whileHover={{
-                backgroundColor: "#2563EB",
-                color: "#fff",
-              }}
-              className="px-2 py-1 cursor-default"
-              onClick={() => setCategory(item.toLowerCase())}
-            >
-              {item}
-            </motion.li>
-          ))}
-        </motion.ul>
-      )}
+    // <div onClick={() => setDropDown(!isDropped)}>
+    //   <div className="flex items-center gap-x-1 cursor-pointer">
+    //     <span className="capitalize">{category}</span>
+    //     <IoFilter />
+    //   </div>
+    //   {isDropped && (
+    //     <motion.ul
+    //       className="text-black bg-white absolute rounded-sm mt-1"
+    //       variants={dropDown}
+    //       initial="exit"
+    //       animate={isDropped ? "enter" : "exit"}
+    //       exit="exit"
+    //     >
+    //       {dropdownItem.map((item) => (
+    //         <motion.li
+    //           key={uuidv4()}
+    //           whileHover={{
+    //             backgroundColor: "#2563EB",
+    //             color: "#fff",
+    //           }}
+    //           className="px-2 py-1 cursor-default"
+    //           onClick={() => setCategory(item.toLowerCase())}
+    //         >
+    //           {item}
+    //         </motion.li>
+    //       ))}
+    //     </motion.ul>
+    //   )}
+    // </div>
+    <div className="dropdown">
+      <label tabIndex={0} className="">
+        <div className="flex items-center gap-x-1 cursor-pointer">
+          <span className="capitalize">{category}</span>
+          <IoFilter />
+        </div>
+      </label>
+      <ul
+        tabIndex={0}
+        className="dropdown-content menu p-2 shadow bg-base-100 text-black rounded-lg w-52"
+      >
+        {dropdownItem.map((item) => (
+          <li className="hover:bg-primary hover:text-white rounded-lg cursor-pointer p-3" onClick={() => setCategory(item.toLowerCase())} key={uuidv4()}>
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 const Search = () => {
   const { setScroll } = useSetBodyScroll();
-  const { close:closeSearch } = useSearch();
+  const { close: closeSearch } = useSearch();
   const router = useRouter();
   const [term, setTerm] = useState<string>("");
   const [category, setCategory] = useState<string>("anime");
